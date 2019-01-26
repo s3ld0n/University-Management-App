@@ -18,6 +18,10 @@ public class Group {
         students.add(student);
     }
     
+    public void addStudents(List<Student> students) {
+        students.addAll(students);
+    }
+    
     public void removeStudent(Student student) {
         students.remove(student);
     }
