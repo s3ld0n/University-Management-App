@@ -3,13 +3,13 @@ package com.foxminded.university;
 import java.io.Serializable;
 import java.util.List;
 
-public class Lector implements Serializable{
+public class Lector implements Serializable {
 
     private int id;
     private String firstName;
     private String lastName;
     private List<Subject> subjects;
-    
+
     public Lector() {
         super();
     }
