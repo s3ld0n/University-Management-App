@@ -7,17 +7,18 @@ public class LectureHall {
     private String name;
     private Set<Date> bookedDates;
   
+    public LectureHall(int id, String name, Set<Date> bookedDates) {
+        this.id = id;
+        this.name = name;
+        this.bookedDates = bookedDates;
+    }
+    
     public void bookDate(Date date) {
         bookedDates.add(date);
     }
     
     public void cancelDate(Date date) {
         bookedDates.remove(date);
-    }
-
-    public LectureHall(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public String getName() {
