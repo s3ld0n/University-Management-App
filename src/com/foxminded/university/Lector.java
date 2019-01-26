@@ -1,28 +1,27 @@
 package com.foxminded.university;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Lector {
+public class Lector implements Serializable{
+
     private int id;
     private String firstName;
     private String lastName;
     private List<Subject> subjects;
+    
+    public Lector() {
+        super();
+    }
 
-    public Lector(int id, String firstName, String lastName, List<Subject> subjects) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.subjects = subjects;
     }
 
-    public void addSubject(Subject subject) {
-        subjects.add(subject);
-    }
-    
-    public void removeSubject(Subject subject) {
-        subjects.remove(subject);
-    }
-    
     public String getFirstName() {
         return firstName;
     }
@@ -45,9 +44,5 @@ public class Lector {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
-    }
-
-    public int getId() {
-        return id;
     }
 }
