@@ -1,17 +1,23 @@
 package com.foxminded.university;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private Group group;
-
-    public Student(int id, String firstName, String lastName, Group group) {
+   
+    public Student() {
         super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.group = group;
     }
 
     public String getFirstName() {
@@ -37,9 +43,4 @@ public class Student {
     public void setGroup(Group group) {
         this.group = group;
     }
-
-    public int getId() {
-        return id;
-    }
-
 }
