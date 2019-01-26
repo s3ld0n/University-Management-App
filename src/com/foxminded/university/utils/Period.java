@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Period implements Serializable {
+    
     private Date start;
     private Date finish;
 

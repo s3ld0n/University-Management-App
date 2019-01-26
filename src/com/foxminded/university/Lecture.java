@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Lecture implements Serializable {
+    
     private Date date;
     private Subject subject;
     private Lector lector;

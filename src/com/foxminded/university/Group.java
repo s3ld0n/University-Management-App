@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Group implements Serializable {
+    
     private int id;
     private String name;
     private List<Student> students;

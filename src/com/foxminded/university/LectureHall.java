@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class LectureHall implements Serializable {
+    
     private int id;
     private String name;
     private Set<Date> bookedDates;
