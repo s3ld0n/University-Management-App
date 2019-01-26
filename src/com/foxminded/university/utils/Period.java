@@ -1,14 +1,14 @@
 package com.foxminded.university.utils;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Period {
+public class Period implements Serializable {
     private Date start;
     private Date finish;
 
-    public Period(Date start, Date finish) {
-        this.start = start;
-        this.finish = finish;
+    public Period() {
+        super();
     }
 
     public Date getStart() {

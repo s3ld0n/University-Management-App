@@ -1,31 +1,25 @@
 package com.foxminded.university;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Group {
+public class Group implements Serializable {
     private int id;
     private String name;
     private List<Student> students;
 
-    public Group(int id, String name, List<Student> students) {
+    public Group() {
         super();
-        this.id = id;
-        this.name = name;
-        this.students = students;
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
+    public int getId() {
+        return id;
     }
-    
-    public void addStudents(List<Student> students) {
-        students.addAll(students);
+
+    public void setId(int id) {
+        this.id = id;
     }
-    
-    public void removeStudent(Student student) {
-        students.remove(student);
-    }
-    
+
     public String getName() {
         return name;
     }
@@ -34,7 +28,11 @@ public class Group {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

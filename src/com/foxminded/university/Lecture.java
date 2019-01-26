@@ -1,20 +1,17 @@
 package com.foxminded.university;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lecture {
+public class Lecture implements Serializable {
     private Date date;
     private Subject subject;
     private Lector lector;
     private Group group;
     private LectureHall location;
 
-    public Lecture(Date date, Subject subject, Lector lector, Group group, LectureHall location) {
-        this.date = date;
-        this.subject = subject;
-        this.lector = lector;
-        this.group = group;
-        this.location = location;
+    public Lecture() {
+        super();
     }
 
     public Date getDate() {
