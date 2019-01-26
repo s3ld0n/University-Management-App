@@ -7,10 +7,11 @@ public class Group {
     private String name;
     private List<Student> students;
 
-    public Group(int id, String name) {
+    public Group(int id, String name, List<Student> students) {
         super();
         this.id = id;
         this.name = name;
+        this.students = students;
     }
 
     public void addStudent(Student student) {
