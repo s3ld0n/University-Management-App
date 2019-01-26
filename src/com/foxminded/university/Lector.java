@@ -8,10 +8,11 @@ public class Lector {
     private String lastName;
     private List<Subject> subjects;
 
-    public Lector(int id, String firstName, String lastName) {
+    public Lector(int id, String firstName, String lastName, List<Subject> subjects) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.subjects = subjects;
     }
 
     public void addSubject(Subject subject) {
