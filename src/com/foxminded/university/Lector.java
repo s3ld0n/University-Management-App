@@ -17,6 +17,10 @@ public class Lector implements Serializable {
         this.subjects = subjects;
     }
 
+    public Lector() {
+        
+    }
+
     public int getId() {
         return id;
     }
