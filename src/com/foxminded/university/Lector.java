@@ -10,6 +10,13 @@ public class Lector implements Serializable {
     private String lastName;
     private List<Subject> subjects;
 
+    public Lector(int id, String firstName, String lastName, List<Subject> subjects) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.subjects = subjects;
+    }
+
     public int getId() {
         return id;
     }
