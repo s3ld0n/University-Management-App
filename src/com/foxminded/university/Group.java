@@ -9,14 +9,14 @@ public class Group implements Serializable {
     private String name;
     private List<Student> students;
 
+    public Group() {
+
+    }
+    
     public Group(int id, String name, List<Student> students) {
         this.id = id;
         this.name = name;
         this.students = students;
-    }
-
-    public Group() {
-
     }
     
     public int getId() {
@@ -49,7 +49,6 @@ public class Group implements Serializable {
         int result = 1;
         result = prime * result + id;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((students == null) ? 0 : students.hashCode());
         return result;
     }
 
@@ -69,16 +68,11 @@ public class Group implements Serializable {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (students == null) {
-            if (other.students != null)
-                return false;
-        } else if (!students.equals(other.students))
-            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Group [id=" + id + ", name=" + name + ", students=" + students + "]";
+        return "Group [id=" + id + ", name=" + name + "]";
     }
 }
