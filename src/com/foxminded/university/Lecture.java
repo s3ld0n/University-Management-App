@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Lecture implements Serializable {
     
-    private int id;
     private Date date;
     private Subject subject;
     private Lector lector;
@@ -22,14 +21,6 @@ public class Lecture implements Serializable {
         this.lector = lector;
         this.group = group;
         this.location = location;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getDate() {
@@ -76,7 +67,9 @@ public class Lecture implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((group == null) ? 0 : group.hashCode());
+        result = prime * result + ((subject == null) ? 0 : subject.hashCode());
         return result;
     }
 
@@ -89,13 +82,27 @@ public class Lecture implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Lecture other = (Lecture) obj;
-        if (id != other.id)
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (group == null) {
+            if (other.group != null)
+                return false;
+        } else if (!group.equals(other.group))
+            return false;
+        if (subject == null) {
+            if (other.subject != null)
+                return false;
+        } else if (!subject.equals(other.subject))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Lecture [id=" + id + ", date=" + date + ", subject=" + subject + "]";
+        return "Lecture [date=" + date + ", subject=" + subject + ", lector=" + lector + ", group="
+                + group + "]";
     }
 }
