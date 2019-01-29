@@ -9,15 +9,15 @@ public class Student implements Serializable {
     private String lastName;
     private Group group;
 
+    public Student() {
+        
+    }
+    
     public Student(int id, String firstName, String lastName, Group group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
-    }
-
-    public Student() {
-        
     }
     
     public int getId() {
@@ -54,12 +54,9 @@ public class Student implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
+        final int prime = 37;
         int result = 1;
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result + ((group == null) ? 0 : group.hashCode());
         result = prime * result + id;
-        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         return result;
     }
 
@@ -72,28 +69,13 @@ public class Student implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Student other = (Student) obj;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
-        if (group == null) {
-            if (other.group != null)
-                return false;
-        } else if (!group.equals(other.group))
-            return false;
         if (id != other.id)
-            return false;
-        if (lastName == null) {
-            if (other.lastName != null)
-                return false;
-        } else if (!lastName.equals(other.lastName))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", group=" + group + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
 }

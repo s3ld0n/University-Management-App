@@ -6,16 +6,16 @@ public class Subject implements Serializable {
     
     private int id;
     private String name;
-    
+
+    public Subject() {
+        
+    }
+
     public Subject(int id, String name) {
         this.id = id;
         this.name = name;
     }
     
-    public Subject() {
-        
-    }
-
     public int getId() {
         return id;
     }

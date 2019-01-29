@@ -4,17 +4,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Period implements Serializable {
-    
+
+    private int id;
     private Date start;
     private Date finish;
+
+    public Period() {
+
+    }
 
     public Period(Date start, Date finish) {
         this.start = start;
         this.finish = finish;
     }
+    
+    public int getId() {
+        return id;
+    }
 
-    public Period() {
-
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Date getStart() {
@@ -34,16 +43,10 @@ public class Period implements Serializable {
     }
     
     @Override
-    public String toString() {
-        return "Period [start=" + start + ", finish=" + finish + "]";
-    }
-
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((finish == null) ? 0 : finish.hashCode());
-        result = prime * result + ((start == null) ? 0 : start.hashCode());
+        result = prime * result + id;
         return result;
     }
 
@@ -56,16 +59,13 @@ public class Period implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Period other = (Period) obj;
-        if (finish == null) {
-            if (other.finish != null)
-                return false;
-        } else if (!finish.equals(other.finish))
-            return false;
-        if (start == null) {
-            if (other.start != null)
-                return false;
-        } else if (!start.equals(other.start))
+        if (id != other.id)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Period [id=" + id + ", start=" + start + ", finish=" + finish + "]";
     }
 }

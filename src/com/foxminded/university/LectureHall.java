@@ -9,14 +9,14 @@ public class LectureHall implements Serializable {
     private String name;
     private Set<Date> bookedDates;
 
+    public LectureHall() {
+
+    }
+
     public LectureHall(int id, String name, Set<Date> bookedDates) {
         this.id = id;
         this.name = name;
         this.bookedDates = bookedDates;
-    }
-
-    public LectureHall() {
-
     }
 
     public int getId() {
@@ -47,9 +47,7 @@ public class LectureHall implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((bookedDates == null) ? 0 : bookedDates.hashCode());
         result = prime * result + id;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -62,23 +60,13 @@ public class LectureHall implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         LectureHall other = (LectureHall) obj;
-        if (bookedDates == null) {
-            if (other.bookedDates != null)
-                return false;
-        } else if (!bookedDates.equals(other.bookedDates))
-            return false;
         if (id != other.id)
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "LectureHall [id=" + id + ", name=" + name + ", bookedDates=" + bookedDates + "]";
+        return "LectureHall [id=" + id + ", name=" + name + "]";
     }
 }
