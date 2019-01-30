@@ -1,26 +1,25 @@
-package com.foxminded.university;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class Lector implements Serializable {
-
+public class Student implements Serializable {
+    
     private int id;
     private String firstName;
     private String lastName;
-    private List<Subject> subjects;
+    private Group group;
 
-    public Lector() {
+    public Student() {
         
     }
-
-    public Lector(int id, String firstName, String lastName, List<Subject> subjects) {
+    
+    public Student(int id, String firstName, String lastName, Group group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.subjects = subjects;
+        this.group = group;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -45,17 +44,17 @@ public class Lector implements Serializable {
         this.lastName = lastName;
     }
 
-    public List<Subject> getSubjects() {
-        return subjects;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setSubjects(List<Subject> subjects) {
-        this.subjects = subjects;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
+        final int prime = 37;
         int result = 1;
         result = prime * result + id;
         return result;
@@ -69,7 +68,7 @@ public class Lector implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Lector other = (Lector) obj;
+        Student other = (Student) obj;
         if (id != other.id)
             return false;
         return true;
@@ -77,6 +76,6 @@ public class Lector implements Serializable {
 
     @Override
     public String toString() {
-        return "Lector [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
 }
