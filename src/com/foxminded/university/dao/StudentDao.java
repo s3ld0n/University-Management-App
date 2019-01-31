@@ -1,27 +1,11 @@
 package com.foxminded.university.dao;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-
+import java.util.*;
 import com.foxminded.university.domain.*;
-import com.foxminded.university.utils.PropertyReader;
 
-public class StudentDao {
+public class StudentDao extends ConnectorDao {
     
-    private String url;
-    private String user;
-    private String password;
-    
-    public StudentDao() {
-        Properties properties = PropertyReader.getPropertiesFromFile("/config.properties");
-        this.url = properties.getProperty("url");
-        this.user = properties.getProperty("user");
-        this.password = properties.getProperty("url");
-    }
-
     public void addStudent(Student student) {
         
         Connection connection = null;
@@ -59,7 +43,7 @@ public class StudentDao {
         }
     }
     
-    public Student getStudentByID(int id) {
+    public Student getStudentById(int id) {
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -142,7 +126,7 @@ public class StudentDao {
         
         for (String idAsString : buffer) {
             int id = Integer.parseInt(idAsString);
-            students.add(getStudentByID(id));
+            students.add(getStudentById(id));
         }
         
         return students;
