@@ -7,17 +7,17 @@ public class Student implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
-    private Group group;
+    private String groupName;
 
     public Student() {
         
     }
     
-    public Student(int id, String firstName, String lastName, Group group) {
+    public Student(int id, String firstName, String lastName, String groupName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.group = group;
+        this.groupName = groupName;
     }
     
     public int getId() {
@@ -44,12 +44,12 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public Group getGroup() {
-        return group;
+    public String getGroup() {
+        return groupName;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroup(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
