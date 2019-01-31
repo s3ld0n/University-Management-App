@@ -6,7 +6,7 @@ import com.foxminded.university.domain.*;
 
 public class StudentDao extends ConnectorDao {
 
-    public void addStudent(Student student) {
+    public void addStudent(Student student) throws DaoException {
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -42,7 +42,7 @@ public class StudentDao extends ConnectorDao {
         }
     }
 
-    public Student getStudentById(int id) {
+    public Student getStudentById(int id) throws DaoException {
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -82,7 +82,7 @@ public class StudentDao extends ConnectorDao {
         return student;
     }
 
-    public void updateStudent(int id, String firstName, String lastName, String group) {
+    public void updateStudent(int id, String firstName, String lastName, String group) throws DaoException {
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -117,7 +117,7 @@ public class StudentDao extends ConnectorDao {
         }
     }
 
-    public List<Student> getAllStudents() {
+    public List<Student> getAllStudents() throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
