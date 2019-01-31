@@ -7,17 +7,17 @@ public class Student implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
-    private String groupName;
+    private String group;
 
     public Student() {
         
     }
     
-    public Student(int id, String firstName, String lastName, String groupName) {
+    public Student(int id, String firstName, String lastName, String group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.groupName = groupName;
+        this.group = group;
     }
     
     public int getId() {
@@ -44,12 +44,12 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getGroup() {
+        return group;
     }
 
-    public void setGroup(String groupName) {
-        this.groupName = groupName;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Override
@@ -76,6 +76,6 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +  ", group=" + group + "]";
     }
 }
