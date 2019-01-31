@@ -89,4 +89,42 @@ public class StudentDao {
         
         return student;
     }
+    
+    public void updateStudent(int id, String firstName, String lastName, String group) {
+        
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        String updateStudent = "UPDATE students "
+                + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
+                + "WHERE id = ?";
+   
+        try {
+            connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
+                    properties.getProperty("password"));
+            
+            statement = connection.prepareStatement(updateStudent);
+
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, group);
+            statement.setInt(4, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
