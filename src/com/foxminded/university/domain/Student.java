@@ -44,7 +44,7 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getGroup() {
+    public String getGroupName() {
         return groupName;
     }
 
