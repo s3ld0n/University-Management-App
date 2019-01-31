@@ -1,6 +1,9 @@
 package com.foxminded.university.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import com.foxminded.university.domain.*;
@@ -8,8 +11,17 @@ import com.foxminded.university.utils.PropertyReader;
 
 public class StudentDao {
     
-    private Properties properties = PropertyReader.getPropertiesFromFile("/config.properties");
+    private String url;
+    private String user;
+    private String password;
     
+    public StudentDao() {
+        Properties properties = PropertyReader.getPropertiesFromFile("/config.properties");
+        this.url = properties.getProperty("url");
+        this.user = properties.getProperty("user");
+        this.password = properties.getProperty("url");
+    }
+
     public void addStudent(Student student) {
         
         Connection connection = null;
@@ -19,8 +31,7 @@ public class StudentDao {
                 + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
         
         try {
-            connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
-                    properties.getProperty("password"));
+            connection = DriverManager.getConnection(url, user,password);
             
             statement = connection.prepareStatement(addStudent);
 
@@ -55,14 +66,12 @@ public class StudentDao {
         ResultSet resultSet = null;
         Student student = null;
         
-        String getStudent = "SELECT students.id, first_name, last_name, name "
+        String getStudent = "SELECT students.id, first_name, last_name, name AS group_name "
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
         
         try {
-            connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
-                    properties.getProperty("password"));
-            
+            connection = DriverManager.getConnection(url, user,password);            
             statement = connection.prepareStatement(getStudent);
             statement.setInt(1, id);
             
@@ -71,7 +80,7 @@ public class StudentDao {
 
             String firstName = resultSet.getString("first_name"); 
             String lastName = resultSet.getString("last_name");
-            String group = resultSet.getString("name");
+            String group = resultSet.getString("group_name");
             
             student = new Student(id, firstName, lastName, group);
             
@@ -100,9 +109,7 @@ public class StudentDao {
                 + "WHERE id = ?";
    
         try {
-            connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("user"),
-                    properties.getProperty("password"));
-            
+            connection = DriverManager.getConnection(url, user,password);            
             statement = connection.prepareStatement(updateStudent);
 
             statement.setString(1, firstName);
@@ -126,5 +133,57 @@ public class StudentDao {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        String studentsIds = getAllStudentsIds();
+        List<String> buffer = Arrays.asList(studentsIds.split(","));
+        
+        for (String idAsString : buffer) {
+            int id = Integer.parseInt(idAsString);
+            students.add(getStudentByID(id));
+        }
+        
+        return students;
+    }
+    
+    private String getAllStudentsIds() {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        String rowOfIds = "";
+        
+        String getAllStudents = "SELECT string_agg(CAST(students.id AS VARCHAR(50)), ',') "
+                + "AS all_students_ids from students;";
+
+        try {
+            connection = DriverManager.getConnection(url, user,password);            
+            statement = connection.prepareStatement(getAllStudents);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            rowOfIds = resultSet.getString("all_students_ids");
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return rowOfIds;
     }
 }
