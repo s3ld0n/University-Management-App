@@ -4,14 +4,16 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
 
-public class StudentDao extends ConnectorDao {
+public class StudentDao {
 
+    private ConnectorDao connector = new ConnectorDao(); 
+    
     public void create(Student student) throws DaoException {
 
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
                 + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(addStudent)){
 
             statement.setInt(1, student.getId());
@@ -32,7 +34,7 @@ public class StudentDao extends ConnectorDao {
         String getStudent = "SELECT students.id, first_name, last_name, name AS group_name "
                 + "FROM students JOIN groups ON students.group_id = groups.id " + "WHERE students.id=?;";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery()) {
             
@@ -58,7 +60,7 @@ public class StudentDao extends ConnectorDao {
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
                 + "WHERE id = ?";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(updateStudent)){
 
             statement.setString(1, firstName);
@@ -80,7 +82,7 @@ public class StudentDao extends ConnectorDao {
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery();) {
 
