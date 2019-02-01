@@ -52,7 +52,7 @@ public class StudentDao extends ConnectorDao {
         return student;
     }
 
-    public void updateStudent(int id, String firstName, String lastName, String group) throws DaoException {
+    public Student updateStudent(int id, String firstName, String lastName, String group) throws DaoException {
         
         String updateStudent = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
@@ -69,24 +69,20 @@ public class StudentDao extends ConnectorDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }    
+        }
         
+        return new Student(id, firstName, lastName, group);
     }
 
     public List<Student> getAllStudents() throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
         List<Student> students = new ArrayList<>();
 
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
-        try {
-            connection = DriverManager.getConnection(url, user, password);
-            statement = connection.prepareStatement(getStudent);
-
-            resultSet = statement.executeQuery();
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+                PreparedStatement statement = connection.prepareStatement(getStudent);
+                ResultSet resultSet = statement.executeQuery();) {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -98,22 +94,8 @@ public class StudentDao extends ConnectorDao {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
+        
         return students;
     }
 }
