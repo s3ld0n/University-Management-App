@@ -77,9 +77,9 @@ public class StudentDao {
         return new Student(personalInfo, group);
     }
 
-    public List<Student> collectAllStudents() throws DaoException {
+    public List<Student> collectAll() throws DaoException {
         List<Student> students = new ArrayList<>();
-
+        
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
