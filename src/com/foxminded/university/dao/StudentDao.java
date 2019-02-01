@@ -6,43 +6,26 @@ import com.foxminded.university.domain.*;
 
 public class StudentDao extends ConnectorDao {
 
-    public void addStudent(Student student) throws DaoException {
-
-        Connection connection = null;
-        PreparedStatement statement = null;
+    public void create(Student student) throws DaoException {
 
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
                 + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
 
-        try {
-            connection = DriverManager.getConnection(url, user, password);
-
-            statement = connection.prepareStatement(addStudent);
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement statement = connection.prepareStatement(addStudent)){
 
             statement.setInt(1, student.getId());
             statement.setString(2, student.getFirstName());
             statement.setString(3, student.getLastName());
             statement.setString(4, student.getGroup());
             statement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-
+        
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
     }
 
-    public Student getStudentById(int id) throws DaoException {
+    public Student findById(int id) throws DaoException {
 
         Connection connection = null;
         PreparedStatement statement = null;
