@@ -3,6 +3,7 @@ package com.foxminded.university.dao;
 import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
+import com.foxminded.university.utils.PersonalInfo;
 
 public class StudentDao {
 
@@ -45,7 +46,7 @@ public class StudentDao {
             String lastName = resultSet.getString("last_name");
             String group = resultSet.getString("group_name");
 
-            student = new Student(id, firstName, lastName, group);
+            student = new Student(new PersonalInfo(id, firstName, lastName), group);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -73,7 +74,7 @@ public class StudentDao {
             e.printStackTrace();
         }
         
-        return new Student(id, firstName, lastName, group);
+        return new Student(new PersonalInfo(id, firstName, lastName), group);
     }
 
     public List<Student> getAllStudents() throws DaoException {
@@ -92,7 +93,7 @@ public class StudentDao {
                 String lastName = resultSet.getString("last_name");
                 String group = resultSet.getString("group_name");
 
-                students.add(new Student(id, firstName, lastName, group));
+                students.add(new Student(new PersonalInfo(id, firstName, lastName), group));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
