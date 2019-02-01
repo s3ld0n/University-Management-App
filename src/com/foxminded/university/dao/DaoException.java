@@ -1,6 +1,6 @@
 package com.foxminded.university.dao;
 
-public class DaoException extends Exception {
+public class DaoException extends RuntimeException {
     
     public DaoException(String message) {
         super(message);
