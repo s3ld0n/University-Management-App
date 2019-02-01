@@ -55,7 +55,7 @@ public class StudentDao {
         return student;
     }
 
-    public Student updateStudent(int id, String firstName, String lastName, String group) throws DaoException {
+    public Student updateStudent(PersonalInfo personalInfo, String group) throws DaoException {
         
         String updateStudent = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
@@ -64,17 +64,17 @@ public class StudentDao {
         try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(updateStudent)){
 
-            statement.setString(1, firstName);
-            statement.setString(2, lastName);
+            statement.setString(1, personalInfo.getFirstName());
+            statement.setString(2, personalInfo.getLastName());
             statement.setString(3, group);
-            statement.setInt(4, id);
+            statement.setInt(4, personalInfo.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        return new Student(new PersonalInfo(id, firstName, lastName), group);
+        return new Student(personalInfo, group);
     }
 
     public List<Student> getAllStudents() throws DaoException {
