@@ -16,8 +16,6 @@ public class PropertyReader {
             inputStream = classLoader.getClass().getResourceAsStream(path);
             properties.load(inputStream);
             
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
