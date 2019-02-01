@@ -55,7 +55,7 @@ public class StudentDao {
         return student;
     }
 
-    public Student updateStudent(PersonalInfo personalInfo, String group) throws DaoException {
+    public Student update(PersonalInfo personalInfo, String group) throws DaoException {
         
         String updateStudent = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
