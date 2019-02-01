@@ -33,7 +33,8 @@ public class StudentDao {
         Student student = null;
 
         String getStudent = "SELECT students.id, first_name, last_name, name AS group_name "
-                + "FROM students JOIN groups ON students.group_id = groups.id " + "WHERE students.id=?;";
+                + "FROM students JOIN groups ON students.group_id = groups.id "
+                + "WHERE students.id=?;";
 
         try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
@@ -78,6 +79,7 @@ public class StudentDao {
     }
 
     public List<Student> collectAll() throws DaoException {
+        
         List<Student> students = new ArrayList<>();
         
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
@@ -95,6 +97,7 @@ public class StudentDao {
 
                 students.add(new Student(new PersonalInfo(id, firstName, lastName), group));
             }
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
