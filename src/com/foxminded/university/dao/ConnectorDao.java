@@ -13,13 +13,13 @@ public class ConnectorDao {
     private String password;
     
     public ConnectorDao() {
-        Properties properties = PropertyReader.getPropertiesFromFile("/config.properties");
+        Properties properties = PropertyReader.readPropertiesFromFile("/config.properties");
         this.url = properties.getProperty("url");
         this.user = properties.getProperty("user");
         this.password = properties.getProperty("password");
     }
     
-    public Connection getConnection() {
+    public Connection receiveConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);

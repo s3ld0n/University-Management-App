@@ -14,7 +14,7 @@ public class StudentDao {
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
                 + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = connector.receiveConnection();
              PreparedStatement statement = connection.prepareStatement(addStudent)){
 
             statement.setInt(1, student.getId());
@@ -36,7 +36,7 @@ public class StudentDao {
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = connector.receiveConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery()) {
             
@@ -62,7 +62,7 @@ public class StudentDao {
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
                 + "WHERE id = ?";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = connector.receiveConnection();
                 PreparedStatement statement = connection.prepareStatement(updateStudent)){
 
             statement.setString(1, personalInfo.getFirstName());
@@ -85,7 +85,7 @@ public class StudentDao {
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = connector.receiveConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery();) {
 

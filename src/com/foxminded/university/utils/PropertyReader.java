@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class PropertyReader {
     
-    public static Properties getPropertiesFromFile(String path) {
+    public static Properties readPropertiesFromFile(String path) {
         InputStream inputStream = null;
         Properties properties = new Properties();
         
