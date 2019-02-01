@@ -151,6 +151,9 @@ public class StudentDao extends ConnectorDao {
             ex.printStackTrace();
         } finally {
             try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
                 if (statement != null) {
                     statement.close();
                 }
