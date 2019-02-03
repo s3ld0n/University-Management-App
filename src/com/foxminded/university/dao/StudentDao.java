@@ -31,16 +31,17 @@ public class StudentDao {
     public Student findById(int id) throws DaoException {
 
         Student student = null;
-
+        ResultSet resultSet = null;
+        
         String getStudent = "SELECT students.id, first_name, last_name, name AS group_name "
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
 
         try (Connection connection = connector.getConnection();
-                PreparedStatement statement = connection.prepareStatement(getStudent);
-                ResultSet resultSet = statement.executeQuery()) {
-            
+                PreparedStatement statement = connection.prepareStatement(getStudent)){
+
             statement.setInt(1, id);
+            resultSet = statement.executeQuery();
             resultSet.next();
 
             String firstName = resultSet.getString("first_name");
@@ -48,9 +49,15 @@ public class StudentDao {
             String group = resultSet.getString("group_name");
 
             student = new Student(new PersonalInfo(id, firstName, lastName), group);
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return student;
