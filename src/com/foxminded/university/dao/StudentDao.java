@@ -7,14 +7,14 @@ import com.foxminded.university.utils.PersonalInfo;
 
 public class StudentDao {
 
-    private ConnectorDao connector = new ConnectorDao(); 
+    private ConnectionFactory connector = new ConnectionFactory(); 
     
-    public void create(Student student) throws DaoException {
+    public void create(Student student) {
 
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
                 + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
 
-        try (Connection connection = connector.receiveConnection();
+        try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(addStudent)){
 
             statement.setInt(1, student.getId());
@@ -36,7 +36,7 @@ public class StudentDao {
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
 
-        try (Connection connection = connector.receiveConnection();
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery()) {
             
@@ -56,26 +56,26 @@ public class StudentDao {
         return student;
     }
 
-    public Student update(PersonalInfo personalInfo, String group) throws DaoException {
+    public Student update(Student student) throws DaoException {
         
         String updateStudent = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
                 + "WHERE id = ?";
 
-        try (Connection connection = connector.receiveConnection();
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(updateStudent)){
 
-            statement.setString(1, personalInfo.getFirstName());
-            statement.setString(2, personalInfo.getLastName());
-            statement.setString(3, group);
-            statement.setInt(4, personalInfo.getId());
+            statement.setString(1, student.getFirstName());
+            statement.setString(2, student.getLastName());
+            statement.setString(3, student.getGroup());
+            statement.setInt(4, student.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        return new Student(personalInfo, group);
+        return student;
     }
 
     public List<Student> collectAll() throws DaoException {
@@ -85,7 +85,7 @@ public class StudentDao {
         String getStudent = "SELECT students.id AS id, first_name, last_name, name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
-        try (Connection connection = connector.receiveConnection();
+        try (Connection connection = connector.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery();) {
 
