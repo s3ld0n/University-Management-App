@@ -28,7 +28,7 @@ public class StudentDao {
             }
     }
 
-    public Student findById(int id) throws DaoException {
+    public Student findById(int id) {
 
         Student student = null;
         ResultSet resultSet = null;
@@ -63,7 +63,7 @@ public class StudentDao {
         return student;
     }
 
-    public Student update(Student student) throws DaoException {
+    public Student update(Student student) {
         
         String updateStudent = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
@@ -85,7 +85,7 @@ public class StudentDao {
         return student;
     }
 
-    public List<Student> findAll() throws DaoException {
+    public List<Student> findAll() {
         
         List<Student> students = new ArrayList<>();
         
