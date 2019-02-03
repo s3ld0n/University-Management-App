@@ -78,7 +78,7 @@ public class StudentDao {
         return student;
     }
 
-    public List<Student> collectAll() throws DaoException {
+    public List<Student> findAll() throws DaoException {
         
         List<Student> students = new ArrayList<>();
         
