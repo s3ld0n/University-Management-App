@@ -9,25 +9,43 @@ public class StudentDao {
 
     private ConnectionFactory connector = new ConnectionFactory(); 
     
-    public void create(Student student) {
+    public Student create(Student student) {
 
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
-                + "VALUES(?, ?, ?, (SELECT id FROM groups WHERE name=?));";
-
+                + "VALUES(DEFAULT, ?, ?, (SELECT id FROM groups WHERE name=?)) RETURNING id;";
+        
+        ResultSet resultSet = null;
+        int idOfCreatedStudent = 0;
+        
+        String firstName = student.getFirstName();
+        String lastName = student.getLastName();
+        String group = student.getGroup();
+        
         try (Connection connection = connector.getConnection();
              PreparedStatement statement = connection.prepareStatement(addStudent)){
 
-            statement.setInt(1, student.getId());
-            statement.setString(2, student.getFirstName());
-            statement.setString(3, student.getLastName());
-            statement.setString(4, student.getGroup());
-            statement.executeUpdate();
-        
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, group);
+            
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            
+            idOfCreatedStudent = resultSet.getInt(1);
+            
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
+        
+        return new Student(new PersonalInfo(idOfCreatedStudent, firstName, lastName), group);
     }
-
+    
     public Student findById(int id) {
 
         Student student = null;
