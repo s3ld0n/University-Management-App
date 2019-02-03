@@ -13,7 +13,7 @@ public class ConnectionFactory {
     private String password;
     
     public ConnectionFactory() {
-        Properties properties = PropertyReader.readPropertiesFromFile("/config.properties");
+        Properties properties = PropertyReader.readPropertiesFromFile("resources/config.properties");
         this.url = properties.getProperty("url");
         this.user = properties.getProperty("user");
         this.password = properties.getProperty("password");
