@@ -2,8 +2,6 @@ package com.foxminded.university.domain;
 
 import java.io.Serializable;
 
-import com.foxminded.university.utils.PersonalInfo;
-
 public class Student implements Serializable {
     
     private int id;
@@ -15,13 +13,14 @@ public class Student implements Serializable {
         
     }
     
-    public Student(PersonalInfo personalInfo, String group) {
-        this.id = personalInfo.getId();
-        this.firstName = personalInfo.getFirstName();
-        this.lastName = personalInfo.getLastName();
+    public Student(int id, String firstName, String lastName, String group) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.group = group;
     }
-    
+
     public int getId() {
         return id;
     }
