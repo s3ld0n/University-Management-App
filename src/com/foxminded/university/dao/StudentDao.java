@@ -9,7 +9,7 @@ public class StudentDao {
 
     public Student create(Student student) {
 
-        String query = "INSERT INTO students (id, first_name, last_name, group_id) "
+        String sql = "INSERT INTO students (id, first_name, last_name, group_id) "
                 + "VALUES(DEFAULT, ?, ?, (SELECT id FROM groups WHERE name=?)) RETURNING id;";
         
         ResultSet resultSet = null;
@@ -20,7 +20,7 @@ public class StudentDao {
         String group = student.getGroup();
         
         try (Connection connection = ConnectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)){
+             PreparedStatement statement = connection.prepareStatement(sql)){
 
             statement.setString(1, firstName);
             statement.setString(2, lastName);
@@ -35,7 +35,7 @@ public class StudentDao {
                 e.printStackTrace();
             } finally {
                 try {
-                    resultSet.close();
+                    resultSet.close();  
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -49,12 +49,12 @@ public class StudentDao {
         Student student = null;
         ResultSet resultSet = null;
         
-        String query = "SELECT students.id, first_name, last_name, groups.name AS group_name "
+        String sql = "SELECT students.id, first_name, last_name, groups.name AS group_name "
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)){
+                PreparedStatement statement = connection.prepareStatement(sql)){
 
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
@@ -81,12 +81,12 @@ public class StudentDao {
 
     public Student update(Student student) {
         
-        String query = "UPDATE students "
+        String sql = "UPDATE students "
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
                 + "WHERE id = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)){
+                PreparedStatement statement = connection.prepareStatement(sql)){
 
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
@@ -105,12 +105,12 @@ public class StudentDao {
         
         List<Student> students = new ArrayList<>();
         
-        String query = "SELECT students.id AS id, first_name, last_name, group.name AS group_name "
+        String sql = "SELECT students.id AS id, first_name, last_name, group.name AS group_name "
                 + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
+                PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery();) {
 
             while (resultSet.next()) {
