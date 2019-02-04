@@ -7,8 +7,6 @@ import com.foxminded.university.utils.PersonalInfo;
 
 public class StudentDao {
 
-    private ConnectionFactory connector = new ConnectionFactory(); 
-    
     public Student create(Student student) {
 
         String addStudent = "INSERT INTO students (id, first_name, last_name, group_id) "
@@ -21,7 +19,7 @@ public class StudentDao {
         String lastName = student.getLastName();
         String group = student.getGroup();
         
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(addStudent)){
 
             statement.setString(1, firstName);
@@ -55,7 +53,7 @@ public class StudentDao {
                 + "FROM students JOIN groups ON students.group_id = groups.id "
                 + "WHERE students.id=?;";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent)){
 
             statement.setInt(1, id);
@@ -87,7 +85,7 @@ public class StudentDao {
                 + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
                 + "WHERE id = ?";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(updateStudent)){
 
             statement.setString(1, student.getFirstName());
@@ -110,7 +108,7 @@ public class StudentDao {
         String getStudent = "SELECT students.id AS id, first_name, last_name, group.name AS group_name " + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
-        try (Connection connection = connector.getConnection();
+        try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getStudent);
                 ResultSet resultSet = statement.executeQuery();) {
 
