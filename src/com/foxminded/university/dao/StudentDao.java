@@ -11,16 +11,12 @@ public class StudentDao {
         String sql = "INSERT INTO students (first_name, last_name, group_id) "
                 + "VALUES(?, ?, (SELECT id FROM groups WHERE name=?));";
         
-        String firstName = student.getFirstName();
-        String lastName = student.getLastName();
-        String group = student.getGroup();
-        
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             
-            statement.setString(1, firstName);
-            statement.setString(2, lastName);
-            statement.setString(3, group);
+            statement.setString(1, student.getFirstName());
+            statement.setString(2, student.getLastName());
+            statement.setString(3, student.getGroup());
             
             statement.executeUpdate();
             
