@@ -105,7 +105,8 @@ public class StudentDao {
         
         List<Student> students = new ArrayList<>();
         
-        String getStudent = "SELECT students.id AS id, first_name, last_name, group.name AS group_name " + "FROM students "
+        String getStudent = "SELECT students.id AS id, first_name, last_name, group.name AS group_name "
+                + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
         try (Connection connection = ConnectionFactory.getConnection();
