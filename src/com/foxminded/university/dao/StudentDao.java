@@ -8,23 +8,25 @@ public class StudentDao {
 
     public Student create(Student student) {
 
-        String sql = "INSERT INTO students (id, first_name, last_name, group_id) "
-                + "VALUES(DEFAULT, ?, ?, (SELECT id FROM groups WHERE name=?)) RETURNING id;";
+        String sql = "INSERT INTO students (first_name, last_name, group_id) "
+                + "VALUES(?, ?, (SELECT id FROM groups WHERE name=?));";
         
         String firstName = student.getFirstName();
         String lastName = student.getLastName();
         String group = student.getGroup();
         
         try (Connection connection = ConnectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)){
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, group);
             
-            try(ResultSet resultSet = statement.executeQuery();) {
+            statement.executeUpdate();
+            
+            try(ResultSet resultSet = statement.getGeneratedKeys();) {
                 resultSet.next();
-                resultSet.getInt(1);
+                student.setId(resultSet.getInt(1));
             }
             
             } catch (SQLException e) {
@@ -84,7 +86,7 @@ public class StudentDao {
         
         List<Student> students = new ArrayList<>();
         
-        String sql = "SELECT students.id AS id, first_name, last_name, group.name AS group_name "
+        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
                 + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id;";
 
@@ -108,22 +110,17 @@ public class StudentDao {
         return students;
     }
     
-    public Student delete(Student student) {
+    public void deleteById(int id) {
         String sql = "DELETE FROM students WHERE id=?";
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);){
             
-            statement.setInt(1, student.getId());
-            
-            try (ResultSet resultSet = statement.executeQuery();){
-                
-            }
+            statement.setInt(1, id);
+            statement.executeUpdate();
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         } 
-    
-        return student;
     }
 }
