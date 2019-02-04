@@ -20,7 +20,7 @@ public class StudentDao {
             
             statement.executeUpdate();
             
-            try(ResultSet resultSet = statement.getGeneratedKeys();) {
+            try(ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 student.setId(resultSet.getInt(1));
             }
@@ -88,7 +88,7 @@ public class StudentDao {
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery();) {
+                ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -110,7 +110,7 @@ public class StudentDao {
         String sql = "DELETE FROM students WHERE id=?";
         
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql);){
+                PreparedStatement statement = connection.prepareStatement(sql)){
             
             statement.setInt(1, id);
             int affectedRows = statement.executeUpdate();
