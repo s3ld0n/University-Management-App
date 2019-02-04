@@ -113,7 +113,11 @@ public class StudentDao {
                 PreparedStatement statement = connection.prepareStatement(sql);){
             
             statement.setInt(1, id);
-            statement.executeUpdate();
+            int affectedRows = statement.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting failed. No such id: " + id);
+            }
             
         } catch (SQLException ex) {
             ex.printStackTrace();
