@@ -57,8 +57,10 @@ public class GroupDao {
 
         List<Student> students = new ArrayList<>();
 
-        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name, group_id "
-                + "FROM students " + "JOIN groups ON students.group_id = groups.id " + "WHERE group_id =?;";
+        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
+                + "FROM students "
+                + "JOIN groups ON students.group_id = groups.id "
+                + "WHERE group_id =?;";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
