@@ -23,6 +23,11 @@ public class StudentDao {
     
     private final static String DELETE_QUERY = "DELETE FROM students WHERE id=?";
     
+    private final static String READ_ALL_FROM_GROUP_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
+            + "FROM students "
+            + "JOIN groups ON students.group_id = groups.id "
+            + "WHERE group_id = ?;";
+    
     public Student create(Student student) {
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -43,7 +48,7 @@ public class StudentDao {
             e.printStackTrace();
         }
 
-        return student;
+        return student; 
     }
 
     public Student findById(int id) {
@@ -108,6 +113,34 @@ public class StudentDao {
         return students;
     }
 
+    public List<Student> findAllByGroupId(int groupId) {
+
+        List<Student> students = new ArrayList<>();
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_FROM_GROUP_QUERY)) {
+
+            statement.setInt(1, groupId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    String group = resultSet.getString("group_name");
+
+                    students.add(new Student(id, firstName, lastName, group));
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return students;
+    }
+    
     public void deleteById(int id) {
 
         try (Connection connection = ConnectionFactory.getConnection();
