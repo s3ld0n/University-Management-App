@@ -113,4 +113,26 @@ public class GroupDao {
         return group;
     }
 
+    public List<Group> findAll() {
+        
+        List<Group> groups = new ArrayList<>();
+        
+        String sql = "SELECT id, name FROM groups;";
+        
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery()) {
+            
+            while(resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                groups.add(new Group(id, name));
+            }
+            
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return groups;
+    }
 }
