@@ -8,7 +8,8 @@ public class GroupDao {
 
     public Group create(Group group) {
 
-        String sql = "INSERT INTO groups (name) VALUES(?);";
+        String sql = "INSERT INTO groups (name) "
+                + "VALUES(?);";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -32,7 +33,9 @@ public class GroupDao {
 
         Group group = null;
 
-        String sql = "SELECT id, name FROM groups WHERE id=?";
+        String sql = "SELECT id, name "
+                + "FROM groups "
+                + "WHERE id=?";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -88,7 +91,9 @@ public class GroupDao {
 
     public Group update(Group group) {
 
-        String sql = "UPDATE groups " + "SET name = ? " + "WHERE id = ?";
+        String sql = "UPDATE groups "
+                + "SET name = ? "
+                + "WHERE id = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -108,7 +113,8 @@ public class GroupDao {
 
         List<Group> groups = new ArrayList<>();
 
-        String sql = "SELECT id, name FROM groups;";
+        String sql = "SELECT id, name "
+                + "FROM groups;";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -129,7 +135,7 @@ public class GroupDao {
 
     public void deleteById(int id) {
 
-        String sql = "DELETE FROM groups " + "WHERE id=?";
+        String sql = "DELETE FROM groups WHERE id=?";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
