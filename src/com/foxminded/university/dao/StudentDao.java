@@ -6,13 +6,27 @@ import com.foxminded.university.domain.*;
 
 public class StudentDao {
 
+    private final static String CREATE_QUERY = "INSERT INTO students (first_name, last_name, group_id) "
+            + "VALUES(?, ?, (SELECT id FROM groups WHERE name=?));";
+    
+    private final static String READ_QUERY = "SELECT students.id, first_name, last_name, groups.name AS group_name "
+            + "FROM students JOIN groups ON students.group_id = groups.id "
+            + "WHERE students.id=?;";
+    
+    private final static String READ_ALL_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
+            + "FROM students "
+            + "JOIN groups ON students.group_id = groups.id;";
+    
+    private final static String UPDATE_QUERY = "UPDATE students "
+            + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
+            + "WHERE id = ?";
+    
+    private final static String DELETE_QUERY = "DELETE FROM students WHERE id=?";
+    
     public Student create(Student student) {
 
-        String sql = "INSERT INTO students (first_name, last_name, group_id) "
-                + "VALUES(?, ?, (SELECT id FROM groups WHERE name=?));";
-
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
@@ -36,12 +50,8 @@ public class StudentDao {
 
         Student student = null;
 
-        String sql = "SELECT students.id, first_name, last_name, groups.name AS group_name "
-                + "FROM students JOIN groups ON students.group_id = groups.id "
-                + "WHERE students.id=?;";
-
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -58,12 +68,8 @@ public class StudentDao {
 
     public Student update(Student student) {
 
-        String sql = "UPDATE students "
-                + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
-                + "WHERE id = ?";
-
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
@@ -82,12 +88,8 @@ public class StudentDao {
 
         List<Student> students = new ArrayList<>();
 
-        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
-                + "FROM students "
-                + "JOIN groups ON students.group_id = groups.id;";
-
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql);
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
                 ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -107,10 +109,9 @@ public class StudentDao {
     }
 
     public void deleteById(int id) {
-        String sql = "DELETE FROM students WHERE id=?";
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
+                PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
 
             statement.setInt(1, id);
             int affectedRows = statement.executeUpdate();
