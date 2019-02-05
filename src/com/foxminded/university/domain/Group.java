@@ -1,4 +1,4 @@
-package com.foxminded.university;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,21 +1,24 @@
-package com.foxminded.university;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
+import java.util.*;
 
-public class Subject implements Serializable {
+public class LectureHall implements Serializable {
     
     private int id;
     private String name;
+    private Set<Date> bookedDates;
 
-    public Subject() {
-        
+    public LectureHall() {
+
     }
 
-    public Subject(int id, String name) {
+    public LectureHall(int id, String name, Set<Date> bookedDates) {
         this.id = id;
         this.name = name;
+        this.bookedDates = bookedDates;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -30,6 +33,14 @@ public class Subject implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Date> getBookedDates() {
+        return bookedDates;
+    }
+
+    public void setBookedDates(Set<Date> bookedDates) {
+        this.bookedDates = bookedDates;
     }
 
     @Override
@@ -48,7 +59,7 @@ public class Subject implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Subject other = (Subject) obj;
+        LectureHall other = (LectureHall) obj;
         if (id != other.id)
             return false;
         return true;
@@ -56,6 +67,6 @@ public class Subject implements Serializable {
 
     @Override
     public String toString() {
-        return "Subject [id=" + id + ", name=" + name + "]";
+        return "LectureHall [id=" + id + ", name=" + name + "]";
     }
 }

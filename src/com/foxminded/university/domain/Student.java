@@ -1,4 +1,4 @@
-package com.foxminded.university;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
 
@@ -7,19 +7,20 @@ public class Student implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
-    private Group group;
+    private String group;
 
     public Student() {
         
     }
     
-    public Student(int id, String firstName, String lastName, Group group) {
+    public Student(int id, String firstName, String lastName, String group) {
+        super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -44,11 +45,11 @@ public class Student implements Serializable {
         this.lastName = lastName;
     }
 
-    public Group getGroup() {
+    public String getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(String group) {
         this.group = group;
     }
 
@@ -76,6 +77,6 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +  ", group=" + group + "]";
     }
 }
