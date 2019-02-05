@@ -43,9 +43,10 @@ public class GroupDao {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
-                group = new Group(id, resultSet.getString("name"));
-                List<Student> students = findStudents(id);
-                group.setStudents(students);
+                
+                String groupName = resultSet.getString("name");
+                group = new Group(id, groupName);
+                group.setStudents(new StudentDao().findAllByGroupId(id));
             }
 
         } catch (SQLException ex) {
@@ -53,39 +54,6 @@ public class GroupDao {
         }
 
         return group;
-    }
-
-    private List<Student> findStudents(int groupId) {
-
-        List<Student> students = new ArrayList<>();
-
-        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
-                + "FROM students "
-                + "JOIN groups ON students.group_id = groups.id "
-                + "WHERE group_id =?;";
-
-        try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, groupId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    int studentId = resultSet.getInt("id");
-                    String firstName = resultSet.getString("first_name");
-                    String lastName = resultSet.getString("last_name");
-                    String group = resultSet.getString("group_name");
-
-                    students.add(new Student(studentId, firstName, lastName, group));
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return students;
     }
 
     public Group update(Group group) {
@@ -107,6 +75,7 @@ public class GroupDao {
     public List<Group> findAll() {
 
         List<Group> groups = new ArrayList<>();
+        StudentDao studentDao = new StudentDao();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
@@ -115,7 +84,10 @@ public class GroupDao {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                groups.add(new Group(id, name));
+
+                Group group = new Group(id, name);
+                group.setStudents(studentDao.findAllByGroupId(id));
+                groups.add(group);
             }
 
         } catch (SQLException e) {
