@@ -60,11 +60,11 @@ public class GroupDao {
         return group;
     }
 
-    private List<Student> findStudents(int id) {
+    private List<Student> findStudents(int groupId) {
         
         List<Student> students = new ArrayList<>();
         
-        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
+        String sql = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name, group_id "
                 + "FROM students "
                 + "JOIN groups ON students.group_id = groups.id "
                 + "WHERE group_id =?;";
@@ -72,16 +72,17 @@ public class GroupDao {
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             
-            statement.setInt(1, id);
+            statement.setInt(1, groupId);
             
             try (ResultSet resultSet = statement.executeQuery()){
             
                 while (resultSet.next()) {
+                    int studentId = resultSet.getInt("id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String group = resultSet.getString("group_name");
     
-                    students.add(new Student(id, firstName, lastName, group));
+                    students.add(new Student(studentId, firstName, lastName, group));
                 }
             }
             
@@ -89,6 +90,27 @@ public class GroupDao {
             e.printStackTrace();
         }
         
-        return null;
+        return students;
     }
+    
+    public Group update(Group group) {
+        
+        String sql = "UPDATE groups "
+                + "SET name = ? "
+                + "WHERE id = ?";
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)){
+
+            statement.setString(1, group.getName());
+            statement.setInt(2, group.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return group;
+    }
+
 }
