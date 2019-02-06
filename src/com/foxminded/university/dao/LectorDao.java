@@ -21,6 +21,12 @@ public class LectorDao {
     private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
             + "WHERE lector_id = ? AND subject_id = ?";
     
+    private static final String UPDATE_QUERY = "UPDATE lectors "
+            + "SET first_name = ?, last_name = ? "
+            + "WHERE id = ?";
+    
+    private static final String DELETE_QUERY = "DELETE FROM lectors WHERE id = ?";
+    
     public Lector create(Lector lector) {
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -57,6 +63,22 @@ public class LectorDao {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+
+        return lector;
+    }
+
+    public Lector update(Lector lector) {
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+            statement.setString(1, lector.getFirstName());
+            statement.setString(2, lector.getLastName());
+            statement.setInt(3, lector.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lector;
@@ -117,5 +139,21 @@ public class LectorDao {
         }
     }
     
-    
+    public void deleteById(int id) {
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
+
+            statement.setInt(1, id);
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting failed. No such id: " + id);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
