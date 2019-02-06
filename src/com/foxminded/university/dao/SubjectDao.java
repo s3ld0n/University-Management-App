@@ -3,6 +3,7 @@ package com.foxminded.university.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.foxminded.university.domain.Subject;
 
 public class SubjectDao {
@@ -18,6 +19,8 @@ public class SubjectDao {
             + "WHERE lectors.id= ?;";
     
     private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects;";
+
+    private static final String UPDATE_QUERY = "UPDATE subjects SET name = ? WHERE id = ?";
     
     public Subject create(Subject subject) {
         
@@ -56,6 +59,22 @@ public class SubjectDao {
             ex.printStackTrace();
         }
         
+        return subject;
+    }
+    
+    public Subject update(Subject subject) {
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+            statement.setString(1, subject.getName());
+            statement.setInt(2, subject.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return subject;
     }
     
