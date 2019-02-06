@@ -1,10 +1,8 @@
 package com.foxminded.university.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.foxminded.university.domain.Subject;
 
@@ -12,14 +10,24 @@ public class SubjectDao {
     
     private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?);";
     
+    private static final String READ_QUERY = "SELECT name FROM subjects WHERE id=?;";
+    
+    private static final String READ_ALL_BY_LECTOR_ID_QUERY = "SELECT subjects.id, subjects.name "
+            + "FROM subjects "
+            + "JOIN lectors_subjects ON subjects.id = lectors_subjects.subject_id " 
+            + "JOIN lectors ON lectors_subjects.lector_id = lectors.id " 
+            + "WHERE lectors.id= ?;";
+
+    
     public Subject create(Subject subject) {
         
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS)
-                        ){
-            statement.setString(1, subject.getName());
+                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS)){
             
-            try (ResultSet resultSet = statement.executeQuery()){
+            statement.setString(1, subject.getName());
+            statement.executeUpdate();
+            
+            try (ResultSet resultSet = statement.getGeneratedKeys()){
                 resultSet.next();
                 subject.setId(resultSet.getInt(1));
             }
@@ -30,4 +38,51 @@ public class SubjectDao {
         
         return subject;
     }
+    
+    public Subject findById(int id) {
+        
+        Subject subject = null;
+        
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
+            statement.setInt(1, id);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                subject = new Subject(id, resultSet.getString("name"));
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return subject;
+    }
+    
+    public List<Subject> findAllByLectorId(int lectorId) {
+
+        List<Subject> subjects = new ArrayList<>();
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_LECTOR_ID_QUERY)) {
+
+            statement.setInt(1, lectorId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+
+                    subjects.add(new Subject(id, name));
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return subjects;
+    }
+
 }
