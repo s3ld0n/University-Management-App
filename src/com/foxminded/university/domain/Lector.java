@@ -1,6 +1,7 @@
 package com.foxminded.university.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lector implements Serializable {
@@ -14,11 +15,11 @@ public class Lector implements Serializable {
         
     }
 
-    public Lector(int id, String firstName, String lastName, List<Subject> subjects) {
+    public Lector(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.subjects = subjects;
+        this.subjects = new ArrayList<>();
     }
 
     public int getId() {
