@@ -23,10 +23,11 @@ public class StudentDao {
     
     private final static String DELETE_QUERY = "DELETE FROM students WHERE id=?";
     
-    private final static String READ_ALL_FROM_GROUP_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
+    private final static String READ_ALL_BY_GROUP_ID_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
             + "FROM students "
             + "JOIN groups ON students.group_id = groups.id "
             + "WHERE group_id = ?;";
+    
     
     public Student create(Student student) {
 
@@ -118,7 +119,7 @@ public class StudentDao {
         List<Student> students = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(READ_ALL_FROM_GROUP_QUERY)) {
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_GROUP_ID_QUERY)) {
 
             statement.setInt(1, groupId);
 
