@@ -3,7 +3,6 @@ package com.foxminded.university.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.foxminded.university.domain.Subject;
 
 public class SubjectDao {
@@ -17,7 +16,8 @@ public class SubjectDao {
             + "JOIN lectors_subjects ON subjects.id = lectors_subjects.subject_id " 
             + "JOIN lectors ON lectors_subjects.lector_id = lectors.id " 
             + "WHERE lectors.id= ?;";
-
+    
+    private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects;";
     
     public Subject create(Subject subject) {
         
@@ -59,6 +59,28 @@ public class SubjectDao {
         return subject;
     }
     
+    public List<Subject> findAll() {
+
+        List<Subject> subjects = new ArrayList<>();
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
+                ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+
+                subjects.add(new Subject(id, name));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return subjects;
+    }
+
     public List<Subject> findAllByLectorId(int lectorId) {
 
         List<Subject> subjects = new ArrayList<>();
@@ -84,5 +106,5 @@ public class SubjectDao {
 
         return subjects;
     }
-
+    
 }
