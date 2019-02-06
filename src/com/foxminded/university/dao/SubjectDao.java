@@ -21,6 +21,9 @@ public class SubjectDao {
     private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects;";
 
     private static final String UPDATE_QUERY = "UPDATE subjects SET name = ? WHERE id = ?";
+
+    private final static String DELETE_QUERY = "DELETE FROM subjects WHERE id=?";
+
     
     public Subject create(Subject subject) {
         
@@ -126,4 +129,21 @@ public class SubjectDao {
         return subjects;
     }
     
+    public void deleteById(int id) {
+
+        try (Connection connection = ConnectionFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
+
+            statement.setInt(1, id);
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting failed. No such id: " + id);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
