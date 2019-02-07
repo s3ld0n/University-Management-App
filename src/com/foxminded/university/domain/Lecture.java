@@ -1,11 +1,12 @@
 package com.foxminded.university.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Lecture implements Serializable {
     
-    private Date date;
+    private int id;
+    private LocalDateTime date;
     private Subject subject;
     private Lector lector;
     private Group group;
@@ -15,7 +16,8 @@ public class Lecture implements Serializable {
 
     }
 
-    public Lecture(Date date, Subject subject, Lector lector, Group group, LectureHall location) {
+    public Lecture(int id, LocalDateTime date, Subject subject, Lector lector, Group group, LectureHall location) {
+        this.id = id;
         this.date = date;
         this.subject = subject;
         this.lector = lector;
@@ -23,11 +25,20 @@ public class Lecture implements Serializable {
         this.location = location;
     }
 
-    public Date getDate() {
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -62,14 +73,12 @@ public class Lecture implements Serializable {
     public void setLocation(LectureHall location) {
         this.location = location;
     }
-
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((group == null) ? 0 : group.hashCode());
-        result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+        result = prime * result + id;
         return result;
     }
 
@@ -82,27 +91,14 @@ public class Lecture implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Lecture other = (Lecture) obj;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
-            return false;
-        if (group == null) {
-            if (other.group != null)
-                return false;
-        } else if (!group.equals(other.group))
-            return false;
-        if (subject == null) {
-            if (other.subject != null)
-                return false;
-        } else if (!subject.equals(other.subject))
+        if (id != other.id)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Lecture [date=" + date + ", subject=" + subject + ", lector=" + lector + ", group="
+        return "Lecture [id=" + id + ", date=" + date + ", subject=" + subject + ", lector=" + lector + ", group="
                 + group + "]";
     }
 }
