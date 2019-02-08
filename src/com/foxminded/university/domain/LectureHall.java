@@ -13,10 +13,9 @@ public class LectureHall implements Serializable {
 
     }
 
-    public LectureHall(int id, String name, Set<Date> bookedDates) {
+    public LectureHall(int id, String name) {
         this.id = id;
         this.name = name;
-        this.bookedDates = bookedDates;
     }
 
     public int getId() {
