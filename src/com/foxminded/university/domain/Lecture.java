@@ -10,19 +10,19 @@ public class Lecture implements Serializable {
     private Subject subject;
     private Lector lector;
     private Group group;
-    private LectureHall location;
+    private LectureHall lectureHall;
 
     public Lecture() {
 
     }
 
-    public Lecture(int id, LocalDateTime date, Subject subject, Lector lector, Group group, LectureHall location) {
+    public Lecture(int id, LocalDateTime date, Subject subject, Lector lector, Group group, LectureHall lectureHall) {
         this.id = id;
         this.date = date;
         this.subject = subject;
         this.lector = lector;
         this.group = group;
-        this.location = location;
+        this.lectureHall = lectureHall;
     }
 
     
@@ -66,12 +66,12 @@ public class Lecture implements Serializable {
         this.group = group;
     }
 
-    public LectureHall getLocation() {
-        return location;
+    public LectureHall getLectureHall() {
+        return lectureHall;
     }
 
-    public void setLocation(LectureHall location) {
-        this.location = location;
+    public void setLectureHall(LectureHall lectureHall) {
+        this.lectureHall = lectureHall;
     }
     
     @Override
