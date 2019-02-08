@@ -7,15 +7,15 @@ public class Period implements Serializable {
 
     private int id;
     private Date start;
-    private Date finish;
+    private Date end;
 
     public Period() {
 
     }
 
-    public Period(Date start, Date finish) {
+    public Period(Date start, Date end) {
         this.start = start;
-        this.finish = finish;
+        this.end = end;
     }
     
     public int getId() {
@@ -34,12 +34,12 @@ public class Period implements Serializable {
         this.start = start;
     }
 
-    public Date getFinish() {
-        return finish;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setFinish(Date finish) {
-        this.finish = finish;
+    public void setEnd(Date end) {
+        this.end = end;
     }
     
     @Override
@@ -66,6 +66,6 @@ public class Period implements Serializable {
 
     @Override
     public String toString() {
-        return "Period [id=" + id + ", start=" + start + ", finish=" + finish + "]";
+        return "Period [id=" + id + ", start=" + start + ", end=" + end + "]";
     }
 }
