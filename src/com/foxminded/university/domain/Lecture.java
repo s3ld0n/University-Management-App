@@ -1,12 +1,12 @@
 package com.foxminded.university.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.foxminded.university.utils.Period;
 
 public class Lecture implements Serializable {
     
     private int id;
-    private LocalDateTime date;
+    private Period period;
     private Subject subject;
     private Lector lector;
     private Group group;
@@ -16,9 +16,9 @@ public class Lecture implements Serializable {
 
     }
 
-    public Lecture(int id, LocalDateTime date, Subject subject, Lector lector, Group group, LectureHall lectureHall) {
+    public Lecture(int id, Period period, Subject subject, Lector lector, Group group, LectureHall lectureHall) {
         this.id = id;
-        this.date = date;
+        this.period = period;
         this.subject = subject;
         this.lector = lector;
         this.group = group;
@@ -34,12 +34,12 @@ public class Lecture implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public Period getPeriod() {
+        return period;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
     public Subject getSubject() {
@@ -98,7 +98,7 @@ public class Lecture implements Serializable {
 
     @Override
     public String toString() {
-        return "Lecture [id=" + id + ", date=" + date + ", subject=" + subject + ", lector=" + lector + ", group="
+        return "Lecture [id=" + id + ", period=" + period + ", subject=" + subject + ", lector=" + lector + ", group="
                 + group + "]";
     }
 }

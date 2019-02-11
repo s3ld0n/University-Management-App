@@ -3,11 +3,13 @@ package com.foxminded.university.domain;
 import java.io.Serializable;
 import java.util.*;
 
+import com.foxminded.university.utils.Period;
+
 public class LectureHall implements Serializable {
     
     private int id;
     private String name;
-    private Set<Date> bookedDates;
+    private Set<Period> bookedPeriods;
 
     public LectureHall() {
 
@@ -34,12 +36,12 @@ public class LectureHall implements Serializable {
         this.name = name;
     }
 
-    public Set<Date> getBookedDates() {
-        return bookedDates;
+    public Set<Period> getBookedPeriods() {
+        return bookedPeriods;
     }
 
-    public void setBookedDates(Set<Date> bookedDates) {
-        this.bookedDates = bookedDates;
+    public void setBookedPeriods(Set<Period> bookedPeriods) {
+        this.bookedPeriods = bookedPeriods;
     }
 
     @Override
