@@ -4,7 +4,7 @@ import java.io.Serializable;
 import com.foxminded.university.utils.Period;
 
 public class Lecture implements Serializable {
-    
+
     private int id;
     private Period period;
     private Subject subject;
@@ -25,7 +25,6 @@ public class Lecture implements Serializable {
         this.lectureHall = lectureHall;
     }
 
-    
     public int getId() {
         return id;
     }
@@ -73,7 +72,7 @@ public class Lecture implements Serializable {
     public void setLectureHall(LectureHall lectureHall) {
         this.lectureHall = lectureHall;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

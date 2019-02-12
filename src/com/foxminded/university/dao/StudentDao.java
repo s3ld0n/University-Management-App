@@ -32,7 +32,8 @@ public class StudentDao {
     public Student create(Student student) {
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
+                        Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
@@ -49,7 +50,7 @@ public class StudentDao {
             e.printStackTrace();
         }
 
-        return student; 
+        return student;
     }
 
     public Student findById(int id) {
@@ -141,7 +142,7 @@ public class StudentDao {
 
         return students;
     }
-    
+
     public void deleteById(int id) {
 
         try (Connection connection = ConnectionFactory.getConnection();

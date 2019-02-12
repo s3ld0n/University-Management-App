@@ -18,7 +18,7 @@ public class Period implements Serializable {
         this.start = start;
         this.end = end;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -42,7 +42,7 @@ public class Period implements Serializable {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
