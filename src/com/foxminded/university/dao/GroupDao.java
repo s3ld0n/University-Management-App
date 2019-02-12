@@ -43,7 +43,9 @@ public class GroupDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
+                if (!resultSet.next()) {
+                    throw new SQLException("No such group id: " + id);
+                }
 
                 String groupName = resultSet.getString("name");
                 group = new Group(id, groupName);

@@ -58,7 +58,10 @@ public class LectorDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
+                if (!resultSet.next()) {
+                    throw new SQLException("No such lector id: " + id);
+                }
+                
                 lector = new Lector(id, resultSet.getString("first_name"), resultSet.getString("last_name"));
             }
         } catch (SQLException ex) {

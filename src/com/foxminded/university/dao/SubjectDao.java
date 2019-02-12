@@ -54,7 +54,10 @@ public class SubjectDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
+                if (!resultSet.next()) {
+                    throw new SQLException("No such subject id: " + id);
+                }
+
                 subject = new Subject(id, resultSet.getString("name"));
             }
             
@@ -145,5 +148,4 @@ public class SubjectDao {
             ex.printStackTrace();
         }
     }
-
 }

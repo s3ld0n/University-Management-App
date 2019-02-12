@@ -62,7 +62,10 @@ public class StudentDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
+                if (!resultSet.next()) {
+                    throw new SQLException("No such student id: " + id);
+                }
+
                 student = new Student(id, resultSet.getString("first_name"), resultSet.getString("last_name"),
                         resultSet.getString("group_name"));
             }
