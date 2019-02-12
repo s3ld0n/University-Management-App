@@ -15,11 +15,11 @@ public class LectorDao {
     
     private static final String APPOINT_TO_SUBJECT_BY_ID_QUERY = "INSERT INTO lectors_subjects (lector_id, subject_id) "
             + "VALUES(?, ?);";
-    
-    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors;";
-    
+
     private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
             + "WHERE lector_id = ? AND subject_id = ?";
+    
+    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors;";
     
     private static final String UPDATE_QUERY = "UPDATE lectors "
             + "SET first_name = ?, last_name = ? "
@@ -91,7 +91,6 @@ public class LectorDao {
     public List<Lector> findAll() {
 
         List<Lector> lectors = new ArrayList<>();
-        SubjectDao subjectDao = new SubjectDao();
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
@@ -103,7 +102,7 @@ public class LectorDao {
                 String lastName = resultSet.getString("last_name");
                 
                 Lector lector = new Lector(id, firstName, lastName);
-                lector.setSubjects(subjectDao.findAllByLectorId(id));
+                lector.setSubjects(new SubjectDao().findAllByLectorId(id));
                 
                 lectors.add(lector);
             }
@@ -159,5 +158,4 @@ public class LectorDao {
             ex.printStackTrace();
         }
     }
-
 }

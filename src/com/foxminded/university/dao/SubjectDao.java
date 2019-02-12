@@ -3,7 +3,6 @@ package com.foxminded.university.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.foxminded.university.domain.Subject;
 
 public class SubjectDao {
