@@ -63,6 +63,7 @@ public class LectorDao {
                 }
                 
                 lector = new Lector(id, resultSet.getString("first_name"), resultSet.getString("last_name"));
+                lector.setSubjects(new SubjectDao().findAllByLectorId(id));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
