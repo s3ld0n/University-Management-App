@@ -13,7 +13,8 @@ public class Period implements Serializable {
 
     }
 
-    public Period(LocalDateTime start, LocalDateTime end) {
+    public Period(int id, LocalDateTime start, LocalDateTime end) {
+        this.id = id;
         this.start = start;
         this.end = end;
     }
