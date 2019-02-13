@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.foxminded.university.domain.Subject;
 
-public class SubjectDao implements CrudDao<Subject> {
+public class SubjectDao implements SubjectCrudDao {
     
     private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?)";
     

@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
 
-public class LectorDao implements CrudDao<Lector> {
+public class LectorDao implements LectorCrudDao {
     
     private static final String CREATE_QUERY = "INSERT INTO lectors (first_name, last_name) VALUES (?, ?)";
     
