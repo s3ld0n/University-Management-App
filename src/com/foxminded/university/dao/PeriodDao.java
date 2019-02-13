@@ -7,20 +7,19 @@ import com.foxminded.university.utils.Period;
 
 public class PeriodDao {
     
-    private static final String CREATE_QUERY = "INSERT INTO periods (period_start, period_end) VALUES(?, ?);";
+    private static final String CREATE_QUERY = "INSERT INTO periods (period_start, period_end) VALUES(?, ?)";
 
-    private static final String READ_QUERY = "SELECT period_start, period_end FROM periods WHERE id=?;";
+    private static final String READ_QUERY = "SELECT period_start, period_end FROM periods WHERE id = ?";
     
-    private static final String READ_ALL_BY_LECTURE_HALL_ID_QUERY = "SELECT id, period_start, period_end "
-            + "FROM periods "
+    private static final String READ_ALL_BY_LECTURE_HALL_ID_QUERY = "SELECT id, period_start, period_end FROM periods "
             + "JOIN lecture_halls_periods AS lhp ON periods.id = lhp.period_id "
-            + "WHERE lhp.lecture_hall_id=?;";
+            + "WHERE lhp.lecture_hall_id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, period_start, period_end FROM periods;";
+    private static final String READ_ALL_QUERY = "SELECT id, period_start, period_end FROM periods";
     
-    private static final String DELETE_QUERY = "DELETE FROM periods WHERE id = ?;";
+    private static final String DELETE_QUERY = "DELETE FROM periods WHERE id = ?";
     
-    private static final String UPDATE_QUERY = "UPDATE periods SET period_start = ?, period_end = ? WHERE id= ?;";
+    private static final String UPDATE_QUERY = "UPDATE periods SET period_start = ?, period_end = ? WHERE id = ?";
     
     public Period create(Period period) {
 

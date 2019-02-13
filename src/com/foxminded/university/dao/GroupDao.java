@@ -6,11 +6,11 @@ import com.foxminded.university.domain.*;
 
 public class GroupDao {
 
-    private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?);";
-    private final static String READ_QUERY = "SELECT id, name FROM groups WHERE id=?";
-    private final static String READ_ALL_QUERY = "SELECT id, name FROM groups;";
+    private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?)";
+    private final static String READ_QUERY = "SELECT id, name FROM groups WHERE id = ?";
+    private final static String READ_ALL_QUERY = "SELECT id, name FROM groups";
     private final static String UPDATE_QUERY = "UPDATE groups SET name = ? WHERE id = ?";
-    private final static String DELETE_QUERY = "DELETE FROM groups WHERE id=?";
+    private final static String DELETE_QUERY = "DELETE FROM groups WHERE id = ?";
 
     public Group create(Group group) {
 

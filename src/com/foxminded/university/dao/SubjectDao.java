@@ -7,21 +7,21 @@ import com.foxminded.university.domain.Subject;
 
 public class SubjectDao {
     
-    private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?);";
+    private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?)";
     
-    private static final String READ_QUERY = "SELECT name FROM subjects WHERE id=?;";
+    private static final String READ_QUERY = "SELECT name FROM subjects WHERE id = ?";
     
     private static final String READ_ALL_BY_LECTOR_ID_QUERY = "SELECT subjects.id, subjects.name "
             + "FROM subjects "
             + "JOIN lectors_subjects ON subjects.id = lectors_subjects.subject_id " 
             + "JOIN lectors ON lectors_subjects.lector_id = lectors.id " 
-            + "WHERE lectors.id= ?;";
+            + "WHERE lectors.id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects;";
+    private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects";
 
     private static final String UPDATE_QUERY = "UPDATE subjects SET name = ? WHERE id = ?";
 
-    private final static String DELETE_QUERY = "DELETE FROM subjects WHERE id=?";
+    private final static String DELETE_QUERY = "DELETE FROM subjects WHERE id = ?";
 
     
     public Subject create(Subject subject) {

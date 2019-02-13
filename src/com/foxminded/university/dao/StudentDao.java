@@ -7,26 +7,25 @@ import com.foxminded.university.domain.*;
 public class StudentDao {
 
     private final static String CREATE_QUERY = "INSERT INTO students (first_name, last_name, group_id) "
-            + "VALUES(?, ?, (SELECT id FROM groups WHERE name=?));";
+            + "VALUES(?, ?, (SELECT id FROM groups WHERE name = ?))";
     
     private final static String READ_QUERY = "SELECT students.id, first_name, last_name, groups.name AS group_name "
             + "FROM students JOIN groups ON students.group_id = groups.id "
-            + "WHERE students.id=?;";
+            + "WHERE students.id = ?";
     
     private final static String READ_ALL_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
-            + "FROM students "
-            + "JOIN groups ON students.group_id = groups.id;";
+            + "FROM students JOIN groups ON students.group_id = groups.id";
     
-    private final static String UPDATE_QUERY = "UPDATE students "
-            + "SET first_name = ?, last_name = ?, group_id = (SELECT id FROM groups WHERE name=?) "
+    private final static String UPDATE_QUERY = "UPDATE students SET first_name = ?, last_name = ?, "
+            + "group_id = (SELECT id FROM groups WHERE name = ?) "
             + "WHERE id = ?";
     
-    private final static String DELETE_QUERY = "DELETE FROM students WHERE id=?";
+    private final static String DELETE_QUERY = "DELETE FROM students WHERE id = ?";
     
-    private final static String READ_ALL_BY_GROUP_ID_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
-            + "FROM students "
-            + "JOIN groups ON students.group_id = groups.id "
-            + "WHERE group_id = ?;";
+    private final static String READ_ALL_BY_GROUP_ID_QUERY = "SELECT students.id AS id, first_name, last_name, "
+            + "groups.name AS group_name "
+            + "FROM students JOIN groups ON students.group_id = groups.id "
+            + "WHERE group_id = ?";
     
     
     public Student create(Student student) {

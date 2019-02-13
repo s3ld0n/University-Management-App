@@ -6,24 +6,19 @@ import com.foxminded.university.domain.*;
 
 public class LectorDao {
     
-    private static final String CREATE_QUERY = "INSERT INTO lectors (first_name, last_name) "
-            + "VALUES (?, ?);";
+    private static final String CREATE_QUERY = "INSERT INTO lectors (first_name, last_name) VALUES (?, ?)";
     
-    private static final String READ_QUERY = "SELECT id, first_name, last_name "
-            + "FROM lectors "
-            + "WHERE id = ?";
+    private static final String READ_QUERY = "SELECT id, first_name, last_name FROM lectors WHERE id = ?";
     
     private static final String APPOINT_TO_SUBJECT_BY_ID_QUERY = "INSERT INTO lectors_subjects (lector_id, subject_id) "
-            + "VALUES(?, ?);";
+            + "VALUES(?, ?)";
 
-    private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
-            + "WHERE lector_id = ? AND subject_id = ?";
+    private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects WHERE lector_id = ? "
+            + "AND subject_id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors;";
+    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors";
     
-    private static final String UPDATE_QUERY = "UPDATE lectors "
-            + "SET first_name = ?, last_name = ? "
-            + "WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE lectors SET first_name = ?, last_name = ? WHERE id = ?";
     
     private static final String DELETE_QUERY = "DELETE FROM lectors WHERE id = ?";
     

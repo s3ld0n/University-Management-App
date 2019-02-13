@@ -8,16 +8,13 @@ import com.foxminded.university.utils.Period;
 public class LectureDao {
     
     private static final String CREATE_QUERY = "INSERT INTO lectures (subject_id, lector_id, group_id, lecture_hall_id, "
-            + "period_id) "
-            + "VALUES (?, ?, ?, ?, ?);";
+            + "period_id) VALUES (?, ?, ?, ?, ?)";
     
     private static final String READ_QUERY = "SELECT subject_id, group_id, lector_id, lecture_hall_id, period_id "
-            + "FROM lectures "
-            + "WHERE id = ?;";
+            + "FROM lectures WHERE id = ?";
 
-    private static final String UPDATE_QUERY = "UPDATE lectures "
-            + "SET period_id = ?, subject_id = ?, lector_id = ?, group_id = ?, lecture_hall_id = ? "
-            + "WHERE id = ?;";
+    private static final String UPDATE_QUERY = "UPDATE lectures SET period_id = ?, subject_id = ?, lector_id = ?, "
+            + "group_id = ?, lecture_hall_id = ? WHERE id = ?";
 
     private static final String READ_ALL_QUERY = "SELECT lectures.id AS lecture_id, periods.id AS period_id, "
             + "periods.period_start AS period_start, periods.period_end AS period_end, subjects.id AS subject_id, "
@@ -30,7 +27,7 @@ public class LectureDao {
             + "JOIN lectors_subjects ON lectors.id = lectors_subjects.lector_id "
             + "JOIN subjects ON lectors_subjects.subject_id = subjects.id "
             + "JOIN groups ON lectures.group_id = groups.id "
-            + "JOIN lecture_halls ON lectures.lecture_hall_id = lecture_halls.id;";
+            + "JOIN lecture_halls ON lectures.lecture_hall_id = lecture_halls.id";
 
     private static final String DELETE_QUERY = "DELETE FROM lectures WHERE id = ?";
     
