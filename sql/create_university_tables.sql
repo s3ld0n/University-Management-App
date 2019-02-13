@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS students (
 	id SERIAL PRIMARY KEY,
 	first_name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(30) NOT NULL,
-	group_id INT NOT NULL REFERENCES groups(id)
+	group_id INT REFERENCES groups(id)
 );
 
 CREATE TABLE IF NOT EXISTS subjects (
