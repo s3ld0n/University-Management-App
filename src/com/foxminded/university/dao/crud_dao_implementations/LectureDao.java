@@ -1,7 +1,10 @@
-package com.foxminded.university.dao;
+package com.foxminded.university.dao.crud_dao_implementations;
 
 import java.sql.*;
 import java.util.*;
+
+import com.foxminded.university.dao.ConnectionFactory;
+import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.domain.*;
 import com.foxminded.university.utils.Period;
 

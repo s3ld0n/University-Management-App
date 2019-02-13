@@ -1,8 +1,11 @@
-package com.foxminded.university.dao;
+package com.foxminded.university.dao.crud_dao_implementations;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.foxminded.university.dao.ConnectionFactory;
+import com.foxminded.university.dao.SubjectCrudDao;
 import com.foxminded.university.domain.Subject;
 
 public class SubjectDao implements SubjectCrudDao {

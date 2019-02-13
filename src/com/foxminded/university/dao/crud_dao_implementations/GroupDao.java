@@ -1,45 +1,48 @@
-package com.foxminded.university.dao;
+package com.foxminded.university.dao.crud_dao_implementations;
 
 import java.sql.*;
 import java.util.*;
-import com.foxminded.university.domain.LectureHall;
 
-public class LectureHallDao implements CrudDao<LectureHall> {
-    
-    public static final String CREATE_QUERY = "INSERT INTO lecture_halls (name) VALUES(?)";
-    
-    public static final String READ_QUERY = "SELECT name FROM lecture_halls WHERE lecture_halls.id = ?";
-    
-    public static final String UPDATE_QUERY = "UPDATE lecture_halls SET name = ? WHERE id = ?";
-    
-    public static final String READ_ALL_QUERY = "SELECT id, name FROM lecture_halls";
+import com.foxminded.university.dao.ConnectionFactory;
+import com.foxminded.university.dao.CrudDao;
+import com.foxminded.university.domain.*;
 
-    private static final String DELETE_QUERY = "DELETE FROM lecture_halls WHERE id = ?";
+public class GroupDao implements CrudDao<Group> {
+
+    private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?)";
     
-    public LectureHall create(LectureHall lectureHall) {
+    private final static String READ_QUERY = "SELECT id, name FROM groups WHERE id = ?";
+    
+    private final static String READ_ALL_QUERY = "SELECT id, name FROM groups";
+    
+    private final static String UPDATE_QUERY = "UPDATE groups SET name = ? WHERE id = ?";
+    
+    private final static String DELETE_QUERY = "DELETE FROM groups WHERE id = ?";
+
+    public Group create(Group group) {
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
                         Statement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(1, lectureHall.getName());
+            statement.setString(1, group.getName());
             statement.executeUpdate();
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
-                lectureHall.setId(resultSet.getInt(1));
+                group.setId(resultSet.getInt(1));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lectureHall;
+        return group;
     }
 
-    public LectureHall findById(int id) {
+    public Group findById(int id) {
 
-        LectureHall lectureHall = null;
+        Group group = null;
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
@@ -48,40 +51,40 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
-                    throw new SQLException("No such lecture hall id: " + id);
+                    throw new SQLException("No such group id: " + id);
                 }
 
-                lectureHall = new LectureHall(id, resultSet.getString("name"));
-
-                lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
+                String groupName = resultSet.getString("name");
+                group = new Group(id, groupName);
+                group.setStudents(new StudentDao().findAllByGroupId(id));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lectureHall;
+        return group;
     }
 
-    public LectureHall update(LectureHall lectureHall) {
+    public Group update(Group group) {
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
-            statement.setString(1, lectureHall.getName());
-            statement.setInt(2, lectureHall.getId());
+            statement.setString(1, group.getName());
+            statement.setInt(2, group.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lectureHall;
+        return group;
     }
 
-    public List<LectureHall> findAll() {
+    public List<Group> findAll() {
 
-        List<LectureHall> lectureHalls = new ArrayList<>();
+        List<Group> groups = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
@@ -91,17 +94,16 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
 
-                LectureHall lectureHall = new LectureHall(id, name);
-                lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
-
-                lectureHalls.add(lectureHall);
+                Group group = new Group(id, name);
+                group.setStudents(new StudentDao().findAllByGroupId(id));
+                groups.add(group);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lectureHalls;
+        return groups;
     }
 
     public void deleteById(int id) {
