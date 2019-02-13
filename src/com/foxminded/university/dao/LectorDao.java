@@ -4,16 +4,16 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
 
-public class LectorDao implements Dao<Lector> {
+public class LectorDao implements CrudDao<Lector> {
     
     private static final String CREATE_QUERY = "INSERT INTO lectors (first_name, last_name) VALUES (?, ?)";
     
     private static final String READ_QUERY = "SELECT id, first_name, last_name FROM lectors WHERE id = ?";
     
-    private static final String APPOINT_TO_SUBJECT_BY_ID_QUERY = "INSERT INTO lectors_subjects (lector_id, subject_id) "
+    private static final String ADD_SUBJECT_BY_ID_QUERY = "INSERT INTO lectors_subjects (lector_id, subject_id) "
             + "VALUES(?, ?)";
 
-    private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
+    private static final String REMOVE_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
             + "WHERE lector_id = ? AND subject_id = ?";
     
     private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors";
@@ -112,7 +112,7 @@ public class LectorDao implements Dao<Lector> {
     public void addSubjectById(Lector lector, int subjectId) {
         
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(APPOINT_TO_SUBJECT_BY_ID_QUERY)) {
+                PreparedStatement statement = connection.prepareStatement(ADD_SUBJECT_BY_ID_QUERY)) {
             
                 statement.setInt(1, lector.getId());
                 statement.setInt(2, subjectId);
@@ -126,7 +126,7 @@ public class LectorDao implements Dao<Lector> {
     public void removeSubjectById(Lector lector, int subjectId) {
         
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(DISCARD_SUBJECT_BY_ID_QUERY)) {
+                PreparedStatement statement = connection.prepareStatement(REMOVE_SUBJECT_BY_ID_QUERY)) {
             
             statement.setInt(1, lector.getId());
             statement.setInt(2, subjectId);

@@ -2,7 +2,7 @@ package com.foxminded.university.dao;
 
 import java.util.List;
 
-public interface Dao<T> {
+public interface CrudDao<T> {
     
     T create(T t);
     

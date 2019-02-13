@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.LectureHall;
 
-public class LectureHallDao implements Dao<LectureHall> {
+public class LectureHallDao implements CrudDao<LectureHall> {
     
     public static final String CREATE_QUERY = "INSERT INTO lecture_halls (name) VALUES(?)";
     

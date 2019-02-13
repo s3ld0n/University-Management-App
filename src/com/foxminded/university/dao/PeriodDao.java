@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import com.foxminded.university.utils.Period;
 
-public class PeriodDao implements Dao<Period> {
+public class PeriodDao implements CrudDao<Period> {
     
     private static final String CREATE_QUERY = "INSERT INTO periods (period_start, period_end) VALUES(?, ?)";
 

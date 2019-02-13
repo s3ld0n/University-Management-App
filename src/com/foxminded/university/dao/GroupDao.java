@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
 
-public class GroupDao implements Dao<Group> {
+public class GroupDao implements CrudDao<Group> {
 
     private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?)";
     
