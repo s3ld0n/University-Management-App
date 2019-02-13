@@ -97,8 +97,8 @@ public class LectureHallDao {
                 lectureHalls.add(lectureHall);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lectureHalls;
@@ -116,8 +116,8 @@ public class LectureHallDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

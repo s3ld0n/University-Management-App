@@ -14,7 +14,8 @@ public class LectureDao {
             + "FROM lectures WHERE id = ?";
 
     private static final String UPDATE_QUERY = "UPDATE lectures SET period_id = ?, subject_id = ?, lector_id = ?, "
-            + "group_id = ?, lecture_hall_id = ? WHERE id = ?";
+            + "group_id = ?, lecture_hall_id = ? "
+            + "WHERE id = ?";
 
     private static final String READ_ALL_QUERY = "SELECT lectures.id AS lecture_id, periods.id AS period_id, "
             + "periods.period_start AS period_start, periods.period_end AS period_end, subjects.id AS subject_id, "
@@ -86,8 +87,8 @@ public class LectureDao {
 
                 lecture = new Lecture(id, period, subject, lector, group, lectureHall);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lecture;
@@ -146,8 +147,8 @@ public class LectureDao {
                 lectures.add(lecture);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lectures;
@@ -165,8 +166,8 @@ public class LectureDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

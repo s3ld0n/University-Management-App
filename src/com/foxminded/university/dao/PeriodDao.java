@@ -60,8 +60,8 @@ public class PeriodDao {
                 period = new Period(id, resultSet.getTimestamp("period_start").toLocalDateTime(),
                         resultSet.getTimestamp("period_end").toLocalDateTime());
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return period;
@@ -103,8 +103,8 @@ public class PeriodDao {
                 }
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return set;
@@ -126,8 +126,8 @@ public class PeriodDao {
                 periods.add(new Period(id, periodStart, periodEnd));
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return periods;
@@ -145,8 +145,8 @@ public class PeriodDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

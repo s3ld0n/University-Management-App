@@ -68,8 +68,8 @@ public class StudentDao {
                 student = new Student(id, resultSet.getString("first_name"), resultSet.getString("last_name"),
                         resultSet.getString("group_name"));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return student;
@@ -110,8 +110,8 @@ public class StudentDao {
                 students.add(new Student(id, firstName, lastName, group));
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return students;
@@ -138,8 +138,8 @@ public class StudentDao {
                 }
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return students;
@@ -157,8 +157,8 @@ public class StudentDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

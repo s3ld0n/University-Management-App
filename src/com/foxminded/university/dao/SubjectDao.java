@@ -60,8 +60,8 @@ public class SubjectDao {
                 subject = new Subject(id, resultSet.getString("name"));
             }
             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         
         return subject;
@@ -98,8 +98,8 @@ public class SubjectDao {
                 subjects.add(new Subject(id, name));
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return subjects;
@@ -124,8 +124,8 @@ public class SubjectDao {
                 }
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return subjects;
@@ -143,8 +143,8 @@ public class SubjectDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -60,8 +60,8 @@ public class LectorDao {
                 lector = new Lector(id, resultSet.getString("first_name"), resultSet.getString("last_name"));
                 lector.setSubjects(new SubjectDao().findAllByLectorId(id));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lector;
@@ -102,8 +102,8 @@ public class LectorDao {
                 lectors.add(lector);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return lectors;
@@ -118,8 +118,8 @@ public class LectorDao {
                 statement.setInt(2, subjectId);
                 statement.executeUpdate();
             
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -132,8 +132,8 @@ public class LectorDao {
             statement.setInt(2, subjectId);
             statement.executeUpdate();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -149,8 +149,8 @@ public class LectorDao {
                 throw new SQLException("Deleting failed. No such id: " + id);
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

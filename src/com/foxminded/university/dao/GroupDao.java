@@ -52,8 +52,8 @@ public class GroupDao {
                 group.setStudents(new StudentDao().findAllByGroupId(id));
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return group;
