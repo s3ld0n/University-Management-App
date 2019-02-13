@@ -13,8 +13,8 @@ public class LectorDao {
     private static final String APPOINT_TO_SUBJECT_BY_ID_QUERY = "INSERT INTO lectors_subjects (lector_id, subject_id) "
             + "VALUES(?, ?)";
 
-    private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects WHERE lector_id = ? "
-            + "AND subject_id = ?";
+    private static final String DISCARD_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
+            + "WHERE lector_id = ? AND subject_id = ?";
     
     private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors";
     
@@ -109,7 +109,7 @@ public class LectorDao {
         return lectors;
     }
     
-    public void appointToSubjectById(Lector lector, int subjectId) {
+    public void addSubjectById(Lector lector, int subjectId) {
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(APPOINT_TO_SUBJECT_BY_ID_QUERY)) {
@@ -123,7 +123,7 @@ public class LectorDao {
         }
     }
     
-    public void discardSubjectById(Lector lector, int subjectId) {
+    public void removeSubjectById(Lector lector, int subjectId) {
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(DISCARD_SUBJECT_BY_ID_QUERY)) {
