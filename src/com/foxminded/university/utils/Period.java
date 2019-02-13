@@ -1,23 +1,24 @@
 package com.foxminded.university.utils;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Period implements Serializable {
 
     private int id;
-    private Date start;
-    private Date finish;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     public Period() {
 
     }
 
-    public Period(Date start, Date finish) {
+    public Period(int id, LocalDateTime start, LocalDateTime end) {
+        this.id = id;
         this.start = start;
-        this.finish = finish;
+        this.end = end;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -26,22 +27,22 @@ public class Period implements Serializable {
         this.id = id;
     }
 
-    public Date getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 
-    public Date getFinish() {
-        return finish;
+    public LocalDateTime getEnd() {
+        return end;
     }
 
-    public void setFinish(Date finish) {
-        this.finish = finish;
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -66,6 +67,6 @@ public class Period implements Serializable {
 
     @Override
     public String toString() {
-        return "Period [id=" + id + ", start=" + start + ", finish=" + finish + "]";
+        return "Period [id=" + id + ", start=" + start + ", end=" + end + "]";
     }
 }

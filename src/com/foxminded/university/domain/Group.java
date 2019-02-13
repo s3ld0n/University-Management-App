@@ -1,6 +1,7 @@
 package com.foxminded.university.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group implements Serializable {
@@ -13,10 +14,10 @@ public class Group implements Serializable {
 
     }
     
-    public Group(int id, String name, List<Student> students) {
+    public Group(int id, String name) {
         this.id = id;
         this.name = name;
-        this.students = students;
+        this.students = new ArrayList<Student>();
     }
     
     public int getId() {
