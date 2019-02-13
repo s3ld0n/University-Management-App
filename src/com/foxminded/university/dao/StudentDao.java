@@ -10,13 +10,16 @@ public class StudentDao implements Dao<Student> {
             + "VALUES(?, ?, (SELECT id FROM groups WHERE name = ?))";
     
     private final static String READ_QUERY = "SELECT students.id, first_name, last_name, groups.name AS group_name "
-            + "FROM students JOIN groups ON students.group_id = groups.id "
+            + "FROM students "
+            + "JOIN groups ON students.group_id = groups.id "
             + "WHERE students.id = ?";
     
     private final static String READ_ALL_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
-            + "FROM students JOIN groups ON students.group_id = groups.id";
+            + "FROM students "
+            + "JOIN groups ON students.group_id = groups.id";
     
-    private final static String UPDATE_QUERY = "UPDATE students SET first_name = ?, last_name = ?, "
+    private final static String UPDATE_QUERY = "UPDATE students "
+            + "SET first_name = ?, last_name = ?, "
             + "group_id = (SELECT id FROM groups WHERE name = ?) "
             + "WHERE id = ?";
     
@@ -24,7 +27,8 @@ public class StudentDao implements Dao<Student> {
     
     private final static String READ_ALL_BY_GROUP_ID_QUERY = "SELECT students.id AS id, first_name, last_name, "
             + "groups.name AS group_name "
-            + "FROM students JOIN groups ON students.group_id = groups.id "
+            + "FROM students "
+            + "JOIN groups ON students.group_id = groups.id "
             + "WHERE group_id = ?";
     
     

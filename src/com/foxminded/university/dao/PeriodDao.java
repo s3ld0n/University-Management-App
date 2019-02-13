@@ -11,7 +11,8 @@ public class PeriodDao implements Dao<Period> {
 
     private static final String READ_QUERY = "SELECT period_start, period_end FROM periods WHERE id = ?";
     
-    private static final String READ_ALL_BY_LECTURE_HALL_ID_QUERY = "SELECT id, period_start, period_end FROM periods "
+    private static final String READ_ALL_BY_LECTURE_HALL_ID_QUERY = "SELECT id, period_start, period_end "
+            + "FROM periods "
             + "JOIN lecture_halls_periods AS lhp ON periods.id = lhp.period_id "
             + "WHERE lhp.lecture_hall_id = ?";
     
