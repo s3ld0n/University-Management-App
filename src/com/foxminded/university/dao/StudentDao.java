@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 import com.foxminded.university.domain.*;
 
-public class StudentDao {
+public class StudentDao implements Dao<Student> {
 
     private final static String CREATE_QUERY = "INSERT INTO students (first_name, last_name, group_id) "
             + "VALUES(?, ?, (SELECT id FROM groups WHERE name = ?))";

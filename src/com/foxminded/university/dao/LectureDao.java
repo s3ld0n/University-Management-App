@@ -5,7 +5,7 @@ import java.util.*;
 import com.foxminded.university.domain.*;
 import com.foxminded.university.utils.Period;
 
-public class LectureDao {
+public class LectureDao implements Dao<Lecture> {
     
     private static final String CREATE_QUERY = "INSERT INTO lectures (subject_id, lector_id, group_id, lecture_hall_id, "
             + "period_id) VALUES (?, ?, ?, ?, ?)";

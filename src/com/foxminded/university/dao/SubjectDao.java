@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.foxminded.university.domain.Subject;
 
-public class SubjectDao {
+public class SubjectDao implements Dao<Subject> {
     
     private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?)";
     
