@@ -17,18 +17,8 @@ public class LectureDao implements Dao<Lecture> {
             + "group_id = ?, lecture_hall_id = ? "
             + "WHERE id = ?";
 
-    private static final String READ_ALL_QUERY = "SELECT lectures.id AS lecture_id, periods.id AS period_id, "
-            + "periods.period_start AS period_start, periods.period_end AS period_end, subjects.id AS subject_id, "
-            + "subjects.name AS subject_name, lectors.id AS lector_id, lectors.first_name AS lector_fname, "
-            + "lectors.last_name AS lector_lname, groups.id AS group_id, groups.name AS group_name, lecture_halls.id "
-            + "AS lecture_hall_id, lecture_halls.name AS lecture_hall_name "
-            + "FROM lectures "
-            + "JOIN periods ON periods.id = lectures.period_id "
-            + "JOIN lectors ON lectures.lector_id = lectors.id "
-            + "JOIN lectors_subjects ON lectors.id = lectors_subjects.lector_id "
-            + "JOIN subjects ON lectors_subjects.subject_id = subjects.id "
-            + "JOIN groups ON lectures.group_id = groups.id "
-            + "JOIN lecture_halls ON lectures.lecture_hall_id = lecture_halls.id";
+    private static final String READ_ALL_QUERY = "SELECT id, subject_id, group_id, lector_id, lecture_hall_id, period_id "
+            + "FROM lectures";
 
     private static final String DELETE_QUERY = "DELETE FROM lectures WHERE id = ?";
     
@@ -123,25 +113,23 @@ public class LectureDao implements Dao<Lecture> {
                 ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("lecture_id");
+                int id = resultSet.getInt("id");
+                
+                PeriodDao periodDao = new PeriodDao(); 
+                Period period = periodDao.findById(resultSet.getInt("period_id"));
+                
+                SubjectDao subjectDao = new SubjectDao();
+                Subject subject = subjectDao.findById(resultSet.getInt("subject_id"));
 
-                Period period = new Period(resultSet.getInt("period_id"),
-                        resultSet.getTimestamp("period_start").toLocalDateTime(),
-                        resultSet.getTimestamp("period_end").toLocalDateTime());
+                Lector lector = new LectorDao().findById(resultSet.getInt("lector_id"));
+                lector.setSubjects(subjectDao.findAllByLectorId(resultSet.getInt("lector_id")));
 
-                Subject subject = new Subject(resultSet.getInt("subject_id"), resultSet.getString("subject_name"));
-
-                Lector lector = new Lector(resultSet.getInt("lector_id"), resultSet.getString("lector_fname"),
-                        resultSet.getString("lector_lname"));
-                lector.setSubjects(new SubjectDao().findAllByLectorId(resultSet.getInt("lector_id")));
-
-                Group group = new Group(resultSet.getInt("group_id"), resultSet.getString("group_name"));
+                Group group = new GroupDao().findById(resultSet.getInt("group_id"));
                 group.setStudents(new StudentDao().findAllByGroupId(resultSet.getInt("group_id")));
 
-                LectureHall lectureHall = new LectureHall(resultSet.getInt("lecture_hall_id"),
-                        resultSet.getString("lecture_hall_name"));
+                LectureHall lectureHall = new LectureHallDao().findById(resultSet.getInt("lecture_hall_id"));
                 lectureHall
-                        .setBookedPeriods(new PeriodDao().findAllByLectureHallId(resultSet.getInt("lecture_hall_id")));
+                        .setBookedPeriods(periodDao.findAllByLectureHallId(resultSet.getInt("lecture_hall_id")));
 
                 Lecture lecture = new Lecture(id, period, subject, lector, group, lectureHall);
                 lectures.add(lecture);
