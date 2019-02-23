@@ -3,6 +3,9 @@ package com.foxminded.university.dao.crud_dao_implementations;
 import java.sql.*;
 import java.util.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.StudentCrudDao;
 import com.foxminded.university.domain.*;
@@ -34,20 +37,30 @@ public class StudentDao implements StudentCrudDao {
             + "JOIN groups ON students.group_id = groups.id "
             + "WHERE group_id = ?";
     
+    private static Logger log = LogManager.getLogger(StudentDao.class.getName());
     
     public Student create(Student student) {
-
+        
+        log.info("Creating a student " + student);
+        
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
                         Statement.RETURN_GENERATED_KEYS)) {
-
+            
+            log.debug("Prepared statement created. Setting parameters...");
+            
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setString(3, student.getGroup());
 
+            log.debug("Executing prepared statement...");
+            
             statement.executeUpdate();
 
+            log.debug("Creating result set...");
+            
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                log.debug("Result set created. Setting id from DB to student object to return...");
                 resultSet.next();
                 student.setId(resultSet.getInt(1));
             }
@@ -55,7 +68,9 @@ public class StudentDao implements StudentCrudDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
+        log.info("Student " + student + " was successfully created.");
+        
         return student;
     }
 
