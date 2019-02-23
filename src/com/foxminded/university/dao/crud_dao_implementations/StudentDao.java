@@ -102,8 +102,8 @@ public class StudentDao implements StudentCrudDao {
                         resultSet.getString("group_name"));
             }
         } catch (SQLException e) {
-            log.error("Finding student have failed", e);
-            throw new DaoException("Finding student have failed", e);
+            log.error("Finding student has failed", e);
+            throw new DaoException("Finding student has failed", e);
         }
 
         log.info("Student was found.");
@@ -112,20 +112,29 @@ public class StudentDao implements StudentCrudDao {
     }
 
     public Student update(Student student) {
+        
+        log.info("Updating student " + student);
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
+            log.debug("Prepared statement created. Setting parameters...");
+            
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setString(3, student.getGroup());
             statement.setInt(4, student.getId());
-            statement.executeUpdate();
 
+            log.debug("Executing prepared statement...");
+            
+            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Updating student has failed", e);
+            throw new DaoException("Updating student has failed", e);
         }
 
+        log.info("Studend was updated.");
+        
         return student;
     }
 
