@@ -47,7 +47,7 @@
             <appender-ref ref="debug-log" level="debug"/>
             <appender-ref ref="info-log" level="info"/>
             <appender-ref ref="error-log" level="error"/>
-            <appender-ref ref="console-log" level="debug"/>
+            <appender-ref ref="console-log" level="info"/>
         </Logger>
         <Root level="info" additivity="false">
             <AppenderRef ref="console-log"/>
