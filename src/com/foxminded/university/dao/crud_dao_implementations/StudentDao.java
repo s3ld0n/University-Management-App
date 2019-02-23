@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
+import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.dao.StudentCrudDao;
 import com.foxminded.university.domain.*;
 
@@ -66,33 +67,46 @@ public class StudentDao implements StudentCrudDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Creation of student has failed." + e);
+            throw new DaoException("Creation of student has failed." + e);
         }
         
-        log.info("Student " + student + " was successfully created.");
+        log.info("Student " + student + " was created.");
         
         return student;
     }
 
     public Student findById(int id) {
-
+        
+        log.info("Finding student from DB by id: " + id);
+        
         Student student = null;
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
+            
+            log.debug("Prepared statement created. Setting parameters...");
+            
             statement.setInt(1, id);
 
+            log.debug("Creating result set...");
+            
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
                     throw new SQLException("No such student id: " + id);
                 }
-
+                
+                log.debug("Creating a student object...");
+                
                 student = new Student(id, resultSet.getString("first_name"), resultSet.getString("last_name"),
                         resultSet.getString("group_name"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Finding student have failed", e);
+            throw new DaoException("Finding student have failed", e);
         }
+
+        log.info("Student was found.");
 
         return student;
     }
