@@ -18,7 +18,7 @@ public class ConnectionFactory {
     public static Connection getConnection() {
         Connection connection = null;
         
-        log.debug("Creating a new connection...");
+        log.info("Creating a new connection...");
 
         try {
             connection = DriverManager.getConnection(properties.getProperty("url") , properties.getProperty("user"),
@@ -28,7 +28,7 @@ public class ConnectionFactory {
             throw new DaoException("Connection has not been created." , e);
         }
         
-        log.debug("Connection was successfully created.");
+        log.info("Connection was successfully created.");
         
         return connection;
     }

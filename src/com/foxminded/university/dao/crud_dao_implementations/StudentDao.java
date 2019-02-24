@@ -140,25 +140,36 @@ public class StudentDao implements StudentCrudDao {
 
     public List<Student> findAll() {
 
+        log.info("Finding all students...");
+        
         List<Student> students = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY);
-                ResultSet resultSet = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY)) {
+            
+            log.debug("Prepared statement created. Creating result set...");
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    log.debug("Getting student fields from result set...");
+                    
+                    int id = resultSet.getInt("id");
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    String group = resultSet.getString("group_name");
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String group = resultSet.getString("group_name");
-
-                students.add(new Student(id, firstName, lastName, group));
+                    students.add(new Student(id, firstName, lastName, group));
+                    log.debug("Student created and added to list.");
+                }
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Finding all students has failed", e);
+            throw new DaoException("Finding all students has failed", e);
         }
 
+        log.info("All students have been found.");
+        
         return students;
     }
 
