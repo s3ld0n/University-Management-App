@@ -10,6 +10,16 @@
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
         </Console>
 
+        <RollingFile name="trace-log" fileName="${log-path}/trace.log"
+                     filePattern="${log-path}/trace-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
         <RollingFile name="debug-log" fileName="${log-path}/debug.log"
                      filePattern="${log-path}/debug-%d{yyyy-MM-dd}.log">
             <PatternLayout>
@@ -43,11 +53,12 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.foxminded.university" level="debug" additivity="false">
+        <Logger name="com.foxminded.university" level="trace" additivity="false">
             <appender-ref ref="debug-log" level="debug"/>
             <appender-ref ref="info-log" level="info"/>
             <appender-ref ref="error-log" level="error"/>
             <appender-ref ref="console-log" level="debug"/>
+            <appender-ref ref="trace-log" level="trace"/>
         </Logger>
         <Root level="info" additivity="false">
             <AppenderRef ref="console-log"/>
