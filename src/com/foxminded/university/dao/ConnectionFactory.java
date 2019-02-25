@@ -12,11 +12,8 @@ import com.foxminded.university.utils.PropertyReader;
 
 public class ConnectionFactory {
 
-    private static Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
-    static {
-        log.info("Reading properties from file");
-    }
     private static Properties properties = PropertyReader.readPropertiesFromFile("resources/config.properties");
+    private static Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
     
     public static Connection getConnection() {
         Connection connection = null;
