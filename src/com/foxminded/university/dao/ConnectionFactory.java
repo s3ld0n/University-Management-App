@@ -18,7 +18,7 @@ public class ConnectionFactory {
     public static Connection getConnection() {
         Connection connection = null;
         
-        log.info("Creating a new connection...");
+        log.info("Creating a new connection");
 
         try {
             connection = DriverManager.getConnection(properties.getProperty("url") , properties.getProperty("user"),
