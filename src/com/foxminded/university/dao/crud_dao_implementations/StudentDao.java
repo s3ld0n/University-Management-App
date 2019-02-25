@@ -42,7 +42,7 @@ public class StudentDao implements StudentCrudDao {
     
     public Student create(Student student) {
         
-        log.debug("Creating a student: " + student);
+        log.debug("Creating a student: {}", student);
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
@@ -72,18 +72,18 @@ public class StudentDao implements StudentCrudDao {
             }
 
         } catch (SQLException e) {
-            log.error("Creation of student has failed." + e);
-            throw new DaoException("Creation of student has failed." + e);
+            log.error("Creation of student has failed.", e);
+            throw new DaoException("Creation of student has failed.", e);
         }
         
-        log.debug("Student " + student + " was created.");
+        log.debug("Student {} was created.", student);
         
         return student;
     }
 
     public Student findById(int id) {
         
-        log.debug("Finding student by id: " + id);
+        log.debug("Finding student by id: {}", id);
         
         Student student = null;
 
@@ -194,7 +194,7 @@ public class StudentDao implements StudentCrudDao {
 
     public List<Student> findAllByGroupId(int groupId) {
         
-        log.debug("Finding all students by group id: " + groupId);
+        log.debug("Finding all students by group id: {}", groupId);
         
         List<Student> students = new ArrayList<>();
 
@@ -245,7 +245,7 @@ public class StudentDao implements StudentCrudDao {
 
     public void deleteById(int id) {
 
-        log.debug("Deleting student by id: " + id);
+        log.debug("Deleting student by id: {}", id);
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
