@@ -42,26 +42,26 @@ public class StudentDao implements StudentCrudDao {
     
     public Student create(Student student) {
         
-        log.info("Creating a student: " + student);
+        log.debug("Creating a student: " + student);
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
                         Statement.RETURN_GENERATED_KEYS)) {
             
-            log.debug("Prepared statement was created. Setting parameters");
+            log.trace("Prepared statement was created. Setting parameters");
             
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setString(3, student.getGroup());
 
-            log.debug("Executing prepared statement");
+            log.trace("Executing prepared statement");
             
             statement.executeUpdate();
 
-            log.debug("Creating result set");
+            log.trace("Creating result set");
             
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                log.debug("Result set was created. Setting id from DB to student object to return");
+                log.trace("Result set was created. Setting id from DB to student object to return");
                 resultSet.next();
                 student.setId(resultSet.getInt(1));
             }
@@ -71,32 +71,32 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Creation of student has failed." + e);
         }
         
-        log.info("Student " + student + " was created.");
+        log.debug("Student " + student + " was created.");
         
         return student;
     }
 
     public Student findById(int id) {
         
-        log.info("Finding student by id: " + id);
+        log.debug("Finding student by id: " + id);
         
         Student student = null;
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
             
-            log.debug("Prepared statement was created. Setting parameters");
+            log.trace("Prepared statement was created. Setting parameters");
             
             statement.setInt(1, id);
 
-            log.debug("Creating result set");
+            log.trace("Creating result set");
             
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
                     throw new SQLException("No such student id: " + id);
                 }
                 
-                log.debug("Creating a student object");
+                log.trace("Creating a student object");
                 
                 student = new Student(id, resultSet.getString("first_name"), resultSet.getString("last_name"),
                         resultSet.getString("group_name"));
@@ -106,26 +106,26 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding student has failed", e);
         }
 
-        log.info("Student was found.");
+        log.debug("Student was found.");
 
         return student;
     }
 
     public Student update(Student student) {
         
-        log.info("Updating student");
+        log.debug("Updating student");
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
-            log.debug("Prepared statement was created. Setting parameters");
+            log.trace("Prepared statement was created. Setting parameters");
             
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getLastName());
             statement.setString(3, student.getGroup());
             statement.setInt(4, student.getId());
 
-            log.debug("Executing prepared statement");
+            log.trace("Executing prepared statement");
             
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -133,25 +133,25 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Student update has failed", e);
         }
 
-        log.info("Student was updated.");
+        log.debug("Student was updated.");
         
         return student;
     }
 
     public List<Student> findAll() {
 
-        log.info("Finding all students");
+        log.debug("Finding all students");
         
         List<Student> students = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY)) {
             
-            log.debug("Prepared statement was created. Creating result set");
+            log.trace("Prepared statement was created. Creating result set");
             
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    log.debug("Getting student fields from result set");
+                    log.trace("Getting student fields from result set");
                     
                     int id = resultSet.getInt("id");
                     String firstName = resultSet.getString("first_name");
@@ -159,7 +159,7 @@ public class StudentDao implements StudentCrudDao {
                     String group = resultSet.getString("group_name");
 
                     students.add(new Student(id, firstName, lastName, group));
-                    log.debug("Student was created and added to list.");
+                    log.trace("Student was created and added to list.");
                 }
             }
 
@@ -168,38 +168,38 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding all students has failed", e);
         }
 
-        log.info("All students have been found.");
+        log.debug("All students have been found.");
         
         return students;
     }
 
     public List<Student> findAllByGroupId(int groupId) {
         
-        log.info("Finding all students by group id: " + groupId);
+        log.debug("Finding all students by group id: " + groupId);
         
         List<Student> students = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_GROUP_ID_QUERY)) {
 
-            log.debug("Prepared statement created. Setting parameter");
+            log.trace("Prepared statement created. Setting parameter");
             
             statement.setInt(1, groupId);
 
-            log.debug("Creating result set");
+            log.trace("Creating result set");
             
             try (ResultSet resultSet = statement.executeQuery()) {
 
                 if (resultSet.next()) {
                     do  {
-                        log.debug("Getting student fields from result set");
+                        log.trace("Getting student fields from result set");
                         int id = resultSet.getInt("id");
                         String firstName = resultSet.getString("first_name");
                         String lastName = resultSet.getString("last_name");
                         String group = resultSet.getString("group_name");
 
                         students.add(new Student(id, firstName, lastName, group));
-                        log.debug("Student was created and added to list.");
+                        log.trace("Student was created and added to list.");
                     } while (resultSet.next());
 
                 } else {
@@ -211,23 +211,23 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding students by group id has failed", e);
         }
 
-        log.info("All students by group id have been found.");
+        log.debug("All students by group id have been found.");
         
         return students;
     }
 
     public void deleteById(int id) {
 
-        log.info("Deleting student by id: " + id);
+        log.debug("Deleting student by id: " + id);
         
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
 
-            log.debug("Prepared statement created. Setting parameter");
+            log.trace("Prepared statement created. Setting parameter");
             
             statement.setInt(1, id);
             
-            log.debug("Executing statement");
+            log.trace("Executing statement");
             int affectedRows = statement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -239,6 +239,6 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Deletion has failed", e);
         }
         
-        log.info("Student was successfully deleted.");
+        log.debug("Student was successfully deleted.");
     }
 }
