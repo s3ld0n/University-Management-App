@@ -12,13 +12,16 @@ import com.foxminded.university.utils.PropertyReader;
 
 public class ConnectionFactory {
 
-    private static Properties properties = PropertyReader.readPropertiesFromFile("resources/config.properties");
     private static Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
+    static {
+        log.info("Reading properties from file");
+    }
+    private static Properties properties = PropertyReader.readPropertiesFromFile("resources/config.properties");
     
     public static Connection getConnection() {
         Connection connection = null;
         
-        log.info("Creating a new connection");
+        log.debug("Creating a new connection");
 
         try {
             connection = DriverManager.getConnection(properties.getProperty("url") , properties.getProperty("user"),
@@ -28,7 +31,7 @@ public class ConnectionFactory {
             throw new DaoException("Connection has not been created." , e);
         }
         
-        log.info("Connection was successfully created.");
+        log.debug("Connection was successfully created.");
         
         return connection;
     }
