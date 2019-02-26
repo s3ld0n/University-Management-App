@@ -13,7 +13,7 @@ import com.foxminded.university.utils.PropertyReader;
 public class ConnectionFactory {
 
     private static Properties properties = PropertyReader.readPropertiesFromFile("resources/config.properties");
-    private static Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
+    private static final Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
     
     public static Connection getConnection() {
         Connection connection = null;
