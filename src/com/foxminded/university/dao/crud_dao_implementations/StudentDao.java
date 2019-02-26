@@ -41,7 +41,7 @@ public class StudentDao implements StudentCrudDao {
     private static Logger log = LogManager.getLogger(StudentDao.class.getName());
     
     public Student create(Student student) {
-        
+
         log.debug("Creating a student: {}", student);
         
         try (Connection connection = ConnectionFactory.getConnection();
@@ -50,13 +50,13 @@ public class StudentDao implements StudentCrudDao {
             
             log.debug("Prepared statement was created. Setting parameters");
             
-            log.trace("Setting first name of the student");
+            log.trace("Setting statement first name {}", student.getFirstName());
             statement.setString(1, student.getFirstName());
             
-            log.trace("Setting last name of the student");
+            log.trace("Setting statement last name {}", student.getLastName());
             statement.setString(2, student.getLastName());
             
-            log.trace("Setting group of the student");
+            log.trace("Setting statement group {}", student.getGroup());
             statement.setString(3, student.getGroup());
 
             log.debug("Executing prepared statement");
@@ -90,7 +90,7 @@ public class StudentDao implements StudentCrudDao {
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
             
-            log.debug("Prepared statement was created. Setting parameters");
+            log.debug("Prepared statement was created. Setting id: {}", id);
             
             statement.setInt(1, id);
 
@@ -125,16 +125,16 @@ public class StudentDao implements StudentCrudDao {
 
             log.debug("Prepared statement was created. Setting parameters");
             
-            log.trace("Setting first name of the student");
+            log.trace("Setting statement first name {}", student.getFirstName());
             statement.setString(1, student.getFirstName());
             
-            log.trace("Setting last name of the student");
+            log.trace("Setting statement last name {}", student.getLastName());
             statement.setString(2, student.getLastName());
             
-            log.trace("Setting group of the student");
+            log.trace("Setting statement group {}", student.getGroup());
             statement.setString(3, student.getGroup());
             
-            log.trace("Setting id of the student");
+            log.trace("Setting statement id {}", student.getId());
             statement.setInt(4, student.getId());
 
             log.debug("Executing prepared statement");
@@ -201,7 +201,7 @@ public class StudentDao implements StudentCrudDao {
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_GROUP_ID_QUERY)) {
 
-            log.debug("Prepared statement created. Setting parameter");
+            log.debug("Prepared statement created. Setting group id: {}", groupId);
             
             statement.setInt(1, groupId);
 
@@ -250,7 +250,7 @@ public class StudentDao implements StudentCrudDao {
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
 
-            log.debug("Prepared statement created. Setting parameter");
+            log.debug("Prepared statement created. Setting id: {}", id);
             
             statement.setInt(1, id);
             
