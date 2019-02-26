@@ -248,6 +248,7 @@ public class StudentDao implements StudentCrudDao {
 
         log.debug("Deleting student by id: {}", id);
 
+        int affectedRows = 0;
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
 
@@ -256,17 +257,17 @@ public class StudentDao implements StudentCrudDao {
             statement.setInt(1, id);
 
             log.debug("Executing statement");
-            int affectedRows = statement.executeUpdate();
-
-            if (affectedRows == 0) {
-                log.debug("No such id: {} in database.", id);
-            }
+            affectedRows = statement.executeUpdate();
 
         } catch (SQLException e) {
             log.error("Deletion has failed", e);
             throw new DaoException("Deletion has failed", e);
         }
-
-        log.debug("Student was successfully deleted.");
+        
+        if (affectedRows == 0) {
+            log.debug("No such id: {} in database.", id);
+        } else {
+            log.debug("Student was successfully deleted.");            
+        }
     }
 }
