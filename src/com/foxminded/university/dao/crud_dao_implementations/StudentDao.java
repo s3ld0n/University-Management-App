@@ -211,7 +211,7 @@ public class StudentDao implements StudentCrudDao {
 
                 if (resultSet.next()) {
                     do  {
-                        log.debug("Getting student fields from result set");
+                        log.trace("Getting student fields from result set");
                         
                         log.trace("Getting id");
                         int id = resultSet.getInt("id");
@@ -226,7 +226,7 @@ public class StudentDao implements StudentCrudDao {
                         String group = resultSet.getString("group_name");
 
                         students.add(new Student(id, firstName, lastName, group));
-                        log.debug("Student was created and added to list.");
+                        log.trace("Student was created and added to list.");
                     } while (resultSet.next());
 
                 } else {
@@ -238,7 +238,7 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding students by group id has failed", e);
         }
 
-        log.debug("All students by group id have been found.");
+        log.debug("All {} students by group id: {} have been found.", students.size(), groupId);
         
         return students;
     }
