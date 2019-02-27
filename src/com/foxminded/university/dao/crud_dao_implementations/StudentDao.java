@@ -42,7 +42,7 @@ public class StudentDao implements StudentCrudDao {
     
     public Student create(Student student) {
 
-        log.debug("Creating a student: {}", student);
+        log.debug("Creating student {} {}", student.getFirstName(), student.getLastName());
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
@@ -111,7 +111,7 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding student has failed", e);
         }
 
-        log.debug("Student {} {} by id:{} was found.", student.getFirstName(), student.getLastName(), student.getId());
+        log.debug("Student {} {} was found by id:{}.", student.getFirstName(), student.getLastName(), student.getId());
 
         return student;
     }
