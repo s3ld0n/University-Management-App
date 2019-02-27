@@ -118,7 +118,7 @@ public class StudentDao implements StudentCrudDao {
 
     public Student update(Student student) {
 
-        log.debug("Updating student");
+        log.debug("Updating student with id:{}", student.getId());
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
@@ -145,7 +145,7 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Student update has failed", e);
         }
 
-        log.debug("Student was updated.");
+        log.debug("Student with id:{} was updated.", student.getId());
 
         return student;
     }
