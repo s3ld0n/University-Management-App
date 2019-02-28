@@ -140,6 +140,7 @@ public class StudentDao implements StudentCrudDao {
             log.debug("Executing prepared statement");
 
             statement.executeUpdate();
+        
         } catch (SQLException e) {
             log.error("Student update has failed", e);
             throw new DaoException("Student update has failed", e);
@@ -236,7 +237,7 @@ public class StudentDao implements StudentCrudDao {
         }
 
         if (students.size() == 0) {
-            log.debug("No such group id: " + groupId + " or the group is empty.");
+            log.debug("No such group id: {} or the group is empty.", groupId);
         } else {
             log.debug("All {} students by group id: {} have been found.", students.size(), groupId);
         }
