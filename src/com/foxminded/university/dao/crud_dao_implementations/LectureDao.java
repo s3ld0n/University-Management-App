@@ -42,23 +42,23 @@ public class LectureDao implements CrudDao<Lecture> {
             log.debug("Prepared statement was created. Setting parameters");
 
             int subjectId = lecture.getSubject().getId();
-            log.trace("Setting statement subject id: {}", subjectId);
+            log.trace("Setting subject's id: {}", subjectId);
             statement.setInt(1, subjectId);
 
             int groupId = lecture.getGroup().getId();
-            log.trace("Setting statement group id: {}", groupId);
+            log.trace("Setting group's id: {}", groupId);
             statement.setInt(2, groupId);
 
             int lectorId = lecture.getLector().getId();
-            log.trace("Setting statement lector id: {}", lectorId);
+            log.trace("Setting lector's id: {}", lectorId);
             statement.setInt(3, lectorId);
 
             int lectureHallId = lecture.getLectureHall().getId();
-            log.trace("Setting statement lecture hall id: {}", lectureHallId);
+            log.trace("Setting lecture hall's id: {}", lectureHallId);
             statement.setInt(4, lectureHallId);
 
             int periodId = lecture.getPeriod().getId();
-            log.trace("Setting statement period id: {}", periodId);
+            log.trace("Setting period's id: {}", periodId);
             statement.setInt(5, periodId);
 
             log.debug("Executing prepared statement");
@@ -103,13 +103,13 @@ public class LectureDao implements CrudDao<Lecture> {
 
                 log.debug("Getting ids of group, lector and lecure hall from result set");
 
-                log.trace("Getting group id");
+                log.trace("Getting group's id");
                 int groupId = resultSet.getInt("group_id");
 
-                log.trace("Getting lector id");
+                log.trace("Getting lector's id");
                 int lectorId = resultSet.getInt("lector_id");
 
-                log.trace("Getting lecture hall id");
+                log.trace("Getting lecture hall's id");
                 int lectureHallId = resultSet.getInt("lecture_hall_id");
 
                 log.debug("Parameters have been gotten. Making objects for lecture fields");
@@ -167,27 +167,27 @@ public class LectureDao implements CrudDao<Lecture> {
             log.debug("Prepared statement was created. Setting parameters");
 
             int periodId = lecture.getPeriod().getId();
-            log.trace("Setting period id: {}", periodId);
+            log.trace("Setting period's id: {}", periodId);
             statement.setInt(1, periodId);
 
             int subjectId = lecture.getSubject().getId();
-            log.trace("Setting subject id: {}", subjectId);
+            log.trace("Setting subject's id: {}", subjectId);
             statement.setInt(2, subjectId);
 
             int lectorId = lecture.getLector().getId();
-            log.trace("Setting lector id: {}", lectorId);
+            log.trace("Setting lector's id: {}", lectorId);
             statement.setInt(3, lectorId);
 
             int groupId = lecture.getGroup().getId();
-            log.trace("Setting group id: {}", groupId);
+            log.trace("Setting group's id: {}", groupId);
             statement.setInt(4, groupId);
 
             int lectureHallId = lecture.getLectureHall().getId();
-            log.trace("Setting lecture hall id: {}", lectureHallId);
+            log.trace("Setting lecture hall's id: {}", lectureHallId);
             statement.setInt(5, lectureHallId);
 
             int lectureId = lecture.getId();
-            log.trace("Setting lecture id: {}", lectureId);
+            log.trace("Setting lecture's id: {}", lectureId);
             statement.setInt(6, lectureId);
 
             log.debug("Executing prepated statement");
@@ -198,14 +198,14 @@ public class LectureDao implements CrudDao<Lecture> {
             throw new DaoException("Lecture update has failed", e);
         }
 
-        log.debug("Lecture with id:{} was updated.", lecture.getId());
+        log.debug("Lecture with id: {} was updated.", lecture.getId());
 
         return lecture;
     }
 
     public List<Lecture> findAll() {
 
-        log.trace("Finding all lectures");
+        log.debug("Finding all lectures");
 
         List<Lecture> lectures = new ArrayList<>();
 
@@ -287,7 +287,7 @@ public class LectureDao implements CrudDao<Lecture> {
         }
 
         if (affectedRows == 0) {
-            log.debug("No such id: {} in database.", id);
+            log.debug("No lecture with such id: {} in database.", id);
         } else {
             log.debug("Lecture with id: {} was successfully deleted.", id);
         }

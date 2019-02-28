@@ -35,7 +35,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             log.debug("Prepared statement was created.");
 
-            log.trace("Setting lecture hall name: {}", lectureHall.getName());
+            log.trace("Setting lecture hall's name: {}", lectureHall.getName());
             statement.setString(1, lectureHall.getName());
 
             log.debug("Executing prepared statement");
@@ -104,10 +104,10 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             log.debug("Prepared statement was created. Setting name and id");
 
-            log.trace("Setting lecture hall name: {}", lectureHall.getName());
+            log.trace("Setting lecture hall's name: {}", lectureHall.getName());
             statement.setString(1, lectureHall.getName());
 
-            log.trace("Setting lecture hall id: {}", lectureHall.getId());
+            log.trace("Setting lecture hall's id: {}", lectureHall.getId());
             statement.setInt(2, lectureHall.getId());
 
             log.debug("Executing prepated statement");
@@ -135,7 +135,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    log.trace("Getting lecture hall id and name from result set");
+                    log.trace("Getting lecture hall's id and name from result set");
 
                     log.trace("Getting id");
                     int id = resultSet.getInt("id");
@@ -182,7 +182,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
         }
 
         if (affectedRows == 0) {
-            log.debug("No such id: {} in database.", id);
+            log.debug("No lecture hall with such id: {} in database.", id);
         } else {
             log.debug("Lecture hall with id: {} was successfully deleted.", id);
         }

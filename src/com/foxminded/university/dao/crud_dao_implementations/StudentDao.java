@@ -50,13 +50,13 @@ public class StudentDao implements StudentCrudDao {
 
             log.debug("Prepared statement was created. Setting parameters");
 
-            log.trace("Setting statement first name {}", student.getFirstName());
+            log.trace("Setting first name {}", student.getFirstName());
             statement.setString(1, student.getFirstName());
 
-            log.trace("Setting statement last name {}", student.getLastName());
+            log.trace("Setting last name {}", student.getLastName());
             statement.setString(2, student.getLastName());
 
-            log.trace("Setting statement group {}", student.getGroup());
+            log.trace("Setting group {}", student.getGroup());
             statement.setString(3, student.getGroup());
 
             log.debug("Executing prepared statement");
@@ -101,7 +101,7 @@ public class StudentDao implements StudentCrudDao {
                     throw new SQLException("No such student id: " + id);
                 }
 
-                log.debug("Creating a student object");
+                log.debug("Creating student object");
 
                 student = new Student(id, resultSet.getString("first_name"), resultSet.getString("last_name"),
                         resultSet.getString("group_name"));
@@ -111,30 +111,30 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Finding student has failed", e);
         }
 
-        log.debug("Student {} {} was found by id:{}.", student.getFirstName(), student.getLastName(), student.getId());
+        log.debug("Student {} {} was found by id: {}.", student.getFirstName(), student.getLastName(), student.getId());
 
         return student;
     }
 
     public Student update(Student student) {
 
-        log.debug("Updating student with id:{}", student.getId());
+        log.debug("Updating student with id: {}", student.getId());
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
             log.debug("Prepared statement was created. Setting parameters");
 
-            log.trace("Setting statement first name {}", student.getFirstName());
+            log.trace("Setting first name {}", student.getFirstName());
             statement.setString(1, student.getFirstName());
 
-            log.trace("Setting statement last name {}", student.getLastName());
+            log.trace("Setting last name {}", student.getLastName());
             statement.setString(2, student.getLastName());
 
-            log.trace("Setting statement group {}", student.getGroup());
+            log.trace("Setting group {}", student.getGroup());
             statement.setString(3, student.getGroup());
 
-            log.trace("Setting statement id {}", student.getId());
+            log.trace("Setting id {}", student.getId());
             statement.setInt(4, student.getId());
 
             log.debug("Executing prepared statement");
@@ -145,7 +145,7 @@ public class StudentDao implements StudentCrudDao {
             throw new DaoException("Student update has failed", e);
         }
 
-        log.debug("Student with id:{} was updated.", student.getId());
+        log.debug("Student with id: {} was updated.", student.getId());
 
         return student;
     }
@@ -211,7 +211,7 @@ public class StudentDao implements StudentCrudDao {
 
                 while (resultSet.next()) {
 
-                    log.trace("Getting student fields from result set");
+                    log.trace("Getting student's fields from result set");
 
                     log.trace("Getting id");
                     int id = resultSet.getInt("id");

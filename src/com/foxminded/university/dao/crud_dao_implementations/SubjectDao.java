@@ -26,7 +26,6 @@ public class SubjectDao implements SubjectCrudDao {
 
     private final static String DELETE_QUERY = "DELETE FROM subjects WHERE id = ?";
 
-    
     public Subject create(Subject subject) {
         
         try (Connection connection = ConnectionFactory.getConnection();

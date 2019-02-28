@@ -90,7 +90,7 @@ public class GroupDao implements CrudDao<Group> {
             throw new DaoException("Finding group has failed", e);
         }
 
-        log.debug("Group {} by id:{} was successfully found.", group, group.getId());
+        log.debug("Group {} was successfully found.", group);
         return group;
     }
 
@@ -134,13 +134,13 @@ public class GroupDao implements CrudDao<Group> {
             log.debug("Prepared statement was created. Creating result set");
             
             while (resultSet.next()) {
-                log.trace("Getting group id from the result set");
+                log.trace("Getting group's id from the result set");
                 int id = resultSet.getInt("id");
                 
                 log.trace("Setting name");
                 String name = resultSet.getString("name");
 
-                log.trace("Creating group object");
+                log.trace("Creating group's object");
                 Group group = new Group(id, name);
                 
                 log.trace("Setting students");
@@ -180,7 +180,7 @@ public class GroupDao implements CrudDao<Group> {
         }
         
         if (affectedRows == 0) {
-            log.debug("No such id: {} in database.", id);
+            log.debug("No group with such id: {} in database.", id);
         } else {
             log.debug("Group was successfully deleted.");            
         }
