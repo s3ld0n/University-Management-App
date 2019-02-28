@@ -263,11 +263,11 @@ public class StudentDao implements StudentCrudDao {
             log.error("Deletion has failed", e);
             throw new DaoException("Deletion has failed", e);
         }
-        
+
         if (affectedRows == 0) {
             log.debug("No such id: {} in database.", id);
         } else {
-            log.debug("Student was successfully deleted.");            
+            log.debug("Student was successfully deleted.");
         }
     }
 }

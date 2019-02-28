@@ -28,22 +28,22 @@ public class LectureHallDao implements CrudDao<LectureHall> {
     public LectureHall create(LectureHall lectureHall) {
 
         log.debug("Creating lecture hall");
-        
+
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
                         Statement.RETURN_GENERATED_KEYS)) {
 
-            log.debug("Prepared statement was created. Setting name");
-            
-            log.trace("Setting statement lecture hall name: {}", lectureHall.getName());
+            log.debug("Prepared statement was created.");
+
+            log.trace("Setting lecture hall name: {}", lectureHall.getName());
             statement.setString(1, lectureHall.getName());
-            
+
             log.debug("Executing prepared statement");
             statement.executeUpdate();
 
             log.debug("Creating result set");
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                
+
                 log.debug("Result set was created. Setting id from DB to lecture object to return");
                 resultSet.next();
                 lectureHall.setId(resultSet.getInt(1));
@@ -55,14 +55,14 @@ public class LectureHallDao implements CrudDao<LectureHall> {
         }
 
         log.debug("Lecture hall {} was created.", lectureHall);
-        
+
         return lectureHall;
     }
 
     public LectureHall findById(int id) {
 
         log.debug("Finding lecture hall by id: {}", id);
-        
+
         LectureHall lectureHall = null;
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -73,7 +73,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             log.debug("Creating result set");
             try (ResultSet resultSet = statement.executeQuery()) {
-                
+
                 if (!resultSet.next()) {
                     throw new SQLException("No such lecture hall id: " + id);
                 }
@@ -81,7 +81,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                 log.debug("Getting name from result set and creating lecture hall object");
                 lectureHall = new LectureHall(id, resultSet.getString("name"));
 
-                log.debug("Setting booked periods");
+                log.debug("Setting booked periods to lecture hall");
                 lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
             }
 
@@ -98,18 +98,18 @@ public class LectureHallDao implements CrudDao<LectureHall> {
     public LectureHall update(LectureHall lectureHall) {
 
         log.debug("Updating lecture hall with id: {}", lectureHall.getId());
-        
+
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
             log.debug("Prepared statement was created. Setting name and id");
-            
+
             log.trace("Setting lecture hall name: {}", lectureHall.getName());
             statement.setString(1, lectureHall.getName());
-            
+
             log.trace("Setting lecture hall id: {}", lectureHall.getId());
             statement.setInt(2, lectureHall.getId());
-            
+
             log.debug("Executing prepated statement");
             statement.executeUpdate();
 
@@ -132,23 +132,23 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY)) {
 
             log.debug("Prepared statement was created. Creating result set");
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     log.trace("Getting lecture hall id and name from result set");
 
                     log.trace("Getting id");
                     int id = resultSet.getInt("id");
-                    
+
                     log.trace("Getting name");
                     String name = resultSet.getString("name");
 
                     log.trace("Creating lecture hall object");
                     LectureHall lectureHall = new LectureHall(id, name);
-                    
+
                     log.trace("Setting booked periods");
                     lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
-                    
+
                     log.trace("Adding lecture hall to the list");
                     lectureHalls.add(lectureHall);
                 }
@@ -172,7 +172,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
             log.debug("Prepared statement created. Setting id: {}", id);
             statement.setInt(1, id);
-            
+
             log.debug("Executing statement");
             affectedRows = statement.executeUpdate();
 
@@ -184,7 +184,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
         if (affectedRows == 0) {
             log.debug("No such id: {} in database.", id);
         } else {
-            log.debug("Lecture hall with id: {} was successfully deleted.", id);            
+            log.debug("Lecture hall with id: {} was successfully deleted.", id);
         }
     }
 }
