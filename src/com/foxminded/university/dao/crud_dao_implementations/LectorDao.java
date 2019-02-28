@@ -161,8 +161,8 @@ public class LectorDao implements LectorCrudDao {
                     log.trace("Setting subjects");
                     lector.setSubjects(new SubjectDao().findAllByLectorId(id));
 
-                    log.trace("Adding lector object to list");
                     lectors.add(lector);
+                    log.trace("Lector was found and added to the list");
                 }
             }
         } catch (SQLException e) {

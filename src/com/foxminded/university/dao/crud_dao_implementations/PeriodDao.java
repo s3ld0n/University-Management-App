@@ -195,8 +195,8 @@ public class PeriodDao implements PeriodCrudDao {
                     log.trace("Getting period's end and making LocalDateTime object of it");
                     LocalDateTime periodEnd = resultSet.getTimestamp("period_end").toLocalDateTime();
 
-                    log.trace("Adding period to the list");
                     periods.add(new Period(id, periodStart, periodEnd));
+                    log.trace("Period was found and added to the list");
                 }
             }
         } catch (SQLException e) {

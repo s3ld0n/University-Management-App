@@ -33,82 +33,83 @@ public class SubjectDao implements SubjectCrudDao {
     private static final Logger log = LogManager.getLogger(SubjectDao.class.getName());
 
     public Subject create(Subject subject) {
-        
+
         log.debug("Creating subject");
-        
+
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS)){
-            
+                PreparedStatement statement = connection.prepareStatement(CREATE_QUERY,
+                        Statement.RETURN_GENERATED_KEYS)) {
+
             log.debug("Prepared statement was created. Setting id parameter");
-            
+
             statement.setString(1, subject.getName());
-            
+
             log.debug("Executing prepared statement");
             statement.executeUpdate();
-            
-            try (ResultSet resultSet = statement.getGeneratedKeys()){
+
+            try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 log.debug("Result set was created. Setting id from DB to period object to return");
                 resultSet.next();
                 subject.setId(resultSet.getInt(1));
             }
-            
+
         } catch (SQLException e) {
             log.error("Creation of subject has failed.", e);
             throw new DaoException("Creation of subject has failed.", e);
         }
 
         log.debug("Subject {} was created.", subject);
-        
+
         return subject;
     }
-    
+
     public Subject findById(int id) {
-        
+
         log.debug("Finding subject by id: {}", id);
         Subject subject = null;
-        
+
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_QUERY)) {
             statement.setInt(1, id);
 
             log.debug("Prepared statement was created. Creating result set");
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
-                
+
                 if (!resultSet.next()) {
                     throw new SQLException("No such subject's id: " + id);
                 }
 
                 log.debug("Creating subject object");
-                
+
                 subject = new Subject(id, resultSet.getString("name"));
             }
-            
+
         } catch (SQLException e) {
             log.error("Finding subject has failed", e);
             throw new DaoException("Finding subject has failed", e);
         }
 
         log.debug("Subject with id: {} was found", id);
-        
+
         return subject;
     }
-    
+
     public Subject update(Subject subject) {
 
         log.debug("Updating subject with id: {}", subject.getId());
-        
+
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
             log.debug("Prepared statement was created. Setting parameters");
-            
+
             log.trace("Setting subject's name");
             statement.setString(1, subject.getName());
-            
+
             log.trace("Setting subject's id");
             statement.setInt(2, subject.getId());
-            
+
             log.debug("Executing prepared statement");
             statement.executeUpdate();
 
@@ -121,31 +122,31 @@ public class SubjectDao implements SubjectCrudDao {
 
         return subject;
     }
-    
+
     public List<Subject> findAll() {
 
         log.debug("Finding all subjects");
-        
+
         List<Subject> subjects = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_QUERY)) {
 
             log.debug("Prepared statement was created. Creating result set");
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
-                
+
                 while (resultSet.next()) {
                     log.trace("Getting student fields from result set");
-                    
+
                     log.trace("Getting id");
                     int id = resultSet.getInt("id");
-                    
+
                     log.trace("Getting name");
                     String name = resultSet.getString("name");
 
                     subjects.add(new Subject(id, name));
-                    log.trace("Subject was found and added to list.");
+                    log.trace("Subject was found and added to the list.");
                 }
             }
         } catch (SQLException e) {
@@ -161,26 +162,26 @@ public class SubjectDao implements SubjectCrudDao {
     public List<Subject> findAllByLectorId(int lectorId) {
 
         log.debug("Finding all subjects by lector id: {}", lectorId);
-        
+
         List<Subject> subjects = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(READ_ALL_BY_LECTOR_ID_QUERY)) {
 
             log.debug("Prepared statement created. Setting lector id: {}", lectorId);
-            
+
             statement.setInt(1, lectorId);
 
             log.debug("Creating result set");
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
                     log.trace("Getting subject's fields from result set");
-                    
+
                     log.trace("Getting id");
                     int id = resultSet.getInt("id");
-                    
+
                     log.trace("Getting name");
                     String name = resultSet.getString("name");
 
@@ -201,7 +202,7 @@ public class SubjectDao implements SubjectCrudDao {
 
         return subjects;
     }
-    
+
     public void deleteById(int id) {
         log.debug("Deleting subject by id: {}", id);
 

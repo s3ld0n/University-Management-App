@@ -146,8 +146,8 @@ public class GroupDao implements CrudDao<Group> {
                 log.trace("Setting students");
                 group.setStudents(new StudentDao().findAllByGroupId(id));
                 
-                log.trace("Adding group to the list");
                 groups.add(group);
+                log.trace("Group was found and added to the list");
             }
             
         } catch (SQLException e) {

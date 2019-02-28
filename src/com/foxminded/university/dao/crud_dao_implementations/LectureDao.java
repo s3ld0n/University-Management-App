@@ -254,8 +254,8 @@ public class LectureDao implements CrudDao<Lecture> {
                     log.trace("Creating the lecture object");
                     Lecture lecture = new Lecture(id, period, subject, lector, group, lectureHall);
 
-                    log.trace("Adding lecture to the list");
                     lectures.add(lecture);
+                    log.trace("Lecture was found and added to the list");
                 }
             }
         } catch (SQLException e) {

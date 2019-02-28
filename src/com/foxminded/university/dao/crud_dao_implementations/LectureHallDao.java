@@ -149,8 +149,8 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                     log.trace("Setting booked periods");
                     lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
 
-                    log.trace("Adding lecture hall to the list");
                     lectureHalls.add(lectureHall);
+                    log.trace("Lecture hall was found and added to the list");
                 }
             }
         } catch (SQLException e) {
