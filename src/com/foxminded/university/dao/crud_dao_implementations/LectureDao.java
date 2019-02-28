@@ -194,8 +194,8 @@ public class LectureDao implements CrudDao<Lecture> {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            log.error("Student update has failed", e);
-            throw new DaoException("Student update has failed", e);
+            log.error("Lecture update has failed", e);
+            throw new DaoException("Lecture update has failed", e);
         }
 
         log.debug("Lecture with id:{} was updated.", lecture.getId());
