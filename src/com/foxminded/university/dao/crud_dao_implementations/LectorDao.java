@@ -53,7 +53,7 @@ public class LectorDao implements LectorCrudDao {
             log.debug("Creating result set.");
 
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                log.debug("Result set was created. Setting id from DB to lector object to return");
+                log.debug("Result set was created. Setting id from DB to lector's object to return");
                 resultSet.next();
                 lector.setId(resultSet.getInt(1));
             }
@@ -97,13 +97,13 @@ public class LectorDao implements LectorCrudDao {
             throw new DaoException("Finding lector has failed", e);
         }
 
-        log.debug("Lector {} {} was found by id:{}.", lector.getFirstName(), lector.getLastName(), lector.getId());
+        log.debug("Lector {} {} was found by id: {}.", lector.getFirstName(), lector.getLastName(), lector.getId());
         return lector;
     }
 
     public Lector update(Lector lector) {
 
-        log.debug("Updating lector with id:{}", lector.getId());
+        log.debug("Updating lector with id: {}", lector.getId());
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
@@ -127,7 +127,7 @@ public class LectorDao implements LectorCrudDao {
             throw new DaoException("Lector update has failed", e);
         }
 
-        log.debug("Lector with id:{} was updated.", lector.getId());
+        log.debug("Lector with id: {} was updated.", lector.getId());
 
         return lector;
     }
@@ -177,20 +177,20 @@ public class LectorDao implements LectorCrudDao {
 
     public void addSubjectById(Lector lector, int subjectId) {
 
-        log.debug("Adding subject by id:{} to lector {} {}", subjectId, lector.getFirstName(), lector.getLastName());
+        log.debug("Adding subject by id: {} to lector {} {}", subjectId, lector.getFirstName(), lector.getLastName());
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(ADD_SUBJECT_BY_ID_QUERY)) {
 
             log.debug("Prepared statement was created. Setting parameters");
 
-            log.trace("Setting lector id");
+            log.trace("Setting lector's id");
             statement.setInt(1, lector.getId());
 
             log.trace("Setting subject's id");
             statement.setInt(2, subjectId);
 
-            log.trace("Executing prepared statement");
+            log.debug("Executing prepared statement");
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -201,7 +201,7 @@ public class LectorDao implements LectorCrudDao {
 
     public void removeSubjectById(Lector lector, int subjectId) {
 
-        log.debug("Removing subject by id:{} from lector {} {}", subjectId, lector.getFirstName(),
+        log.debug("Removing subject by id: {} from lector {} {}", subjectId, lector.getFirstName(),
                 lector.getLastName());
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -209,13 +209,13 @@ public class LectorDao implements LectorCrudDao {
 
             log.debug("Prepared statement was created. Setting parameters");
 
-            log.trace("Setting lector id");
+            log.trace("Setting lector's id");
             statement.setInt(1, lector.getId());
 
             log.trace("Setting subject's id");
             statement.setInt(2, subjectId);
 
-            log.trace("Executing prepared statement");
+            log.debug("Executing prepared statement");
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -245,7 +245,7 @@ public class LectorDao implements LectorCrudDao {
         }
 
         if (affectedRows == 0) {
-            log.debug("No such id: {} in database.", id);
+            log.debug("No lector with such id: {} in database.", id);
         } else {
             log.debug("Lector was successfully deleted.");
         }
