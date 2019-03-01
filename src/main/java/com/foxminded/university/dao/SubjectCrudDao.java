@@ -1,8 +1,8 @@
-package com.foxminded.university.dao;
+package main.java.com.foxminded.university.dao;
 
 import java.util.List;
 
-import com.foxminded.university.domain.Subject;
+import main.java.com.foxminded.university.domain.Subject;
 
 public interface SubjectCrudDao extends CrudDao<Subject> {
     

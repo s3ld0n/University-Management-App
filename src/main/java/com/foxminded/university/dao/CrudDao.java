@@ -1,4 +1,4 @@
-package com.foxminded.university.dao;
+package main.java.com.foxminded.university.dao;
 
 import java.util.List;
 

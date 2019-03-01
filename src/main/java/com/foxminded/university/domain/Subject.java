@@ -1,23 +1,19 @@
-package com.foxminded.university.domain;
+package main.java.com.foxminded.university.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Group implements Serializable {
+public class Subject implements Serializable {
     
     private int id;
     private String name;
-    private List<Student> students;
 
-    public Group() {
-
+    public Subject() {
+        
     }
-    
-    public Group(int id, String name) {
+
+    public Subject(int id, String name) {
         this.id = id;
         this.name = name;
-        this.students = new ArrayList<Student>();
     }
     
     public int getId() {
@@ -36,14 +32,6 @@ public class Group implements Serializable {
         this.name = name;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -60,7 +48,7 @@ public class Group implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Group other = (Group) obj;
+        Subject other = (Subject) obj;
         if (id != other.id)
             return false;
         return true;
@@ -68,6 +56,6 @@ public class Group implements Serializable {
 
     @Override
     public String toString() {
-        return "Group [id=" + id + ", name=" + name + "]";
+        return "Subject [id=" + id + ", name=" + name + "]";
     }
 }

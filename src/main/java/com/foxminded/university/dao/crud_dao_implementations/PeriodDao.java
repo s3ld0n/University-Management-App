@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.crud_dao_implementations;
+package main.java.com.foxminded.university.dao.crud_dao_implementations;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -7,10 +7,10 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.foxminded.university.dao.ConnectionFactory;
-import com.foxminded.university.dao.DaoException;
-import com.foxminded.university.dao.PeriodCrudDao;
-import com.foxminded.university.utils.Period;
+import main.java.com.foxminded.university.dao.ConnectionFactory;
+import main.java.com.foxminded.university.dao.DaoException;
+import main.java.com.foxminded.university.dao.PeriodCrudDao;
+import main.java.com.foxminded.university.utils.Period;
 
 public class PeriodDao implements PeriodCrudDao {
     

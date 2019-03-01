@@ -1,23 +1,22 @@
-package com.foxminded.university.domain;
+package main.java.com.foxminded.university.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.time.LocalDateTime;
 
-import com.foxminded.university.utils.Period;
+public class Period implements Serializable {
 
-public class LectureHall implements Serializable {
-    
     private int id;
-    private String name;
-    private Set<Period> bookedPeriods;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public LectureHall() {
+    public Period() {
 
     }
 
-    public LectureHall(int id, String name) {
+    public Period(int id, LocalDateTime start, LocalDateTime end) {
         this.id = id;
-        this.name = name;
+        this.start = start;
+        this.end = end;
     }
 
     public int getId() {
@@ -28,20 +27,20 @@ public class LectureHall implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public LocalDateTime getStart() {
+        return start;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStart(LocalDateTime start) {
+        this.start = start;
     }
 
-    public Set<Period> getBookedPeriods() {
-        return bookedPeriods;
+    public LocalDateTime getEnd() {
+        return end;
     }
 
-    public void setBookedPeriods(Set<Period> bookedPeriods) {
-        this.bookedPeriods = bookedPeriods;
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class LectureHall implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LectureHall other = (LectureHall) obj;
+        Period other = (Period) obj;
         if (id != other.id)
             return false;
         return true;
@@ -68,6 +67,6 @@ public class LectureHall implements Serializable {
 
     @Override
     public String toString() {
-        return "LectureHall [id=" + id + ", name=" + name + "]";
+        return "Period [id=" + id + ", start=" + start + ", end=" + end + "]";
     }
 }
