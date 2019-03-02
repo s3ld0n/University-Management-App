@@ -1,4 +1,4 @@
-package main.java.com.foxminded.university.dao;
+package com.foxminded.university.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import main.java.com.foxminded.university.utils.PropertyReader;
+import com.foxminded.university.utils.PropertyReader;
 
 public class ConnectionFactory {
 

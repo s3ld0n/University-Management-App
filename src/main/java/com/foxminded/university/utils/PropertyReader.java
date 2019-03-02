@@ -1,4 +1,4 @@
-package main.java.com.foxminded.university.utils;
+package com.foxminded.university.utils;
 
 import java.io.*;
 import java.util.Properties;

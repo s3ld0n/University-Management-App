@@ -1,4 +1,4 @@
-package main.java.com.foxminded.university.domain;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;

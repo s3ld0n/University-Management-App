@@ -1,9 +1,9 @@
-package main.java.com.foxminded.university.domain;
+package com.foxminded.university.domain;
 
 import java.io.Serializable;
 import java.util.*;
 
-import main.java.com.foxminded.university.utils.Period;
+import com.foxminded.university.utils.Period;
 
 public class LectureHall implements Serializable {
     

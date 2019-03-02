@@ -1,8 +1,8 @@
-package main.java.com.foxminded.university.dao;
+package com.foxminded.university.dao;
 
 import java.util.Set;
 
-import main.java.com.foxminded.university.utils.Period;
+import com.foxminded.university.utils.Period;
 
 public interface PeriodCrudDao {
     

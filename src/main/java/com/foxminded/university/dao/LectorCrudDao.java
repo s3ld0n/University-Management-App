@@ -1,6 +1,6 @@
-package main.java.com.foxminded.university.dao;
+package com.foxminded.university.dao;
 
-import main.java.com.foxminded.university.domain.Lector;
+import com.foxminded.university.domain.Lector;
 
 public interface LectorCrudDao extends CrudDao<Lector> {
     
