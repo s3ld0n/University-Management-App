@@ -1,6 +1,7 @@
 package com.foxminded.university.domain;
 
 import java.io.Serializable;
+
 import com.foxminded.university.utils.Period;
 
 public class Lecture implements Serializable {
