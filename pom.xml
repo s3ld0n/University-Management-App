@@ -19,6 +19,12 @@
       <version>2.11.1</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>2.11.2</version>
+    </dependency>
+
     <!-- PostgreSQL -->
     <dependency>
         <groupId>org.postgresql</groupId>
