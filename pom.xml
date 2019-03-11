@@ -32,13 +32,6 @@
         <version>42.2.5</version>
     </dependency>    
 
-    <!-- Tomcat -->
-    <dependency>
-      <groupId>org.apache.tomcat.embed</groupId>
-      <artifactId>tomcat-embed-core</artifactId>
-      <version>8.5.38</version>
-    </dependency>
-
     <!-- JSTL -->
     <dependency>
       <groupId>javax.servlet.jsp.jstl</groupId>
