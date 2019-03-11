@@ -13,24 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
 import com.foxminded.university.domain.Student;
 
-/**
- * Servlet implementation class StudentServlet
- */
-@WebServlet("/Students")
+@WebServlet("/students")
 public class AllStudentsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AllStudentsServlet() {
-        super();
-    }
-
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -42,18 +28,8 @@ public class AllStudentsServlet extends HttpServlet {
 
         List<Student> students = new StudentDao().findAll();
 
-        request.setAttribute("students_list", students);
+        request.setAttribute("studentsList", students);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/all_students.jsp");
         dispatcher.forward(request, response);
     }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
-
 }
