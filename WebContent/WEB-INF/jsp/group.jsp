@@ -31,7 +31,7 @@ h3, table {
         
             <tr>
               <td>${student.id}</td>
-              <td><a href="Student?id=${student.id}">${student.firstName} ${student.lastName}</a></td>
+              <td><a href="student?id=${student.id}">${student.firstName} ${student.lastName}</a></td>
             </tr>
             
         </c:forEach>

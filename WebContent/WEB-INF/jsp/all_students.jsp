@@ -22,11 +22,11 @@ h1, table {
           <th>ID</th>
           <th>Full Name</th>
         </tr>
-        <c:forEach var="student" items="${students_list}">
+        <c:forEach var="student" items="${studentsList}">
         
             <tr>
               <td>${student.id}</td>
-              <td><a href="Student?id=${student.id}">${student.firstName} ${student.lastName}</a></td>
+              <td><a href="student?id=${student.id}">${student.firstName} ${student.lastName}</a></td>
             </tr>
             
         </c:forEach>
