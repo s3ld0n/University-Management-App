@@ -20,7 +20,7 @@ public class StudentServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String studentId = request.getParameter("id");
-        System.out.println(studentId);
+        
         Student student = new StudentDao().findById(Integer.parseInt(studentId));
 
         request.setAttribute("student", student);
