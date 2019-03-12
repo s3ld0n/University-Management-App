@@ -20,12 +20,6 @@ public class AllStudentsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         List<Student> students = new StudentDao().findAll();
 
         request.setAttribute("studentsList", students);

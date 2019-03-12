@@ -17,12 +17,6 @@ public class AllGroupsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         List<Group> groups = new GroupDao().findAll();
 
         request.setAttribute("groupList", groups);
