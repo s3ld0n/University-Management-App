@@ -1,4 +1,4 @@
-package servlets;
+package servlets.lector;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +22,6 @@ public class AllLectorsServlet extends HttpServlet {
         List<Lector> lectors= new LectorDao().findAll();
 
         request.setAttribute("lectors", lectors);
-        request.getRequestDispatcher("jsp/all_lectors.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/lector/all_lectors.jsp").forward(request, response);
     }
 }

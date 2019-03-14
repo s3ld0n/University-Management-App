@@ -1,4 +1,4 @@
-package servlets;
+package servlets.group;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +20,6 @@ public class AllGroupsServlet extends HttpServlet {
         List<Group> groups = new GroupDao().findAll();
 
         request.setAttribute("groups", groups);
-        request.getRequestDispatcher("jsp/all_groups.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/group/all_groups.jsp").forward(request, response);
     }
 }

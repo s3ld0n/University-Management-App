@@ -1,4 +1,4 @@
-package servlets;
+package servlets.lecture_hall;
 
 import java.io.IOException;
 import java.util.Set;
@@ -29,6 +29,6 @@ public class LectureHallServlet extends HttpServlet {
         request.setAttribute("lectureHall", lectureHall);
         request.setAttribute("periods", periods);
         
-        request.getRequestDispatcher("jsp/lecture_hall.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/lecture_hall/lecture_hall.jsp").forward(request, response);
     }
 }

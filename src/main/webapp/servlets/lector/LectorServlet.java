@@ -1,4 +1,4 @@
-package servlets;
+package servlets.lector;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +29,6 @@ public class LectorServlet extends HttpServlet {
         request.setAttribute("lector", lector);
         request.setAttribute("subjects", subjects);
         
-        request.getRequestDispatcher("jsp/lector.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/lector/lector.jsp").forward(request, response);
     }
 }

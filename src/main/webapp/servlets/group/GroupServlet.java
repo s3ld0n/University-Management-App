@@ -1,4 +1,4 @@
-package servlets;
+package servlets.group;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +29,6 @@ public class GroupServlet extends HttpServlet {
         request.setAttribute("group", group);
         request.setAttribute("students", students);
 
-        request.getRequestDispatcher("jsp/group.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/group/group.jsp").forward(request, response);
     }
 }
