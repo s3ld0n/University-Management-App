@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +29,6 @@ public class LectorServlet extends HttpServlet {
         request.setAttribute("lector", lector);
         request.setAttribute("subjects", subjects);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/lector.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("jsp/lector.jsp").forward(request, response);
     }
 }
