@@ -24,7 +24,7 @@ h1, table {
           <th>Lector</th>
         </tr>
 
-        <c:forEach var="lecture" items="${lecturesList}">
+        <c:forEach var="lecture" items="${lectures}">
         
             <tr>
               <td>${lecture.id}</td>

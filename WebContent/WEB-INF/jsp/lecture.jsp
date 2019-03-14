@@ -29,7 +29,7 @@ h1, table {
         </tr>
         <tr>
           <td>${lecture.id}</td>
-          <td><${lecture.subject.name}</td>
+          <td>${lecture.subject.name}</td>
           <td>${lecture.lector.firstName} ${lecture.lector.lastName}</td>
           <td>${lecture.group.name}</td>
           <td>${lecture.period.start}</td>

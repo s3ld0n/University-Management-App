@@ -22,7 +22,7 @@ h1, table {
           <th>ID</th>
           <th>Full Name</th>
         </tr>
-        <c:forEach var="lector" items="${lectorsList}">
+        <c:forEach var="lector" items="${lectors}">
         
             <tr>
               <td>${lector.id}</td>

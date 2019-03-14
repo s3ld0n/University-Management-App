@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +21,8 @@ public class AllLectorsServlet extends HttpServlet {
 
         List<Lector> lectors= new LectorDao().findAll();
 
-        request.setAttribute("lectorsList", lectors);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/all_lectors.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("lectors", lectors);
+        request.getRequestDispatcher("/WEB-INF/jsp/all_lectors.jsp").forward(request, response);
     }
 
 }
