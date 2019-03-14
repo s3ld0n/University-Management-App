@@ -22,7 +22,7 @@ h1, table {
           <th>ID</th>
           <th>Name</th>
         </tr>
-        <c:forEach var="group" items="${groupList}">
+        <c:forEach var="group" items="${groups}">
         
             <tr>
               <td>${group.id}</td>

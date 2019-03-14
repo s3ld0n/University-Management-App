@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +29,6 @@ public class GroupServlet extends HttpServlet {
         request.setAttribute("group", group);
         request.setAttribute("students", students);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/group.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("jsp/group.jsp").forward(request, response);
     }
 }

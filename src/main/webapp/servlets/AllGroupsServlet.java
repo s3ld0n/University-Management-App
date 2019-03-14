@@ -19,8 +19,8 @@ public class AllGroupsServlet extends HttpServlet {
 
         List<Group> groups = new GroupDao().findAll();
 
-        request.setAttribute("groupList", groups);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/all_groups.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("groups", groups);
+        request.getRequestDispatcher("/WEB-INF/jsp/all_groups.jsp").forward(request, response);
+        
     }
 }
