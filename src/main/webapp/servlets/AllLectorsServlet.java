@@ -22,7 +22,7 @@ public class AllLectorsServlet extends HttpServlet {
         List<Lector> lectors= new LectorDao().findAll();
 
         request.setAttribute("lectors", lectors);
-        request.getRequestDispatcher("/WEB-INF/jsp/all_lectors.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/all_lectors.jsp").forward(request, response);
     }
 
 }

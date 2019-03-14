@@ -20,7 +20,7 @@ public class AllGroupsServlet extends HttpServlet {
         List<Group> groups = new GroupDao().findAll();
 
         request.setAttribute("groups", groups);
-        request.getRequestDispatcher("/WEB-INF/jsp/all_groups.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/all_groups.jsp").forward(request, response);
         
     }
 }

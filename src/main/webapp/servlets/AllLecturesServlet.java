@@ -22,7 +22,7 @@ public class AllLecturesServlet extends HttpServlet {
         List<Lecture> lectures = new LectureDao().findAll();
 
         request.setAttribute("lectures", lectures);
-        request.getRequestDispatcher("/WEB-INF/jsp/all_lectures.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/all_lectures.jsp").forward(request, response);
     }
 
 }

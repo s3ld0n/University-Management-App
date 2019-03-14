@@ -23,7 +23,7 @@ public class LectureServlet extends HttpServlet {
         
         request.setAttribute("lecture", lecture);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/lecture.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/lecture.jsp");
         dispatcher.forward(request, response);
     }
 }

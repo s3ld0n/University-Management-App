@@ -30,7 +30,7 @@ public class LectorServlet extends HttpServlet {
         request.setAttribute("lector", lector);
         request.setAttribute("subjects", subjects);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/lector.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/lector.jsp");
         dispatcher.forward(request, response);
     }
 }

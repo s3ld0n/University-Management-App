@@ -22,6 +22,6 @@ public class AllStudentsServlet extends HttpServlet {
         List<Student> students = new StudentDao().findAll();
 
         request.setAttribute("students", students);
-        request.getRequestDispatcher("/WEB-INF/jsp/all_students.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/all_students.jsp").forward(request, response);
     }
 }

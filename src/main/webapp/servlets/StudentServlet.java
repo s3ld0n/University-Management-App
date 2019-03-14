@@ -23,6 +23,6 @@ public class StudentServlet extends HttpServlet {
         Student student = new StudentDao().findById(Integer.parseInt(studentId));
 
         request.setAttribute("student", student);
-        request.getRequestDispatcher("/WEB-INF/jsp/student.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/student.jsp").forward(request, response);
     }
 }
