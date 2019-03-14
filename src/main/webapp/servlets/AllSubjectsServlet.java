@@ -9,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.crud_dao_implementations.LectorDao;
-import com.foxminded.university.domain.Lector;
+import com.foxminded.university.dao.crud_dao_implementations.SubjectDao;
+import com.foxminded.university.domain.Subject;
 
-@WebServlet("/lectors")
-public class AllLectorsServlet extends HttpServlet {
+@WebServlet("/subjects")
+public class AllSubjectsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lector> lectors= new LectorDao().findAll();
+        List<Subject> subjects = new SubjectDao().findAll();
 
-        request.setAttribute("lectors", lectors);
-        request.getRequestDispatcher("jsp/all_lectors.jsp").forward(request, response);
+        request.setAttribute("subjects", subjects);
+        request.getRequestDispatcher("jsp/all_subjects.jsp").forward(request, response);
     }
+
 }

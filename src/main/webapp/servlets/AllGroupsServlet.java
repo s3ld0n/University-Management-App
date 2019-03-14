@@ -21,6 +21,5 @@ public class AllGroupsServlet extends HttpServlet {
 
         request.setAttribute("groups", groups);
         request.getRequestDispatcher("jsp/all_groups.jsp").forward(request, response);
-        
     }
 }

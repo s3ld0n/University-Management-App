@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +22,6 @@ public class LectureServlet extends HttpServlet {
         
         request.setAttribute("lecture", lecture);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/lecture.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("jsp/lecture.jsp").forward(request, response);
     }
 }
