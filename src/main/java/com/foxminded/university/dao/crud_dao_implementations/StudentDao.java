@@ -23,7 +23,8 @@ public class StudentDao implements StudentCrudDao {
     
     private final static String READ_ALL_QUERY = "SELECT students.id AS id, first_name, last_name, groups.name AS group_name "
             + "FROM students "
-            + "JOIN groups ON students.group_id = groups.id";
+            + "JOIN groups ON students.group_id = groups.id "
+            + "ORDER BY id";
     
     private final static String UPDATE_QUERY = "UPDATE students "
             + "SET first_name = ?, last_name = ?, "

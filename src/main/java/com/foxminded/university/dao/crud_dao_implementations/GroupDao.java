@@ -17,7 +17,7 @@ public class GroupDao implements CrudDao<Group> {
     
     private final static String READ_QUERY = "SELECT id, name FROM groups WHERE id = ?";
     
-    private final static String READ_ALL_QUERY = "SELECT id, name FROM groups";
+    private final static String READ_ALL_QUERY = "SELECT id, name FROM groups ORDER BY id";
     
     private final static String UPDATE_QUERY = "UPDATE groups SET name = ? WHERE id = ?";
     

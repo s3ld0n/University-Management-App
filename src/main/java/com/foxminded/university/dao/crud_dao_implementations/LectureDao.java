@@ -25,7 +25,7 @@ public class LectureDao implements CrudDao<Lecture> {
             + "WHERE id = ?";
 
     private static final String READ_ALL_QUERY = "SELECT id, subject_id, group_id, lector_id, lecture_hall_id, period_id "
-            + "FROM lectures";
+            + "FROM lectures ORDER BY id";
 
     private static final String DELETE_QUERY = "DELETE FROM lectures WHERE id = ?";
     

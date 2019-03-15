@@ -23,7 +23,7 @@ public class LectorDao implements LectorCrudDao {
     private static final String REMOVE_SUBJECT_BY_ID_QUERY = "DELETE FROM lectors_subjects "
             + "WHERE lector_id = ? AND subject_id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors";
+    private static final String READ_ALL_QUERY = "SELECT id, first_name, last_name FROM lectors ORDER BY id";
     
     private static final String UPDATE_QUERY = "UPDATE lectors SET first_name = ?, last_name = ? WHERE id = ?";
     

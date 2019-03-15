@@ -19,7 +19,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
     
     public static final String UPDATE_QUERY = "UPDATE lecture_halls SET name = ? WHERE id = ?";
     
-    public static final String READ_ALL_QUERY = "SELECT id, name FROM lecture_halls";
+    public static final String READ_ALL_QUERY = "SELECT id, name FROM lecture_halls ORDER BY id";
 
     private static final String DELETE_QUERY = "DELETE FROM lecture_halls WHERE id = ?";
 

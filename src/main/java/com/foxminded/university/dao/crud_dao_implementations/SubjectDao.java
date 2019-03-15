@@ -24,7 +24,7 @@ public class SubjectDao implements SubjectCrudDao {
             + "JOIN lectors ON lectors_subjects.lector_id = lectors.id " 
             + "WHERE lectors.id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects";
+    private static final String READ_ALL_QUERY = "SELECT id, name FROM subjects ORDER BY id";
 
     private static final String UPDATE_QUERY = "UPDATE subjects SET name = ? WHERE id = ?";
 

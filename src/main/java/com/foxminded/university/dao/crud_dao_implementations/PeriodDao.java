@@ -23,7 +23,7 @@ public class PeriodDao implements PeriodCrudDao {
             + "JOIN lecture_halls_periods AS lhp ON periods.id = lhp.period_id "
             + "WHERE lhp.lecture_hall_id = ?";
     
-    private static final String READ_ALL_QUERY = "SELECT id, period_start, period_end FROM periods";
+    private static final String READ_ALL_QUERY = "SELECT id, period_start, period_end FROM periods ORDER BY id";
     
     private static final String DELETE_QUERY = "DELETE FROM periods WHERE id = ?";
     
