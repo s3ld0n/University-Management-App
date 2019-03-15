@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 
-h1, table {
+h1, h2, table, form {
     text-align: center;
 }
 
@@ -16,6 +16,15 @@ h1, table {
 </head>
 <body>
     <h1>STUDENTS</h1><br>
+    
+    <h2>Find by ID</h2>
+    
+    <form action="student-read">
+      ID:
+      <input type="number" name="id">
+      <input type="submit" value="Find">
+    </form>
+    <br><br>
     
     <table border="1" align="center">
         <tr>
