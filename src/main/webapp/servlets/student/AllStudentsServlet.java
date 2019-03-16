@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.crud_dao_implementations.GroupDao;
 import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
+import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
 @WebServlet("/students")
@@ -20,8 +22,10 @@ public class AllStudentsServlet extends HttpServlet {
             throws ServletException, IOException {
 
         List<Student> students = new StudentDao().findAll();
+        List<Group> groups = new GroupDao().findAll();
 
         request.setAttribute("students", students);
+        request.setAttribute("groups", groups);
         request.getRequestDispatcher("jsp/student/all_students.jsp").forward(request, response);
     }
 }

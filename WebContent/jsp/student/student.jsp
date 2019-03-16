@@ -43,9 +43,11 @@
       
       <div class="form-group">
         <label for="group">Group</label>
-        <input type="text" class="form-control" id="group" name="group" required>
-        <div class="valid-feedback">Valid.</div>
-        <div class="invalid-feedback">Please fill out this field.</div>
+       <select id="group" id="group" name="group">
+        <c:forEach var="group" items="${groups}">
+          <option value="${group.name}">${group.name}</option>
+        </c:forEach>
+       </select> 
       </div>
         
       <button type="submit" class="btn btn-primary">Update</button>
