@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
 import com.foxminded.university.domain.Student;
 
-@WebServlet("/student-read")
-public class StudentReadServlet extends HttpServlet {
+@WebServlet("/student-find")
+public class StudentFindServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
