@@ -1,4 +1,4 @@
-package servlets.group;
+package com.foxminded.university.servlets.group;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package servlets.student;
+package com.foxminded.university.servlets.student;
 
 import java.io.IOException;
 import java.util.List;

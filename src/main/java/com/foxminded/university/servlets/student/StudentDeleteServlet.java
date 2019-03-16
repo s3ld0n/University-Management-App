@@ -1,4 +1,4 @@
-package servlets.group;
+package com.foxminded.university.servlets.student;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.crud_dao_implementations.GroupDao;
+import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
 
-@WebServlet("/group-delete-servlet")
-public class GroupDeleteServlet extends HttpServlet {
+@WebServlet("/student-delete-servlet")
+public class StudentDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -18,8 +18,8 @@ public class GroupDeleteServlet extends HttpServlet {
         
         int id = Integer.parseInt(request.getParameter("id"));
         
-        new GroupDao().deleteById(id);
-        response.sendRedirect(request.getContextPath() + "/groups");
+        new StudentDao().deleteById(id);
+        response.sendRedirect(request.getContextPath() + "/students");
     }
 
 }

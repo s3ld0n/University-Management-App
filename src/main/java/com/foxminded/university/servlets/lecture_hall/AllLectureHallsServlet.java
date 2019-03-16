@@ -1,4 +1,4 @@
-package servlets.lecture_hall;
+package com.foxminded.university.servlets.lecture_hall;
 
 import java.io.IOException;
 import java.util.List;

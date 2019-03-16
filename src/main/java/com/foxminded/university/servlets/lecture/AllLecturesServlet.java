@@ -1,4 +1,4 @@
-package servlets.lector;
+package com.foxminded.university.servlets.lecture;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.crud_dao_implementations.LectorDao;
-import com.foxminded.university.domain.Lector;
+import com.foxminded.university.dao.crud_dao_implementations.LectureDao;
+import com.foxminded.university.domain.Lecture;
 
-@WebServlet("/lectors")
-public class AllLectorsServlet extends HttpServlet {
+@WebServlet("/lectures")
+public class AllLecturesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lector> lectors= new LectorDao().findAll();
+        List<Lecture> lectures = new LectureDao().findAll();
 
-        request.setAttribute("lectors", lectors);
-        request.getRequestDispatcher("jsp/lector/all_lectors.jsp").forward(request, response);
+        request.setAttribute("lectures", lectures);
+        request.getRequestDispatcher("jsp/lecture/all_lectures.jsp").forward(request, response);
     }
 }

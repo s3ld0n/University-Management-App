@@ -1,4 +1,4 @@
-package servlets.student;
+package com.foxminded.university.servlets.group;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,18 +14,21 @@ import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
-@WebServlet("/students")
-public class AllStudentsServlet extends HttpServlet {
+@WebServlet("/group-find")
+public class GroupFindServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Student> students = new StudentDao().findAll();
-        List<Group> groups = new GroupDao().findAll();
-
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        Group group =  new GroupDao().findById(id);
+        List<Student> students = new StudentDao().findAllByGroupId(id);
+        
+        request.setAttribute("group", group);
         request.setAttribute("students", students);
-        request.setAttribute("groups", groups);
-        request.getRequestDispatcher("jsp/student/all_students.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/group/group.jsp").forward(request, response);
     }
 }

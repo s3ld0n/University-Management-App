@@ -1,4 +1,4 @@
-package servlets.lecture;
+package com.foxminded.university.servlets.lecture;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
