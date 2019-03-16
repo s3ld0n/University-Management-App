@@ -7,7 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.foxminded.university.dao.crud_dao_implementations.GroupDao;
+import com.foxminded.university.dao.impl.GroupDao;
 import com.foxminded.university.domain.Group;
 
 @WebServlet("/groups")

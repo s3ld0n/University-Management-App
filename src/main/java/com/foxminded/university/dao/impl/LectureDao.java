@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.crud_dao_implementations;
+package com.foxminded.university.dao.impl;
 
 import java.sql.*;
 import java.util.*;

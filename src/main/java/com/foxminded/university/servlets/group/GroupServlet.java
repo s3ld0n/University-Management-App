@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.crud_dao_implementations.GroupDao;
-import com.foxminded.university.dao.crud_dao_implementations.StudentDao;
+import com.foxminded.university.dao.impl.GroupDao;
+import com.foxminded.university.dao.impl.StudentDao;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
