@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<style type="text/css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-h3, table {
-    text-align: center;
-}
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="css/style.css">
 
-</style>
 <c:set var="currentGroup" value="${group}"></c:set>
 
 <title>Group ${currentGroup.name}</title>
@@ -19,7 +19,29 @@ h3, table {
 <body>
     <h3>Group id: ${currentGroup.id}</h3>
     <h3>Group Name: ${currentGroup.name}</h3>
-    <br>
+    <br><br>
+    
+    <div class="container update border">
+    <form action="group-update-servlet" class="needs-validation" method="post" novalidate>
+      <input type="hidden" name="id" value="${currentStudent.id}" />
+
+      <div class="form-group">
+        <label for="name">New name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    </div>
+    <br><br>
+    
+    <form action="group-delete-servlet?id=${currentGroup.id}" method="post">
+      <input type="submit" value="Delete" />
+    </form>
+    <br><br>
+    
     <h3>Students</h3>
     
     <table border="1" align="center">
@@ -36,6 +58,6 @@ h3, table {
             
         </c:forEach>
     </table>
-    
+<script src="js/form_validator.js"></script>
 </body>
 </html>
