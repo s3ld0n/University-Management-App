@@ -36,12 +36,12 @@
       </div>
       
       <div class="form-group">
-        <label for="group">Group</label>
+       <label for="group">Group</label>
        <select id="group" id="group" name="group">
        
-        <c:forEach var="group" items="${groups}">
-          <option value="${group.name}">${group.name}</option>
-        </c:forEach>
+          <c:forEach var="group" items="${groups}">
+            <option value="${group.name}">${group.name}</option>
+          </c:forEach>
         
        </select> 
       </div>
