@@ -18,7 +18,7 @@
     <h1>STUDENTS</h1><br>
     
     <div class="container create border">
-    <form action="student-update-servlet" class="needs-validation" method="post" novalidate>
+    <form action="student-create-servlet" class="needs-validation" method="post" novalidate>
       <input type="hidden" name="id" value="${currentStudent.id}" />
 
       <div class="form-group">
