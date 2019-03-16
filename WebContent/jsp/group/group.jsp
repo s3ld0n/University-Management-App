@@ -23,8 +23,6 @@
     
     <div class="container update border">
     <form action="group-update-servlet" class="needs-validation" method="post" novalidate>
-      <input type="hidden" name="id" value="${currentStudent.id}" />
-
       <div class="form-group">
         <label for="name">New name</label>
         <input type="text" class="form-control" id="name" name="name" required>
