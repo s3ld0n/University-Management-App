@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.impl.GroupDao;
 
-@WebServlet("/group-delete-servlet")
+@WebServlet("/group/delete")
 public class GroupDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

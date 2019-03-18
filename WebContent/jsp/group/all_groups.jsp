@@ -18,7 +18,7 @@
     <h1>GROUPS</h1><br>
 
     <div class="container create border">
-    <form action="group-create-servlet" class="needs-validation" method="post" novalidate>
+    <form action="groups" class="needs-validation" method="post" novalidate>
       <input type="hidden" name="id" value="${currentStudent.id}" />
 
       <div class="form-group">

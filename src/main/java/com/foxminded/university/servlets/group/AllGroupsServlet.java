@@ -22,4 +22,13 @@ public class AllGroupsServlet extends HttpServlet {
         request.setAttribute("groups", groups);
         request.getRequestDispatcher("jsp/group/all_groups.jsp").forward(request, response);
     }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String name = request.getParameter("name");
+        
+        new GroupDao().create(new Group(1, name));
+        response.sendRedirect(request.getContextPath() + "/groups");
+    }
 }

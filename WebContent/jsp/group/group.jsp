@@ -22,7 +22,7 @@
     <br><br>
     
     <div class="container update border">
-    <form action="group-update-servlet" class="needs-validation" method="post" novalidate>
+    <form action="group" class="needs-validation" method="post" novalidate>
       <div class="form-group">
         <label for="name">New name</label>
         <input type="text" class="form-control" id="name" name="name" required>
@@ -35,7 +35,7 @@
     </div>
     <br><br>
     
-    <form action="group-delete-servlet?id=${currentGroup.id}" method="post">
+    <form action="group/delete?id=${currentGroup.id}" method="post">
       <input type="submit" value="Delete" />
     </form>
     <br><br>

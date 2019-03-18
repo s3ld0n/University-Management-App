@@ -31,4 +31,13 @@ public class GroupServlet extends HttpServlet {
 
         request.getRequestDispatcher("jsp/group/group.jsp").forward(request, response);
     }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String name = request.getParameter("name");
+        
+        new GroupDao().update(new Group(1, name));
+        response.sendRedirect(request.getContextPath() + "/groups");
+    }
 }

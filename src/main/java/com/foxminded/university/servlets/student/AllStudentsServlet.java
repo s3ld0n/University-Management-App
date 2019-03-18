@@ -28,4 +28,15 @@ public class AllStudentsServlet extends HttpServlet {
         request.setAttribute("groups", groups);
         request.getRequestDispatcher("jsp/student/all_students.jsp").forward(request, response);
     }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String group = request.getParameter("group");
+        
+        new StudentDao().create(new Student(1, firstName, lastName, group));
+        response.sendRedirect(request.getContextPath() + "/students");
+    }
 }

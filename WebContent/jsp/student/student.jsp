@@ -24,7 +24,7 @@
     <br><br>
     
     <div class="container update border">
-    <form action="student-update-servlet" class="needs-validation" method="post" novalidate>
+    <form action="student" class="needs-validation" method="post" novalidate>
       <input type="hidden" name="id" value="${currentStudent.id}" />
 
       <div class="form-group">
@@ -56,7 +56,7 @@
     
     <br><br>
     
-    <form action="student-delete-servlet?id=${currentStudent.id}" method="post">
+    <form action="student/delete?id=${currentStudent.id}" method="post">
         <input type="submit" value="Delete" />
     </form>
     
