@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.dao.impl.LectureDaoImpl;
 import com.foxminded.university.domain.Lecture;
 
@@ -14,11 +15,18 @@ import com.foxminded.university.domain.Lecture;
 public class LectureServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private LectureDao lectureDao;
+    
+    @Override
+    public void init() throws ServletException {
+        lectureDao = new LectureDaoImpl();
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         int lectureId = Integer.parseInt(request.getParameter("id"));
-        Lecture lecture = new LectureDaoImpl().findById(lectureId);
+        Lecture lecture = lectureDao.findById(lectureId);
         
         request.setAttribute("lecture", lecture);
         

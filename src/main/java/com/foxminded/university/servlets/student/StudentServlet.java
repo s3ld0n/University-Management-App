@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.GroupDao;
+import com.foxminded.university.dao.StudentDao;
 import com.foxminded.university.dao.impl.GroupDaoImpl;
 import com.foxminded.university.dao.impl.StudentDaoImpl;
 import com.foxminded.university.domain.Group;
@@ -18,8 +20,8 @@ import com.foxminded.university.domain.Student;
 public class StudentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private StudentDaoImpl studentDao;
-    private GroupDaoImpl groupDao;
+    private StudentDao studentDao;
+    private GroupDao groupDao;
     
     @Override
     public void init() {
@@ -48,7 +50,7 @@ public class StudentServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String group = request.getParameter("group");
         
-        new StudentDaoImpl().update(new Student(id, firstName, lastName, group));
+        studentDao.update(new Student(id, firstName, lastName, group));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }

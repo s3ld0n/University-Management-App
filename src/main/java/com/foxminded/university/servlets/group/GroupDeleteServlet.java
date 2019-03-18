@@ -7,13 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.dao.impl.GroupDaoImpl;
 
 @WebServlet("/group/delete")
 public class GroupDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private GroupDaoImpl groupDao;
+    private GroupDao groupDao;
     
     @Override
     public void init() {

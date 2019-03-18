@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.dao.GroupDao;
+import com.foxminded.university.dao.StudentDao;
 import com.foxminded.university.domain.*;
 
 public class GroupDaoImpl implements GroupDao {
@@ -133,6 +134,8 @@ public class GroupDaoImpl implements GroupDao {
 
             log.debug("Prepared statement was created. Creating result set");
             
+            StudentDao studentDao = new StudentDaoImpl();
+            
             while (resultSet.next()) {
                 log.trace("Getting group's id from the result set");
                 int id = resultSet.getInt("id");
@@ -144,7 +147,7 @@ public class GroupDaoImpl implements GroupDao {
                 Group group = new Group(id, name);
                 
                 log.trace("Setting students");
-                group.setStudents(new StudentDaoImpl().findAllByGroupId(id));
+                group.setStudents(studentDao.findAllByGroupId(id));
                 
                 groups.add(group);
                 log.trace("Group was found and added to the list");

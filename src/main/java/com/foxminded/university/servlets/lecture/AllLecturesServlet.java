@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.dao.impl.LectureDaoImpl;
 import com.foxminded.university.domain.Lecture;
 
@@ -16,10 +17,17 @@ import com.foxminded.university.domain.Lecture;
 public class AllLecturesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private LectureDao lectureDao;
+    
+    @Override
+    public void init() throws ServletException {
+        lectureDao = new LectureDaoImpl();
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lecture> lectures = new LectureDaoImpl().findAll();
+        List<Lecture> lectures = lectureDao.findAll();
 
         request.setAttribute("lectures", lectures);
         request.getRequestDispatcher("jsp/lecture/all_lectures.jsp").forward(request, response);

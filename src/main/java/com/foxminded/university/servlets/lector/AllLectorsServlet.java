@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foxminded.university.dao.LectorDao;
 import com.foxminded.university.dao.impl.LectorDaoImpl;
 import com.foxminded.university.domain.Lector;
 
@@ -16,10 +17,17 @@ import com.foxminded.university.domain.Lector;
 public class AllLectorsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private LectorDao lectorDao;
+    
+    @Override
+    public void init() throws ServletException {
+        lectorDao = new LectorDaoImpl();
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lector> lectors= new LectorDaoImpl().findAll();
+        List<Lector> lectors= lectorDao.findAll();
 
         request.setAttribute("lectors", lectors);
         request.getRequestDispatcher("jsp/lector/all_lectors.jsp").forward(request, response);

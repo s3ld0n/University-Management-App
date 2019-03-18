@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.dao.impl.GroupDaoImpl;
 import com.foxminded.university.domain.Group;
 
@@ -14,7 +15,7 @@ import com.foxminded.university.domain.Group;
 public class AllGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private GroupDaoImpl groupDao;
+    private GroupDao groupDao;
     
     @Override
     public void init() {

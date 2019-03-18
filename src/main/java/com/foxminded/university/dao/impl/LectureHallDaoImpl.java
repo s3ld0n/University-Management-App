@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.dao.LectureHallDao;
+import com.foxminded.university.dao.PeriodDao;
 import com.foxminded.university.domain.LectureHall;
 
 public class LectureHallDaoImpl implements LectureHallDao {
@@ -134,6 +135,9 @@ public class LectureHallDaoImpl implements LectureHallDao {
             log.debug("Prepared statement was created. Creating result set");
 
             try (ResultSet resultSet = statement.executeQuery()) {
+                
+                PeriodDao periodDao = new PeriodDaoImpl();
+                
                 while (resultSet.next()) {
                     log.trace("Getting lecture hall's id and name from result set");
 
@@ -147,7 +151,7 @@ public class LectureHallDaoImpl implements LectureHallDao {
                     LectureHall lectureHall = new LectureHall(id, name);
 
                     log.trace("Setting booked periods");
-                    lectureHall.setBookedPeriods(new PeriodDaoImpl().findAllByLectureHallId(id));
+                    lectureHall.setBookedPeriods(periodDao.findAllByLectureHallId(id));
 
                     lectureHalls.add(lectureHall);
                     log.trace("Lecture hall was found and added to the list");
