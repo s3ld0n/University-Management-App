@@ -7,11 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
-import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.dao.DaoException;
+import com.foxminded.university.dao.LectureHallDao;
 import com.foxminded.university.domain.LectureHall;
 
-public class LectureHallDaoImpl implements CrudDao<LectureHall> {
+public class LectureHallDaoImpl implements LectureHallDao {
     
     public static final String CREATE_QUERY = "INSERT INTO lecture_halls (name) VALUES(?)";
     

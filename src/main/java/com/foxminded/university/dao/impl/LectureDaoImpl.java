@@ -7,12 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
-import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.dao.DaoException;
+import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.domain.*;
 import com.foxminded.university.utils.Period;
 
-public class LectureDaoImpl implements CrudDao<Lecture> {
+public class LectureDaoImpl implements LectureDao {
     
     private static final String CREATE_QUERY = "INSERT INTO lectures (subject_id, lector_id, group_id, lecture_hall_id, "
             + "period_id) VALUES (?, ?, ?, ?, ?)";

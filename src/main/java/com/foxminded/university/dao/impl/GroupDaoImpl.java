@@ -7,11 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
-import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.dao.DaoException;
+import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.domain.*;
 
-public class GroupDaoImpl implements CrudDao<Group> {
+public class GroupDaoImpl implements GroupDao {
 
     private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?)";
     
