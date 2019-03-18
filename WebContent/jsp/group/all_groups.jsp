@@ -33,13 +33,6 @@
     </div>
     <br><br>
     
-    <form action="group-find">
-      ID:
-      <input type="number" name="id">
-      <input type="submit" value="Find">
-    </form>
-    <br><br>
-    
     <table border="1" align="center">
         <tr>
           <th>ID</th>
