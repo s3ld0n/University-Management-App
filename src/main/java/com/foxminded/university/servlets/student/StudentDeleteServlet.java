@@ -7,18 +7,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.StudentDao;
+import com.foxminded.university.dao.impl.StudentDaoImpl;
 
 @WebServlet("/student/delete")
 public class StudentDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private StudentDaoImpl studentDao;
+    
+    @Override
+    public void init() {
+        studentDao = new StudentDaoImpl();
+    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         int id = Integer.parseInt(request.getParameter("id"));
         
-        new StudentDao().deleteById(id);
+        studentDao.deleteById(id);
         response.sendRedirect(request.getContextPath() + "/students");
     }
 

@@ -12,7 +12,7 @@ import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.domain.*;
 import com.foxminded.university.utils.Period;
 
-public class LectureDao implements CrudDao<Lecture> {
+public class LectureDaoImpl implements CrudDao<Lecture> {
     
     private static final String CREATE_QUERY = "INSERT INTO lectures (subject_id, lector_id, group_id, lecture_hall_id, "
             + "period_id) VALUES (?, ?, ?, ?, ?)";
@@ -29,7 +29,7 @@ public class LectureDao implements CrudDao<Lecture> {
 
     private static final String DELETE_QUERY = "DELETE FROM lectures WHERE id = ?";
     
-    private static final Logger log = LogManager.getLogger(LectureDao.class.getName());
+    private static final Logger log = LogManager.getLogger(LectureDaoImpl.class.getName());
     
     public Lecture create(Lecture lecture) {
 
@@ -115,10 +115,10 @@ public class LectureDao implements CrudDao<Lecture> {
                 log.debug("Parameters have been gotten. Making objects for lecture fields");
 
                 log.trace("Creating PeriodDao object");
-                PeriodDao periodDao = new PeriodDao();
+                PeriodDaoImpl periodDao = new PeriodDaoImpl();
 
-                log.trace("Creating SubjectDao object");
-                SubjectDao subjectDao = new SubjectDao();
+                log.trace("Creating SubjectDaoImpl object");
+                SubjectDaoImpl subjectDao = new SubjectDaoImpl();
 
                 log.debug("Finding the period");
                 Period period = periodDao.findById(resultSet.getInt("period_id"));
@@ -127,19 +127,19 @@ public class LectureDao implements CrudDao<Lecture> {
                 Subject subject = subjectDao.findById(resultSet.getInt("subject_id"));
 
                 log.debug("Finding the group");
-                Group group = new GroupDao().findById(groupId);
+                Group group = new GroupDaoImpl().findById(groupId);
 
                 log.debug("Finding and setting students of the group");
-                group.setStudents(new StudentDao().findAllByGroupId(groupId));
+                group.setStudents(new StudentDaoImpl().findAllByGroupId(groupId));
 
                 log.debug("Finding the lector");
-                Lector lector = new LectorDao().findById(lectorId);
+                Lector lector = new LectorDaoImpl().findById(lectorId);
 
                 log.debug("Setting subjects of the lector");
                 lector.setSubjects(subjectDao.findAllByLectorId(lectorId));
 
                 log.debug("Finding the lecture hall");
-                LectureHall lectureHall = new LectureHallDao().findById(lectureHallId);
+                LectureHall lectureHall = new LectureHallDaoImpl().findById(lectureHallId);
 
                 log.debug("Setting booked period of the lecture hall");
                 lectureHall.setBookedPeriods(periodDao.findAllByLectureHallId(lectureHallId));
@@ -222,31 +222,31 @@ public class LectureDao implements CrudDao<Lecture> {
                     int id = resultSet.getInt("id");
 
                     log.trace("Creating PeriodDao object");
-                    PeriodDao periodDao = new PeriodDao();
+                    PeriodDaoImpl periodDao = new PeriodDaoImpl();
 
                     log.trace("Finding the period");
                     Period period = periodDao.findById(resultSet.getInt("period_id"));
 
-                    log.trace("Creating SubjectDao object");
-                    SubjectDao subjectDao = new SubjectDao();
+                    log.trace("Creating SubjectDaoImpl object");
+                    SubjectDaoImpl subjectDao = new SubjectDaoImpl();
 
                     log.trace("Finding the subject");
                     Subject subject = subjectDao.findById(resultSet.getInt("subject_id"));
 
                     log.trace("Finding the lector");
-                    Lector lector = new LectorDao().findById(resultSet.getInt("lector_id"));
+                    Lector lector = new LectorDaoImpl().findById(resultSet.getInt("lector_id"));
 
                     log.trace("Setting subjects of the lector");
                     lector.setSubjects(subjectDao.findAllByLectorId(resultSet.getInt("lector_id")));
 
                     log.trace("Finding the group");
-                    Group group = new GroupDao().findById(resultSet.getInt("group_id"));
+                    Group group = new GroupDaoImpl().findById(resultSet.getInt("group_id"));
 
                     log.trace("Setting students of the group");
-                    group.setStudents(new StudentDao().findAllByGroupId(resultSet.getInt("group_id")));
+                    group.setStudents(new StudentDaoImpl().findAllByGroupId(resultSet.getInt("group_id")));
 
                     log.trace("Finding the lecture hall");
-                    LectureHall lectureHall = new LectureHallDao().findById(resultSet.getInt("lecture_hall_id"));
+                    LectureHall lectureHall = new LectureHallDaoImpl().findById(resultSet.getInt("lecture_hall_id"));
 
                     log.trace("Setting booked periods of the lecture hall");
                     lectureHall.setBookedPeriods(periodDao.findAllByLectureHallId(resultSet.getInt("lecture_hall_id")));

@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
-import com.foxminded.university.dao.LectorCrudDao;
+import com.foxminded.university.dao.LectorDao;
 import com.foxminded.university.domain.*;
 
-public class LectorDao implements LectorCrudDao {
+public class LectorDaoImpl implements LectorDao {
     
     private static final String CREATE_QUERY = "INSERT INTO lectors (first_name, last_name) VALUES (?, ?)";
     
@@ -29,7 +29,7 @@ public class LectorDao implements LectorCrudDao {
     
     private static final String DELETE_QUERY = "DELETE FROM lectors WHERE id = ?";
 
-    private static final Logger log = LogManager.getLogger(LectorDao.class.getName());
+    private static final Logger log = LogManager.getLogger(LectorDaoImpl.class.getName());
     
     public Lector create(Lector lector) {
 
@@ -90,7 +90,7 @@ public class LectorDao implements LectorCrudDao {
                 lector = new Lector(id, resultSet.getString("first_name"), resultSet.getString("last_name"));
 
                 log.debug("Setting subjects");
-                lector.setSubjects(new SubjectDao().findAllByLectorId(id));
+                lector.setSubjects(new SubjectDaoImpl().findAllByLectorId(id));
             }
         } catch (SQLException e) {
             log.error("Finding lector has failed", e);
@@ -159,7 +159,7 @@ public class LectorDao implements LectorCrudDao {
                     Lector lector = new Lector(id, firstName, lastName);
 
                     log.trace("Setting subjects");
-                    lector.setSubjects(new SubjectDao().findAllByLectorId(id));
+                    lector.setSubjects(new SubjectDaoImpl().findAllByLectorId(id));
 
                     lectors.add(lector);
                     log.trace("Lector was found and added to the list");

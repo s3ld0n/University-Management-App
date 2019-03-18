@@ -9,10 +9,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
-import com.foxminded.university.dao.SubjectCrudDao;
+import com.foxminded.university.dao.SubjectDao;
 import com.foxminded.university.domain.Subject;
 
-public class SubjectDao implements SubjectCrudDao {
+public class SubjectDaoImpl implements SubjectDao {
     
     private static final String CREATE_QUERY = "INSERT INTO subjects (name) VALUES(?)";
     
@@ -30,7 +30,7 @@ public class SubjectDao implements SubjectCrudDao {
 
     private final static String DELETE_QUERY = "DELETE FROM subjects WHERE id = ?";
 
-    private static final Logger log = LogManager.getLogger(SubjectDao.class.getName());
+    private static final Logger log = LogManager.getLogger(SubjectDaoImpl.class.getName());
 
     public Subject create(Subject subject) {
 

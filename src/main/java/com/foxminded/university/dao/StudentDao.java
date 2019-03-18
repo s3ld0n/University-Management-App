@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.foxminded.university.domain.Student;
 
-public interface StudentCrudDao extends CrudDao<Student> {
+public interface StudentDao extends CrudDao<Student> {
     
     public List<Student> findAllByGroupId(int groupId);
 }

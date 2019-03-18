@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.LectureHallDao;
-import com.foxminded.university.dao.impl.PeriodDao;
+import com.foxminded.university.dao.impl.LectureHallDaoImpl;
+import com.foxminded.university.dao.impl.PeriodDaoImpl;
 import com.foxminded.university.domain.LectureHall;
 import com.foxminded.university.utils.Period;
 
@@ -22,9 +22,9 @@ public class LectureHallServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int lectureHallId = Integer.parseInt(request.getParameter("id"));
-        LectureHall lectureHall = new LectureHallDao().findById(lectureHallId);
+        LectureHall lectureHall = new LectureHallDaoImpl().findById(lectureHallId);
         
-        Set<Period> periods = new PeriodDao().findAllByLectureHallId(lectureHallId);
+        Set<Period> periods = new PeriodDaoImpl().findAllByLectureHallId(lectureHallId);
         
         request.setAttribute("lectureHall", lectureHall);
         request.setAttribute("periods", periods);

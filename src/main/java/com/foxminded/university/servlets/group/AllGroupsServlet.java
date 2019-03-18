@@ -7,17 +7,24 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.foxminded.university.dao.impl.GroupDao;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
 import com.foxminded.university.domain.Group;
 
 @WebServlet("/groups")
 public class AllGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private GroupDaoImpl groupDao;
+    
+    @Override
+    public void init() {
+        groupDao = new GroupDaoImpl();
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Group> groups = new GroupDao().findAll();
+        List<Group> groups = groupDao.findAll();
 
         request.setAttribute("groups", groups);
         request.getRequestDispatcher("jsp/group/all_groups.jsp").forward(request, response);
@@ -28,7 +35,7 @@ public class AllGroupsServlet extends HttpServlet {
         
         String name = request.getParameter("name");
         
-        new GroupDao().create(new Group(1, name));
+        groupDao.create(new Group(1, name));
         response.sendRedirect(request.getContextPath() + "/groups");
     }
 }

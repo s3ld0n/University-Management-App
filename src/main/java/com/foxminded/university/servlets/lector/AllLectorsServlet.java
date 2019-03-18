@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.LectorDao;
+import com.foxminded.university.dao.impl.LectorDaoImpl;
 import com.foxminded.university.domain.Lector;
 
 @WebServlet("/lectors")
@@ -19,7 +19,7 @@ public class AllLectorsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lector> lectors= new LectorDao().findAll();
+        List<Lector> lectors= new LectorDaoImpl().findAll();
 
         request.setAttribute("lectors", lectors);
         request.getRequestDispatcher("jsp/lector/all_lectors.jsp").forward(request, response);

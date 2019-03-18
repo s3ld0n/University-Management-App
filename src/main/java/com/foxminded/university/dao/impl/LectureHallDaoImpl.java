@@ -11,7 +11,7 @@ import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.domain.LectureHall;
 
-public class LectureHallDao implements CrudDao<LectureHall> {
+public class LectureHallDaoImpl implements CrudDao<LectureHall> {
     
     public static final String CREATE_QUERY = "INSERT INTO lecture_halls (name) VALUES(?)";
     
@@ -23,7 +23,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
 
     private static final String DELETE_QUERY = "DELETE FROM lecture_halls WHERE id = ?";
 
-    private static final Logger log = LogManager.getLogger(LectureHallDao.class.getName());
+    private static final Logger log = LogManager.getLogger(LectureHallDaoImpl.class.getName());
     
     public LectureHall create(LectureHall lectureHall) {
 
@@ -82,7 +82,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                 lectureHall = new LectureHall(id, resultSet.getString("name"));
 
                 log.debug("Setting booked periods to lecture hall");
-                lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
+                lectureHall.setBookedPeriods(new PeriodDaoImpl().findAllByLectureHallId(id));
             }
 
         } catch (SQLException e) {
@@ -147,7 +147,7 @@ public class LectureHallDao implements CrudDao<LectureHall> {
                     LectureHall lectureHall = new LectureHall(id, name);
 
                     log.trace("Setting booked periods");
-                    lectureHall.setBookedPeriods(new PeriodDao().findAllByLectureHallId(id));
+                    lectureHall.setBookedPeriods(new PeriodDaoImpl().findAllByLectureHallId(id));
 
                     lectureHalls.add(lectureHall);
                     log.trace("Lecture hall was found and added to the list");

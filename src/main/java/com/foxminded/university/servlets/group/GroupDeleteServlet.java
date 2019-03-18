@@ -7,18 +7,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.GroupDao;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
 
 @WebServlet("/group/delete")
 public class GroupDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private GroupDaoImpl groupDao;
+    
+    @Override
+    public void init() {
+        groupDao = new GroupDaoImpl();
+    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         int id = Integer.parseInt(request.getParameter("id"));
         
-        new GroupDao().deleteById(id);
+        groupDao.deleteById(id);
         response.sendRedirect(request.getContextPath() + "/groups");
     }
 

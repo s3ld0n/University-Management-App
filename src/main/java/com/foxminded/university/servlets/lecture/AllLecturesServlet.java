@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.LectureDao;
+import com.foxminded.university.dao.impl.LectureDaoImpl;
 import com.foxminded.university.domain.Lecture;
 
 @WebServlet("/lectures")
@@ -19,7 +19,7 @@ public class AllLecturesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Lecture> lectures = new LectureDao().findAll();
+        List<Lecture> lectures = new LectureDaoImpl().findAll();
 
         request.setAttribute("lectures", lectures);
         request.getRequestDispatcher("jsp/lecture/all_lectures.jsp").forward(request, response);

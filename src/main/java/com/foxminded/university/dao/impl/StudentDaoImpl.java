@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
-import com.foxminded.university.dao.StudentCrudDao;
+import com.foxminded.university.dao.StudentDao;
 import com.foxminded.university.domain.*;
 
-public class StudentDao implements StudentCrudDao {
+public class StudentDaoImpl implements StudentDao {
 
     private final static String CREATE_QUERY = "INSERT INTO students (first_name, last_name, group_id) "
             + "VALUES(?, ?, (SELECT id FROM groups WHERE name = ?))";
@@ -39,7 +39,7 @@ public class StudentDao implements StudentCrudDao {
             + "JOIN groups ON students.group_id = groups.id "
             + "WHERE group_id = ?";
     
-    private static final Logger log = LogManager.getLogger(StudentDao.class.getName());
+    private static final Logger log = LogManager.getLogger(StudentDaoImpl.class.getName());
     
     public Student create(Student student) {
 

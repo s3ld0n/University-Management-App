@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.LectorDao;
-import com.foxminded.university.dao.impl.SubjectDao;
+import com.foxminded.university.dao.impl.LectorDaoImpl;
+import com.foxminded.university.dao.impl.SubjectDaoImpl;
 import com.foxminded.university.domain.Lector;
 import com.foxminded.university.domain.Subject;
 
@@ -22,9 +22,9 @@ public class LectorServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int lectorId = Integer.parseInt(request.getParameter("id"));
-        Lector lector = new LectorDao().findById(lectorId);
+        Lector lector = new LectorDaoImpl().findById(lectorId);
         
-        List<Subject> subjects = new SubjectDao().findAllByLectorId(lectorId);
+        List<Subject> subjects = new SubjectDaoImpl().findAllByLectorId(lectorId);
         
         request.setAttribute("lector", lector);
         request.setAttribute("subjects", subjects);

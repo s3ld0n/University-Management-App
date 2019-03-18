@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.foxminded.university.utils.Period;
 
-public interface PeriodCrudDao {
+public interface PeriodDao {
     
     public Set<Period> findAllByLectureHallId(int hallId);
 }

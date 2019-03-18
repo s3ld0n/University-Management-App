@@ -9,22 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.GroupDao;
-import com.foxminded.university.dao.impl.StudentDao;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
+import com.foxminded.university.dao.impl.StudentDaoImpl;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    
+    private StudentDaoImpl studentDao;
+    private GroupDaoImpl groupDao;
+    
+    @Override
+    public void init() {
+        studentDao = new StudentDaoImpl();
+        groupDao = new GroupDaoImpl();
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String studentId = request.getParameter("id");
         
-        Student student = new StudentDao().findById(Integer.parseInt(studentId));
-        List<Group> groups = new GroupDao().findAll();
+        Student student = studentDao.findById(Integer.parseInt(studentId));
+        List<Group> groups = groupDao.findAll();
 
         request.setAttribute("groups", groups);
         request.setAttribute("student", student);
@@ -39,7 +48,7 @@ public class StudentServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String group = request.getParameter("group");
         
-        new StudentDao().update(new Student(id, firstName, lastName, group));
+        new StudentDaoImpl().update(new Student(id, firstName, lastName, group));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }

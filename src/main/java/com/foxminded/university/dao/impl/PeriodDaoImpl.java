@@ -9,10 +9,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.foxminded.university.dao.ConnectionFactory;
 import com.foxminded.university.dao.DaoException;
-import com.foxminded.university.dao.PeriodCrudDao;
+import com.foxminded.university.dao.PeriodDao;
 import com.foxminded.university.utils.Period;
 
-public class PeriodDao implements PeriodCrudDao {
+public class PeriodDaoImpl implements PeriodDao {
     
     private static final String CREATE_QUERY = "INSERT INTO periods (period_start, period_end) VALUES(?, ?)";
 
@@ -29,7 +29,7 @@ public class PeriodDao implements PeriodCrudDao {
     
     private static final String UPDATE_QUERY = "UPDATE periods SET period_start = ?, period_end = ? WHERE id = ?";
 
-    private static final Logger log = LogManager.getLogger(PeriodDao.class.getName());
+    private static final Logger log = LogManager.getLogger(PeriodDaoImpl.class.getName());
     
     public Period create(Period period) {
 

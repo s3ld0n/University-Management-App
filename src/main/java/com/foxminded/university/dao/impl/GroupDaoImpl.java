@@ -11,7 +11,7 @@ import com.foxminded.university.dao.CrudDao;
 import com.foxminded.university.dao.DaoException;
 import com.foxminded.university.domain.*;
 
-public class GroupDao implements CrudDao<Group> {
+public class GroupDaoImpl implements CrudDao<Group> {
 
     private final static String CREATE_QUERY = "INSERT INTO groups (name) VALUES(?)";
     
@@ -23,7 +23,7 @@ public class GroupDao implements CrudDao<Group> {
     
     private final static String DELETE_QUERY = "DELETE FROM groups WHERE id = ?";
 
-    private static final Logger log = LogManager.getLogger(GroupDao.class.getName());
+    private static final Logger log = LogManager.getLogger(GroupDaoImpl.class.getName());
     
     public Group create(Group group) {
 
@@ -82,7 +82,7 @@ public class GroupDao implements CrudDao<Group> {
                 group = new Group(id, groupName);
                 
                 log.debug("Setting students of the group");
-                group.setStudents(new StudentDao().findAllByGroupId(id));
+                group.setStudents(new StudentDaoImpl().findAllByGroupId(id));
             }
 
         } catch (SQLException e) {
@@ -144,7 +144,7 @@ public class GroupDao implements CrudDao<Group> {
                 Group group = new Group(id, name);
                 
                 log.trace("Setting students");
-                group.setStudents(new StudentDao().findAllByGroupId(id));
+                group.setStudents(new StudentDaoImpl().findAllByGroupId(id));
                 
                 groups.add(group);
                 log.trace("Group was found and added to the list");
