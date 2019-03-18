@@ -1,0 +1,12 @@
+h1, h3, h2, table, form {
+    text-align: center;
+}
+
+.update, .create {
+    margin:0 auto;
+    width: 300px;
+}
+
+.border {
+    padding: 10px;
+}

@@ -19,9 +19,10 @@ public class ConnectionFactory {
         log.debug("Creating a new connection");
 
         try {
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(resourceBundle.getString("url") , resourceBundle.getString("user"),
                     resourceBundle.getString("password"));
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             log.error("Connection has not been created." , e);
             throw new DaoException("Connection has not been created." , e);
         }
