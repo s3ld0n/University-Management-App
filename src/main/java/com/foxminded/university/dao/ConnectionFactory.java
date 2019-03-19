@@ -1,17 +1,20 @@
 package com.foxminded.university.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ConnectionFactory {
 
-    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
     private static final Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
+    private static DataSource dataSource;
     
     public static Connection getConnection() {
         Connection connection = null;
@@ -19,10 +22,11 @@ public class ConnectionFactory {
         log.debug("Creating a new connection");
 
         try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(resourceBundle.getString("url") , resourceBundle.getString("user"),
-                    resourceBundle.getString("password"));
-        } catch (SQLException | ClassNotFoundException e) {
+            Context context = new InitialContext();
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/university");
+            connection = dataSource.getConnection();
+            
+        } catch (SQLException | NamingException e) {
             log.error("Connection has not been created." , e);
             throw new DaoException("Connection has not been created." , e);
         }
