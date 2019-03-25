@@ -7,24 +7,21 @@ import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import com.foxminded.university.utils.ContextReceiver;
 
 public class ConnectionFactory {
 
     private static final Logger log = LogManager.getLogger(ConnectionFactory.class.getName());
-    private static DataSource dataSource;
+    private static DataSource dataSource = ContextReceiver.receiveDataSourceFromContext("applicationContext.xml");
     
     public static Connection getConnection() {
         Connection connection = null;
         
         log.debug("Creating a new connection");
 
-        try (ConfigurableApplicationContext  context = 
-                new ClassPathXmlApplicationContext("applicationContext.xml")) {
-            
-            dataSource = context.getBean("dataSource", DriverManagerDataSource.class);
+        try {
+
             connection = dataSource.getConnection();
             
         } catch (SQLException e) {
