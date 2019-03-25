@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -20,7 +21,7 @@ public class ConnectionFactory {
         
         log.debug("Creating a new connection");
 
-        try (ClassPathXmlApplicationContext context = 
+        try (ConfigurableApplicationContext  context = 
                 new ClassPathXmlApplicationContext("applicationContext.xml")) {
             
             dataSource = context.getBean("dataSource", DriverManagerDataSource.class);
