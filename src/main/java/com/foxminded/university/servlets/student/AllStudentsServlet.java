@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.GroupDao;
-import com.foxminded.university.dao.StudentDao;
-import com.foxminded.university.dao.impl.GroupDaoImpl;
-import com.foxminded.university.dao.impl.StudentDaoImpl;
-import com.foxminded.university.domain.Group;
-import com.foxminded.university.domain.Student;
+import com.foxminded.university.dao.impl.jpa.*;
+import com.foxminded.university.domain.alt_impl.*;
+
 
 @WebServlet("/students")
 public class AllStudentsServlet extends HttpServlet {
@@ -25,8 +22,8 @@ public class AllStudentsServlet extends HttpServlet {
     
     @Override
     public void init() {
-        studentDao = new StudentDaoImpl();
-        groupDao = new GroupDaoImpl();
+        studentDao = new StudentDaoJpa();
+        groupDao = new GroupDaoJpa();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +44,7 @@ public class AllStudentsServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String group = request.getParameter("group");
         
-        studentDao.create(new Student(1, firstName, lastName, group));
+        studentDao.create(new Student(1, firstName, lastName, groupDao.findByName(group)));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }
