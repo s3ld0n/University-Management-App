@@ -30,6 +30,18 @@ public class GroupDaoJpa implements GroupDao {
         return group;
     }
 
+    public Group findByName(String name) {
+        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
+        
+        session.beginTransaction();
+        
+        Group group = (Group) session.createQuery("FROM Group g WHERE g.name = :groupName")
+        .setParameter("groupName", name).getResultList().get(0);
+        
+        session.getTransaction().commit();
+        return group;
+    }
+    
     public Group update(Group updatedGroup) {
         Session session = JpaSessionCreator.getSession(Student.class, Group.class);
 
@@ -51,7 +63,7 @@ public class GroupDaoJpa implements GroupDao {
         
         @SuppressWarnings("unchecked")
         List<Group> groups = session.createQuery("from Group").getResultList();
-        
+        groups.sort((a, b) -> (a.getId() - b.getId()));
         session.getTransaction().commit();
         
         return groups;
