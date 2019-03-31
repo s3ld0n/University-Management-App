@@ -24,6 +24,7 @@ public class StudentDaoJpa implements StudentDao {
 
         Session session = JpaSessionCreator.getSession(Student.class, Group.class);
         
+        
         session.beginTransaction();
         Student student = session.get(Student.class, id);
         session.getTransaction().commit();
@@ -50,11 +51,12 @@ public class StudentDaoJpa implements StudentDao {
     public List<Student> findAll() {
 
         Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-        
+
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
         List<Student> students = session.createQuery("from Student").getResultList();
+        students.sort((a, b) -> (a.getId() - b.getId()));
         
         session.getTransaction().commit();
 
