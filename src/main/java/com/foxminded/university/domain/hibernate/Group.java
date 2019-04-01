@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,12 @@ import javax.persistence.Table;
 public class Group implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "groups_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(
+            name = "groups_id_seq",
+            sequenceName = "groups_id_seq",
+            allocationSize=1
+        )
     @Column(name = "id")
     private int id;
     

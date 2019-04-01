@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +18,12 @@ import javax.persistence.Table;
 public class Student implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "students_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(
+            name = "students_id_seq",
+            sequenceName = "students_id_seq",
+            allocationSize=1
+        )
     @Column(name = "id")
     private int id;
     
