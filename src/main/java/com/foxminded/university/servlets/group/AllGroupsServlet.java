@@ -7,8 +7,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.foxminded.university.dao.impl.jpa.GroupDao;
-import com.foxminded.university.dao.impl.jpa.GroupDaoJpa;
+import com.foxminded.university.dao.jpa.GroupDao;
+import com.foxminded.university.dao.jpa.GroupDaoJpa;
 import com.foxminded.university.domain.alt_impl.*;
 
 @WebServlet("/groups")

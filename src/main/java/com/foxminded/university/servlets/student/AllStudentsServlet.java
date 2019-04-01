@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.impl.jpa.*;
+import com.foxminded.university.dao.jpa.*;
 import com.foxminded.university.domain.alt_impl.*;
 
 

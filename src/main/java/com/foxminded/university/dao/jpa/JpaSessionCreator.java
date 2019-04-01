@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.impl.jpa;
+package com.foxminded.university.dao.jpa;
 
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;

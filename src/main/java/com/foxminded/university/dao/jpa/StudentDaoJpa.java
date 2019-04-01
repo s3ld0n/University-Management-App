@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.impl.jpa;
+package com.foxminded.university.dao.jpa;
 
 import java.util.*;
 

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.LectorDao;
 import com.foxminded.university.dao.SubjectDao;
-import com.foxminded.university.dao.impl.LectorDaoImpl;
-import com.foxminded.university.dao.impl.SubjectDaoImpl;
+import com.foxminded.university.dao.sql.LectorDaoImpl;
+import com.foxminded.university.dao.sql.SubjectDaoImpl;
 import com.foxminded.university.domain.Lector;
 import com.foxminded.university.domain.Subject;
 

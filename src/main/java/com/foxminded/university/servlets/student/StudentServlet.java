@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.dao.StudentDao;
-import com.foxminded.university.dao.impl.GroupDaoImpl;
-import com.foxminded.university.dao.impl.StudentDaoImpl;
+import com.foxminded.university.dao.sql.GroupDaoImpl;
+import com.foxminded.university.dao.sql.StudentDaoImpl;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 

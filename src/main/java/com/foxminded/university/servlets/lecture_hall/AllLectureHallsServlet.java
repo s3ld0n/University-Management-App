@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.LectureHallDao;
-import com.foxminded.university.dao.impl.LectureHallDaoImpl;
+import com.foxminded.university.dao.sql.LectureHallDaoImpl;
 import com.foxminded.university.domain.LectureHall;
 
 @WebServlet("/lecture-halls")

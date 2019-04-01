@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.StudentDao;
-import com.foxminded.university.dao.impl.StudentDaoImpl;
+import com.foxminded.university.dao.sql.StudentDaoImpl;
 
 @WebServlet("/student/delete")
 public class StudentDeleteServlet extends HttpServlet {
