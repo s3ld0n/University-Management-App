@@ -44,7 +44,7 @@ public class AllStudentsServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String group = request.getParameter("group");
         
-        studentDao.create(new Student(1, firstName, lastName, groupDao.findByName(group)));
+        studentDao.create(new Student(firstName, lastName, groupDao.findByName(group)));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }

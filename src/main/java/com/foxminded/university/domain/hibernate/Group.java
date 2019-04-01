@@ -28,16 +28,14 @@ public class Group implements Serializable {
     
     @OneToMany(mappedBy="group", fetch = FetchType.LAZY,
             cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    private List<Student> students;
+    private List<Student> students  = new ArrayList<Student>();
 
     public Group() {
 
     }
     
-    public Group(int id, String name) {
-        this.id = id;
+    public Group(String name) {
         this.name = name;
-        this.students = new ArrayList<Student>();
     }
     
     public int getId() {

@@ -35,9 +35,7 @@ public class Student implements Serializable {
         
     }
     
-    public Student(int id, String firstName, String lastName, Group group) {
-        super();
-        this.id = id;
+    public Student(String firstName, String lastName, Group group) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
