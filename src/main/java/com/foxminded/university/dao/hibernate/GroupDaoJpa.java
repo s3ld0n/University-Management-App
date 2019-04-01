@@ -3,15 +3,17 @@ package com.foxminded.university.dao.hibernate;
 import java.util.*;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.foxminded.university.domain.hibernate.*;
 
 public class GroupDaoJpa implements GroupDao {
     
+    private SessionFactory sessionFactory = HibenateUtil.getSessionfactory();
+    
     public Group create(Group group) {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(group);
         session.getTransaction().commit();
@@ -21,8 +23,7 @@ public class GroupDaoJpa implements GroupDao {
 
     public Group findById(int id) {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-        
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Group group = session.get(Group.class, id);
         session.getTransaction().commit();
@@ -31,10 +32,10 @@ public class GroupDaoJpa implements GroupDao {
     }
 
     public Group findByName(String name) {
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-        
+
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
-        
+
         Group group = (Group) session.createQuery("FROM Group g WHERE g.name = :groupName")
         .setParameter("groupName", name).getResultList().get(0);
         
@@ -43,8 +44,8 @@ public class GroupDaoJpa implements GroupDao {
     }
     
     public Group update(Group updatedGroup) {
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
 
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Group currentGroup = session.get(Group.class, updatedGroup.getId());
         
@@ -57,8 +58,7 @@ public class GroupDaoJpa implements GroupDao {
 
     public List<Group> findAll() {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-        
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -70,12 +70,12 @@ public class GroupDaoJpa implements GroupDao {
     }
     
     public void deleteById(int id) {
-        Session session = JpaSessionCreator.getSession(Group.class);
 
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
+        
         Group group = session.get(Group.class, id);
         session.delete(group);
         session.getTransaction().commit();
-
     }
 }

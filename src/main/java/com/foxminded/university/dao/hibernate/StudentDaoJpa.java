@@ -3,16 +3,18 @@ package com.foxminded.university.dao.hibernate;
 import java.util.*;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import com.foxminded.university.domain.hibernate.*;
 
 public class StudentDaoJpa implements StudentDao {
+
+    private SessionFactory sessionFactory = HibenateUtil.getSessionfactory();
     
     public Student create(Student student) {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(student);
         session.getTransaction().commit();
@@ -22,9 +24,7 @@ public class StudentDaoJpa implements StudentDao {
 
     public Student findById(int id) {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-        
-        
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Student student = session.get(Student.class, id);
         session.getTransaction().commit();
@@ -34,8 +34,7 @@ public class StudentDaoJpa implements StudentDao {
 
     public Student update(Student updatedStudent) {
 
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Student currentStudent = session.get(Student.class, updatedStudent.getId());
         
@@ -49,9 +48,8 @@ public class StudentDaoJpa implements StudentDao {
     }
 
     public List<Student> findAll() {
-
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
-
+        
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -64,9 +62,8 @@ public class StudentDaoJpa implements StudentDao {
     }
 
     public List<Student> findAllByGroupId(int groupId) {
-
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
         
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -84,16 +81,11 @@ public class StudentDaoJpa implements StudentDao {
     }
 
     public void deleteById(int id) {
-        Session session = JpaSessionCreator.getSession(Student.class, Group.class);
 
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Student student = session.get(Student.class, id);
         session.delete(student);
         session.getTransaction().commit();
     }
 }
-
-
-
-
-
