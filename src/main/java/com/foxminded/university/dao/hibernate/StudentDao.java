@@ -7,5 +7,5 @@ import com.foxminded.university.domain.hibernate.*;
 
 public interface StudentDao extends CrudDao<Student> {
     
-    public List<Student> findAllByGroupId(int groupId);
+    List<Student> findAllByGroupId(int groupId);
 }

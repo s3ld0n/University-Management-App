@@ -7,11 +7,7 @@ public class JpaSessionCreator {
 
     private static Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
     
-    static Session getSession(Class<?> ... classes) {
-        for (Class<?> klass : classes) {
-            configuration.addAnnotatedClass(klass);
-        }
-        
+    static Session getSession() {
         return configuration.buildSessionFactory().getCurrentSession();
     }
 }
