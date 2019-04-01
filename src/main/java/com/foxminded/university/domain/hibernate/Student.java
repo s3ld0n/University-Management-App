@@ -1,4 +1,4 @@
-package com.foxminded.university.domain.alt_impl;
+package com.foxminded.university.domain.hibernate;
 
 import java.io.Serializable;
 

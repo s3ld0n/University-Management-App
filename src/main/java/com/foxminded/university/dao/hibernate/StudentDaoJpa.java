@@ -1,11 +1,11 @@
-package com.foxminded.university.dao.jpa;
+package com.foxminded.university.dao.hibernate;
 
 import java.util.*;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import com.foxminded.university.domain.alt_impl.*;
+import com.foxminded.university.domain.hibernate.*;
 
 public class StudentDaoJpa implements StudentDao {
     

@@ -7,9 +7,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.foxminded.university.dao.jpa.GroupDao;
-import com.foxminded.university.dao.jpa.GroupDaoJpa;
-import com.foxminded.university.domain.alt_impl.*;
+import com.foxminded.university.dao.hibernate.GroupDao;
+import com.foxminded.university.dao.hibernate.GroupDaoJpa;
+import com.foxminded.university.domain.hibernate.*;
 
 @WebServlet("/groups")
 public class AllGroupsServlet extends HttpServlet {

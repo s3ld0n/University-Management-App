@@ -1,10 +1,10 @@
-package com.foxminded.university.dao.jpa;
+package com.foxminded.university.dao.hibernate;
 
 import java.util.*;
 
 import org.hibernate.Session;
 
-import com.foxminded.university.domain.alt_impl.*;
+import com.foxminded.university.domain.hibernate.*;
 
 public class GroupDaoJpa implements GroupDao {
     

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.foxminded.university.dao.jpa.*;
-import com.foxminded.university.domain.alt_impl.*;
+import com.foxminded.university.dao.hibernate.*;
+import com.foxminded.university.domain.hibernate.*;
 
 
 @WebServlet("/students")
