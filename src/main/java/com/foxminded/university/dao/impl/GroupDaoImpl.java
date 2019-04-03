@@ -14,7 +14,7 @@ public class GroupDaoImpl implements GroupDao {
     
     public Group create(Group group) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.save(group);
         session.getTransaction().commit();
@@ -24,7 +24,7 @@ public class GroupDaoImpl implements GroupDao {
 
     public Group findById(int id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Group group = session.get(Group.class, id);
         session.getTransaction().commit();
@@ -34,7 +34,7 @@ public class GroupDaoImpl implements GroupDao {
 
     public Group findByName(String name) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         Group group = (Group) session.createQuery("FROM Group g WHERE g.name = :groupName")
@@ -46,7 +46,7 @@ public class GroupDaoImpl implements GroupDao {
     
     public Group update(Group updatedGroup) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Group currentGroup = session.get(Group.class, updatedGroup.getId());
         
@@ -59,7 +59,7 @@ public class GroupDaoImpl implements GroupDao {
 
     public List<Group> findAll() {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -72,7 +72,7 @@ public class GroupDaoImpl implements GroupDao {
     
     public void deleteById(int id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
         Group group = session.get(Group.class, id);

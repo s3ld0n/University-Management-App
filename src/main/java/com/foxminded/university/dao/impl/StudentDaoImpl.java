@@ -15,7 +15,7 @@ public class StudentDaoImpl implements StudentDao {
     
     public Student create(Student student) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.save(student);
         session.getTransaction().commit();
@@ -25,7 +25,7 @@ public class StudentDaoImpl implements StudentDao {
 
     public Student findById(int id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Student student = session.get(Student.class, id);
         session.getTransaction().commit();
@@ -35,7 +35,7 @@ public class StudentDaoImpl implements StudentDao {
 
     public Student update(Student updatedStudent) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Student currentStudent = session.get(Student.class, updatedStudent.getId());
         
@@ -50,7 +50,7 @@ public class StudentDaoImpl implements StudentDao {
 
     public List<Student> findAll() {
         
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -64,7 +64,7 @@ public class StudentDaoImpl implements StudentDao {
 
     public List<Student> findAllByGroupId(int groupId) {
         
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
@@ -83,7 +83,7 @@ public class StudentDaoImpl implements StudentDao {
 
     public void deleteById(int id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Student student = session.get(Student.class, id);
         session.delete(student);
