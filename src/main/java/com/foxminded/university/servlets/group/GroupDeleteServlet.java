@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.GroupDao;
-import com.foxminded.university.dao.sql.GroupDaoImpl;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
 
 @WebServlet("/group/delete")
 public class GroupDeleteServlet extends HttpServlet {

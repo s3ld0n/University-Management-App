@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.hibernate;
+package com.foxminded.university.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;

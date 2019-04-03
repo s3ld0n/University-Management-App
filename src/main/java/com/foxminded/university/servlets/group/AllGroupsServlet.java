@@ -7,9 +7,10 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.foxminded.university.dao.hibernate.GroupDao;
-import com.foxminded.university.dao.hibernate.GroupDaoJpa;
-import com.foxminded.university.domain.hibernate.*;
+import com.foxminded.university.dao.GroupDao;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
+import com.foxminded.university.domain.Group;
+
 
 @WebServlet("/groups")
 public class AllGroupsServlet extends HttpServlet {
@@ -19,7 +20,7 @@ public class AllGroupsServlet extends HttpServlet {
     
     @Override
     public void init() {
-        groupDao = new GroupDaoJpa();
+        groupDao = new GroupDaoImpl();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

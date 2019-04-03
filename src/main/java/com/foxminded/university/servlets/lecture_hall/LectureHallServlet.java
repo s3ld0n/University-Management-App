@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.LectureHallDao;
 import com.foxminded.university.dao.PeriodDao;
-import com.foxminded.university.dao.sql.LectureHallDaoImpl;
-import com.foxminded.university.dao.sql.PeriodDaoImpl;
+import com.foxminded.university.dao.impl.LectureHallDaoImpl;
+import com.foxminded.university.dao.impl.PeriodDaoImpl;
 import com.foxminded.university.domain.LectureHall;
 import com.foxminded.university.utils.Period;
 

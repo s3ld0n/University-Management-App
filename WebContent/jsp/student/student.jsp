@@ -20,7 +20,7 @@
     <h3>Student id: ${currentStudent.id}</h3>
     <h3>First Name: ${currentStudent.firstName}</h3>
     <h3>Last Name: ${currentStudent.lastName}</h3>
-    <h3>Group: ${currentStudent.group}</h3>
+    <h3>Group: ${currentStudent.group.name}</h3>
     <br><br>
     
     <div class="container update border">

@@ -1,13 +1,14 @@
-package com.foxminded.university.dao.hibernate;
+package com.foxminded.university.dao.impl;
 
 import java.util.*;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.foxminded.university.domain.hibernate.*;
+import com.foxminded.university.dao.GroupDao;
+import com.foxminded.university.domain.Group;
 
-public class GroupDaoJpa implements GroupDao {
+public class GroupDaoImpl implements GroupDao {
     
     private SessionFactory sessionFactory = HibenateUtil.getSessionfactory();
     

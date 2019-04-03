@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.dao.StudentDao;
-import com.foxminded.university.dao.sql.GroupDaoImpl;
-import com.foxminded.university.dao.sql.StudentDaoImpl;
+import com.foxminded.university.dao.impl.GroupDaoImpl;
+import com.foxminded.university.dao.impl.StudentDaoImpl;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
@@ -45,12 +45,11 @@ public class StudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String group = request.getParameter("group");
         
-        studentDao.update(new Student(id, firstName, lastName, group));
+        studentDao.update(new Student(firstName, lastName, groupDao.findByName(group)));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }

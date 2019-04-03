@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.sql;
+package com.foxminded.university.dao.impl;
 
 import java.sql.*;
 import java.util.ArrayList;

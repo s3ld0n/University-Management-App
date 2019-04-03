@@ -13,8 +13,8 @@
         <property name="hibernate.connection.datasource">java:comp/env/jdbc/university</property>
         <property name="hibernate.current_session_context_class">thread</property>
         
-        <mapping class="com.foxminded.university.domain.hibernate.Group" />
-        <mapping class="com.foxminded.university.domain.hibernate.Student" />
+        <mapping class="com.foxminded.university.domain.Group" />
+        <mapping class="com.foxminded.university.domain.Student" />
     </session-factory>
 
 </hibernate-configuration>

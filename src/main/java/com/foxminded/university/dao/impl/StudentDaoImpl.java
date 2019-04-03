@@ -1,4 +1,4 @@
-package com.foxminded.university.dao.hibernate;
+package com.foxminded.university.dao.impl;
 
 import java.util.*;
 
@@ -6,9 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import com.foxminded.university.domain.hibernate.*;
+import com.foxminded.university.dao.StudentDao;
+import com.foxminded.university.domain.*;
 
-public class StudentDaoJpa implements StudentDao {
+public class StudentDaoImpl implements StudentDao {
 
     private SessionFactory sessionFactory = HibenateUtil.getSessionfactory();
     
