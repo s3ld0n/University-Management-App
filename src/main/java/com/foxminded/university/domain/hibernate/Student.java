@@ -19,11 +19,7 @@ public class Student implements Serializable {
     
     @Id
     @GeneratedValue(generator = "students_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(
-            name = "students_id_seq",
-            sequenceName = "students_id_seq",
-            allocationSize=1
-        )
+    @SequenceGenerator(name = "students_id_seq",sequenceName = "students_id_seq")
     @Column(name = "id")
     private int id;
     
