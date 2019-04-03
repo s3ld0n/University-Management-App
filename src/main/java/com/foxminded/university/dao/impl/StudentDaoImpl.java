@@ -68,7 +68,7 @@ public class StudentDaoImpl implements StudentDao {
         session.beginTransaction();
         
         @SuppressWarnings("unchecked")
-        Query<Student> query = session.createSQLQuery("SELECT students.id AS id, first_name, last_name, "
+        Query<Student> query = session.createSQLQuery("SELECT students.id, first_name, last_name, "
             + "group_id "
             + "FROM students "
             + "JOIN groups ON students.group_id = groups.id "
