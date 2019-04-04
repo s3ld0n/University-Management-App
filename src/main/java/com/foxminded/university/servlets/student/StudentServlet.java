@@ -48,9 +48,12 @@ public class StudentServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        int group = Integer.parseInt(request.getParameter("group"));
+        int groupId = Integer.parseInt(request.getParameter("group"));
         
-        studentDao.update(new Student(id, firstName, lastName, groupDao.findById(group)));
+        Group group = new Group();
+        group.setId(groupId);
+        
+        studentDao.update(new Student(id, firstName, lastName, group));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }
