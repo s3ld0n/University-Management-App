@@ -31,18 +31,6 @@ public class GroupDaoImpl implements GroupDao {
 
         return group;
     }
-
-    public Group findByName(String name) {
-
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        Group group = (Group) session.createQuery("FROM Group g WHERE g.name = :groupName")
-        .setParameter("groupName", name).getResultList().get(0);
-        
-        session.getTransaction().commit();
-        return group;
-    }
     
     public Group update(Group updatedGroup) {
 
