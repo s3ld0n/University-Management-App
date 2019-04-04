@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,8 +27,7 @@ public class Group implements Serializable {
     @Column(name = "name")
     private String name;
     
-    @OneToMany(mappedBy="group", fetch = FetchType.LAZY,
-            cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    @OneToMany(mappedBy="group", fetch = FetchType.LAZY)
     private List<Student> students  = new ArrayList<Student>();
 
     public Group() {
