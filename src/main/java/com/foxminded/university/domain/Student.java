@@ -98,6 +98,6 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +  ", group=" + group.getName() + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName +  ", group=" + group + "]";
     }
 }

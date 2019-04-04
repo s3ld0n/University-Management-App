@@ -11,7 +11,6 @@ import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.dao.impl.GroupDaoImpl;
 import com.foxminded.university.domain.Group;
 
-
 @WebServlet("/groups")
 public class AllGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

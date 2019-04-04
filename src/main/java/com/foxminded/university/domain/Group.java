@@ -28,7 +28,7 @@ public class Group implements Serializable {
     private String name;
     
     @OneToMany(mappedBy="group", fetch = FetchType.LAZY)
-    private List<Student> students  = new ArrayList<Student>();
+    private List<Student> students  = new ArrayList<>();
 
     public Group() {
 
