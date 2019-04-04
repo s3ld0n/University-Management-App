@@ -46,9 +46,10 @@ public class GroupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         
-        groupDao.update(new Group(name));
+        groupDao.update(new Group(id, name));
         response.sendRedirect(request.getContextPath() + "/groups");
     }
 }

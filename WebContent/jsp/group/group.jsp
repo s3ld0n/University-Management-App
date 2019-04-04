@@ -23,9 +23,11 @@
     
     <div class="container update border">
     <form action="group" class="needs-validation" method="post" novalidate>
+      <input type="hidden" name="id" value="${currentGroup.id}" />
+      
       <div class="form-group">
         <label for="name">New name</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+        <input type="text" class="form-control" id="name" name="name" value="${currentGroup.name}" required>
         <div class="valid-feedback">Valid.</div>
         <div class="invalid-feedback">Please fill out this field.</div>
       </div>

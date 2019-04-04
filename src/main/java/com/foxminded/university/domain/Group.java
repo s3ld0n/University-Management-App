@@ -38,6 +38,11 @@ public class Group implements Serializable {
         this.name = name;
     }
     
+    public Group(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
