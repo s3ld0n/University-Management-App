@@ -20,7 +20,7 @@
     <h3>Student id: ${currentStudent.id}</h3>
     <h3>First Name: ${currentStudent.firstName}</h3>
     <h3>Last Name: ${currentStudent.lastName}</h3>
-    <h3>Group: ${currentStudent.group}</h3>
+    <h3>Group: ${currentStudent.group.name}</h3>
     <br><br>
     
     <div class="container update border">
@@ -29,23 +29,23 @@
 
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" name="firstName" required>
+        <input type="text" class="form-control" id="firstName" name="firstName" value="${currentStudent.firstName}" required>
         <div class="valid-feedback">Valid.</div>
         <div class="invalid-feedback">Please fill out this field.</div>
       </div>
 
       <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" name="lastName" required>
+        <input type="text" class="form-control" id="lastName" name="lastName" value="${currentStudent.lastName}" required>
         <div class="valid-feedback">Valid.</div>
         <div class="invalid-feedback">Please fill out this field.</div>
       </div>
       
       <div class="form-group">
         <label for="group">Group</label>
-       <select id="group" id="group" name="group">
+       <select id="group" name="group">
         <c:forEach var="group" items="${groups}">
-          <option value="${group.name}">${group.name}</option>
+          <option value="${group.id}">${group.name}</option>
         </c:forEach>
        </select> 
       </div>

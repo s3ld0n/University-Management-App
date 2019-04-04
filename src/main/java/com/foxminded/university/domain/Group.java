@@ -4,22 +4,45 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "groups")
 public class Group implements Serializable {
     
+    @Id
+    @GeneratedValue(generator = "groups_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "groups_id_seq", sequenceName = "groups_id_seq")
+    @Column(name = "id")
     private int id;
+    
+    @Column(name = "name")
     private String name;
-    private List<Student> students;
+    
+    @OneToMany(mappedBy="group", fetch = FetchType.LAZY)
+    private List<Student> students  = new ArrayList<>();
 
     public Group() {
 
     }
     
+    public Group(String name) {
+        this.name = name;
+    }
+    
     public Group(int id, String name) {
         this.id = id;
         this.name = name;
-        this.students = new ArrayList<Student>();
     }
-    
+
     public int getId() {
         return id;
     }

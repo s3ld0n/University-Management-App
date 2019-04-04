@@ -40,7 +40,7 @@
        <select id="group" id="group" name="group">
        
           <c:forEach var="group" items="${groups}">
-            <option value="${group.name}">${group.name}</option>
+            <option value="${group.id}">${group.name}</option>
           </c:forEach>
         
        </select> 

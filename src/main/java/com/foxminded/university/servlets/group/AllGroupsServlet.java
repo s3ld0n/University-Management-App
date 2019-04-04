@@ -36,7 +36,7 @@ public class AllGroupsServlet extends HttpServlet {
         
         String name = request.getParameter("name");
         
-        groupDao.create(new Group(1, name));
+        groupDao.create(new Group(name));
         response.sendRedirect(request.getContextPath() + "/groups");
     }
 }
