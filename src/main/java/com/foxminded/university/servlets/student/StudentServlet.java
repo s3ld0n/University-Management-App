@@ -22,7 +22,6 @@ public class StudentServlet extends HttpServlet {
     
     private StudentDao studentDao;
     private GroupDao groupDao;
-    private int currentStudentId;
     
     @Override
     public void init() {
@@ -33,7 +32,7 @@ public class StudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        this.currentStudentId = Integer.parseInt(request.getParameter("id"));
+        int currentStudentId = Integer.parseInt(request.getParameter("id"));
         
         Student student = studentDao.findById(currentStudentId);
         List<Group> groups = groupDao.findAll();
@@ -46,11 +45,12 @@ public class StudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        int id = Integer.parseInt(request.getParameter("id"));
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         int group = Integer.parseInt(request.getParameter("group"));
         
-        studentDao.update(new Student(this.currentStudentId, firstName, lastName, groupDao.findById(group)));
+        studentDao.update(new Student(id, firstName, lastName, groupDao.findById(group)));
         response.sendRedirect(request.getContextPath() + "/students");
     }
 }
